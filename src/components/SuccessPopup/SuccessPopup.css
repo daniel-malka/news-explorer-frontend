@@ -1,0 +1,15 @@
+ .popup__redirect {
+     font-family: 'Inter', sans-serif;
+     font-style: normal;
+     font-weight: 400;
+     font-size: 12px;
+     line-height: 15px;
+     color: #2F71E5;
+     text-align: initial;
+     margin-bottom: 9px;
+     margin-top: 9px;
+     border: none;
+     background-color: #ffff0000;
+     cursor: pointer;
+     ;
+ }

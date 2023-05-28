@@ -1,0 +1,133 @@
+export const data = [
+  {
+    title: 'Apple',
+    keyword: 'fruit',
+    text: 'Information about the apple. Information about the apple. Information about the apple. Information about the apple. Information about the apple. Information about the apple. Information about the apple. Information about the apple. ',
+    source: 'Tree',
+    date: 'May 24, 2023',
+    image:
+      'https://img.freepik.com/premium-photo/red-apples-isolated-white-background-ripe-fresh-apples-clipping-path-apple-with-leaf_299651-595.jpg',
+    link: 'https://www.lipsum.com/',
+    _id: '6458e3a76dc6cc13a8sc6c',
+  },
+  {
+    title: 'Banana',
+    keyword: 'fruit',
+    text: 'Information about the banana. Information about the banana. Information about the banana. Information about the banana. Information about the banana. Information about the banana. Information about the banana. Information about the banana. Information about the banana. ',
+    source: 'bush',
+    date: 'May 24, 2023',
+    image:
+      'https://media.istockphoto.com/id/173242750/photo/banana-bunch.jpg?s=612x612&w=0&k=20&c=MAc8AXVz5KxwWeEmh75WwH6j_HouRczBFAhulLAtRUU=',
+    link: 'https://www.lipsum.com/',
+    _id: '6458e3a76dc613asccd68sccds',
+  },
+  {
+    title: 'Orange',
+    keyword: 'fruit',
+    text: 'Information about the orange. Information about the orange. Information about the orange. Information about the orange. Information about the orange. Information about the orange. Information about the orange. Information about the orange. ',
+    source: 'Tree',
+    date: 'May 24, 2023',
+    image:
+      'https://media.istockphoto.com/id/1357864202/photo/mandarine-orange-fruits-or-tangerines-isolated-on-white-background-fresh-mandarine-close-up.jpg?b=1&s=170667a&w=0&k=20&c=7eEcfgZ2noRhb8eer8qX-gI_rhaO2Jfhb1Q6WqyEPFc=',
+    link: 'https://www.lipsum.com/',
+    _id: '6458e3agrr613asd68csc6c',
+  },
+  {
+    title: 'Grapefruit',
+    keyword: 'fruit',
+    text: 'Information about the grapefruit. Information about the grapefruit. Information about the grapefruit. Information about the grapefruit. Information about the grapefruit. Information about the grapefruit. Information about the grapefruit. Information about the grapefruit. Information about the grapefruit. Information about the grapefruit. ',
+    source: 'Tree',
+    date: 'May 24, 2023',
+    image: 'https://thumbs.dreamstime.com/b/pink-grapefruit-17664176.jpg',
+    link: 'https://www.lipsum.com/',
+    _id: '6458e3atrgbtrasd6c8sc6c',
+  },
+  {
+    title: 'Mango',
+    keyword: 'fruit',
+    text: 'Information about the mango. Information about the mango. Information about the mango. Information about the mango. Information about the mango. Information about the mango. Information about the mango. Information about the mango. ',
+    source: 'Tree',
+    date: 'May 24, 2023',
+    image:
+      'https://media.istockphoto.com/id/168370138/photo/mango.jpg?s=612x612&w=0&k=20&c=ENq2BrUV8dNH2rth_ZYBBtS9RWDwCbI25SfulxirmnQ=',
+    link: 'https://www.lipsum.com/',
+    _id: 'trtr8e3a76dc613asccd68sc6c',
+  },
+  {
+    title: 'Banana',
+    keyword: 'fruit',
+    text: 'Information about the banana. Information about the banana. Information about the banana.Information about the banana. Information about the banana.Information about the banana. Information about the banana.',
+    source: 'bush',
+    date: 'May 24, 2023',
+    image:
+      'https://media.istockphoto.com/id/173242750/photo/banana-bunch.jpg?s=612x612&w=0&k=20&c=MAc8AXVz5KxwWeEmh75WwH6j_HouRczBFAhulLAtRUU=',
+    link: 'https://www.lipsum.com/',
+    _id: '6458e3a76dc613asdcc68sccds',
+  },
+  {
+    title: 'Apple',
+    keyword: 'fruit',
+    text: 'Information about the apple.Information about the apple.Information about the apple.Information about the apple.Information about the apple.Information about the apple.Information about the apple.Information about the apple.',
+    source: 'Tree',
+    date: 'May 24, 2023',
+    image:
+      'https://img.freepik.com/premium-photo/red-apples-isolated-white-background-ripe-fresh-apples-clipping-path-apple-with-leaf_299651-595.jpg',
+    link: 'https://www.lipsum.com/',
+    _id: '6458e3a7xsaxaaaxsaa8sc6c',
+  },
+  {
+    title: 'Cherry',
+    keyword: 'fruit',
+    text: 'Information about the cherry. Information about the cherry.Information about the cherry.Information about the cherry.Information about the cherry.Information about the cherry.',
+    source: 'Tree',
+    date: 'May 24, 2023',
+    image:
+      'https://images.unsplash.com/photo-1528821154947-1aa3d1b74941?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y2hlcnJpZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
+    link: 'https://www.lipsum.com/',
+    _id: '6458e3a76dcxsaasd68sc6c',
+  },
+  {
+    title: 'Peach',
+    keyword: 'fruit',
+    text: 'Information about the peach. Information about the peach.Information about the peach.Information about the peach.Information about the peach.Information about the peach.Information about the peach.Information about the peach.',
+    source: 'Tree',
+    date: 'May 24, 2023',
+    image:
+      'https://img.freepik.com/premium-photo/peach-isolated-white-background_88281-1751.jpg',
+    link: 'https://www.lipsum.com/',
+    _id: '6458xsa76dc613asd68sc6c',
+  },
+  {
+    title: 'Pear',
+    keyword: 'fruit',
+    text: 'Information about the pear. Information about the pear.Information about the pear.Information about the pear.Information about the pear.Information about the pear.Information about the pear.Information about the pear.Information about the pear.',
+    source: 'Tree',
+    date: 'May 24, 2023',
+    image:
+      'https://static9.depositphotos.com/1642482/1148/i/600/depositphotos_11489464-stock-photo-pears.jpg',
+    link: 'https://www.lipsum.com/',
+    _id: '6458xsaxa6dc613asd68sc6c',
+  },
+  {
+    title: 'Plum',
+    keyword: 'fruit',
+    text: 'Information about the plum.Information about the plum.Information about the plum.Information about the plum.Information about the plum.Information about the plum.Information about the plum.Information about the plum.Information about the plum.',
+    source: 'Tree',
+    date: 'May 24, 2023',
+    image:
+      'https://images.immediate.co.uk/production/volatile/sites/30/2019/09/Plums-in-a-tree-4a97a61.jpg?quality=90&webp=true&resize=300,272',
+    link: 'https://www.lipsum.com/',
+    _id: '6458e3axsac613asd68sc6c',
+  },
+  {
+    title: 'Raspberry',
+    keyword: 'fruit',
+    text: 'Information about the raspberry.Information about the raspberry.Information about the raspberry.Information about the raspberry.Information about the raspberry.Information about the raspberry.Information about the raspberry.',
+    source: 'Bush',
+    date: 'May 24, 2023',
+    image:
+      'https://cdn.shopify.com/s/files/1/2336/3219/products/shutterstock_728062678_8992842f-1a95-4365-b326-93a367a0ab28_1024x1024.jpg?v=1569666151',
+    link: 'https://www.lipsum.com/',
+    _id: '6458e3a76dc613asd68sxsac6c',
+  },
+];
