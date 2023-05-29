@@ -194,6 +194,11 @@ li.header__link.header__button:hover {
     padding: 0 40px;
     padding-top: 14px;
   }
+  li.header__link.header__button {
+    padding: 8px 0;
+    padding-left: 55px;
+    height: 40px;
+  }
   .selected-dark {
     padding-bottom: 17px;
   }
