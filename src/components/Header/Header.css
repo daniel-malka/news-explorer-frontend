@@ -96,13 +96,26 @@ a.header__redirect-text {
 .header__navburger {
   display: none;
 }
-
+.header__logout {
+  box-sizing: border-box;
+  color: #f9f9f9;
+  font-weight: 400;
+  font-size: 18px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  cursor: pointer;
+  border: 1px solid #d1d2d6;
+  backdrop-filter: blur(4px);
+  border-radius: 100px;
+  padding: 12px 15px 12px 19px;
+  margin-bottom: 13px;
+}
 li.header__link.header__button {
   background: transparent;
   color: #f9f9f9;
   font-weight: 400;
   font-size: 18px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   float: right;
   cursor: pointer;

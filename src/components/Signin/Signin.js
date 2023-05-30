@@ -46,12 +46,12 @@ const Signin = ({ isLoading }) => {
           signin: false,
         })
       }
-      title="sign in"
+      title="Sign in"
       name="signin"
       buttonText={`${isLoading ? 'Connecting...' : 'Sign in'}`}
       onSubmit={handleSubmit}
     >
-      <label className="signin-label" htmlFor="email">
+      <label className="signin-label signin-label-email " htmlFor="email">
         Email
       </label>
       <input

@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <footer
       className="footer"
-      style={{ backgroundColor: `${isHome ? '#E5E5E5' : '#ffff'}` }}
+      style={{ backgroundColor: `${!isHome ? '#E5E5E5' : '#ffff'}` }}
     >
       <p className="footer__copyrights">
         © {new Date().getFullYear()} Supersite, Powered by News API

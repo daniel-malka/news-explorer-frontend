@@ -5,7 +5,7 @@ import nav1 from '../../images/header/Rectangle1.png';
 import nav2 from '../../images/header/Rectangle2.png';
 import exitImg from '../../images/icons/logout.svg';
 import blackLogo from '../../images/blackLogo.svg';
-import logo from '../../images/logo.png';
+import logo from '../../images/logo.svg';
 // context
 import { usePopup } from '../../contexts/PopupContext';
 import { useAuth } from '../../contexts/AuthContext';
@@ -17,6 +17,7 @@ function Header() {
   const elemntClass = document.getElementsByClassName('header__navburger');
   const liClass = document.querySelectorAll('.header__button');
   const { isLoggedIn, user, handleLogout } = useAuth();
+
   const navBurgerChange = () => {
     if (!elemntClass[0].classList.contains('open')) {
       elemntClass[0].classList.add('open');
@@ -46,11 +47,11 @@ function Header() {
                 onClick={() => handleLogout()}
                 className={
                   isHome
-                    ? 'header__link header__button'
-                    : 'header__link header__button-dark'
+                    ? 'header__logout header__button'
+                    : 'header__logout header__button-dark'
                 }
               >
-                {user.userName}
+                {user.userName == '' ? `Daniel` : user.userName}
                 <img
                   className={
                     isHome

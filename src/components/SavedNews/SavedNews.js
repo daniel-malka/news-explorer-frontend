@@ -1,13 +1,18 @@
 import { useAuth } from '../../contexts/AuthContext';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import { useArticles } from '../../contexts/ArticlesContext';
+import { data } from '../../data';
+
 const SavedNews = () => {
-  const { data } = useArticles();
+  //temporary commented
+  // const { data } = useArticles();
+
   const { user } = useAuth();
 
   const keywordSelect = () => {
-    const keyW = data.map((card) => card.keyword);
     let uniqKeywords = [];
+    const keyW = data.map((article) => article.keyword);
+
     for (let i = 0; i < keyW.length; i++) {
       if (keyW[0] === keyW[i] && uniqKeywords.includes(keyW[i])) {
         continue;
@@ -26,6 +31,7 @@ const SavedNews = () => {
       return keywordElements;
     }
   };
+
   return (
     <main className="savedNews">
       <section className="savedNews__text">

@@ -45,12 +45,12 @@ const Signup = ({ isLoading }) => {
           signup: false,
         })
       }
-      title="sign up"
+      title="Sign up"
       name="signup"
       buttonText={`${isLoading ? 'Connecting...' : 'sign up'}`}
       onSubmit={handleSubmit}
     >
-      <label className="signin-label" htmlFor="email">
+      <label className="signin-label signin-label-email" htmlFor="email">
         Email
       </label>
       <input

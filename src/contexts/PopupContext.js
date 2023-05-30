@@ -11,14 +11,19 @@ export const PopupControler = ({ children }) => {
 
   const openPopup = (popupName) => {
     setPopupState({
-      ...popupState,
+      popupState,
       [popupName]: true,
     });
   };
-  const closeAllPopups = () =>
-    setPopupState(
-      Object.keys(popupState).every((key) => (popupState[key] = false))
-    );
+  const closeAllPopups = () => {
+    setPopupState({
+      signin: false,
+      signup: false,
+      nav: false,
+      successPopup: false,
+    });
+  };
+
   useEffect(() => {
     const closeByEscape = (e) => {
       if (e.key === 'Escape') {
@@ -26,16 +31,17 @@ export const PopupControler = ({ children }) => {
       }
     };
     const closeOnClick = (evt) => {
-      if (evt.target.classList.contains('popup_active')) {
+      if (evt.target.classList.contains('popup__active')) {
         closeAllPopups();
       }
     };
     document.addEventListener('keydown', closeByEscape);
     document.addEventListener('click', closeOnClick);
 
-    return () =>
-      document.removeEventListener('keydown', closeByEscape) &&
+    return () => {
+      document.removeEventListener('keydown', closeByEscape);
       document.removeEventListener('click', closeOnClick);
+    };
   });
 
   return (

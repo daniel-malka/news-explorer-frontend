@@ -1,9 +1,11 @@
 import { useArticles } from '../../contexts/ArticlesContext';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/preloader';
+import { data } from '../../data';
 
 const NewsCardList = () => {
-  const { data } = useArticles();
+  //temporary commented
+  // const { data } = useArticles();
 
   return (
     <div className="NewsCardList">
