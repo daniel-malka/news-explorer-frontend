@@ -1,5 +1,5 @@
-article.newsCard {  box-sizing: border-box;
-  max-width: 400px;
+article.newsCard {
+  box-sizing: border-box;
   border-radius: 10px;
   border: none;
   max-height: 576px;
@@ -8,7 +8,6 @@ article.newsCard {  box-sizing: border-box;
 
 .newsCard-img {
   box-sizing: border-box;
-  width: 400px;
   height: 272px;
   background-repeat: no-repeat;
   background-size: cover;
@@ -142,20 +141,13 @@ p.newsCard-text-source {
 /* article text ends here */
 
 @media screen and (max-width: 1253px) {
-  .newsCard-img {
-    box-sizing: border-box;
-    width: 224px;
-  }
-  article.newsCard {
-    max-width: 224px;
-  }
   h3.newsCard-text-title {
     font-size: 22px;
     line-height: 24px;
   }
-  p.newsCard-text-text {
+  /* p.newsCard-text-text {
     max-width: 192px;
-  }
+  } */
   button.news-card__tootltip {
     display: none;
   }

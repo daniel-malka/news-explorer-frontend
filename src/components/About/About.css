@@ -1,7 +1,6 @@
 .about {
   box-sizing: border-box;
-  min-height: 624px;
-  max-height: fit-content;
+  min-height: minmax(624px, fit-content);
   display: flex;
   background: #ffffff;
   padding: 80px 104px;
