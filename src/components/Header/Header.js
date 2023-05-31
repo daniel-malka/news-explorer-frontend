@@ -4,6 +4,7 @@ import { Navigate, NavLink } from 'react-router-dom';
 import nav1 from '../../images/header/Rectangle1.png';
 import nav2 from '../../images/header/Rectangle2.png';
 import exitImg from '../../images/icons/logout.svg';
+import exitImgDark from '../../images/icons/logout-dark.svg';
 import blackLogo from '../../images/blackLogo.svg';
 import logo from '../../images/logo.svg';
 // context
@@ -31,9 +32,17 @@ function Header() {
     isHome
       ? liClass.forEach((li) => li.classList.add('header__active-white'))
       : liClass.forEach((li) => li.classList.add('li__active-dark'));
+
+    // Add padding-top: 11px to header__home and header__saved classes
+    const homeElements = document.querySelectorAll(
+      '.header__link .header__saved'
+    );
+    homeElements.forEach((element) => {
+      element.style.paddingTop = '11px';
+    });
   }, [location, isHome, liClass]);
   return (
-    <header className={isHome ? 'header' : 'header white-bg '}>
+    <header className={isHome ? 'header' : 'header white-bg'}>
       <div className="header__wrap">
         <img
           src={isHome ? logo : blackLogo}
@@ -46,41 +55,47 @@ function Header() {
               <li
                 onClick={() => handleLogout()}
                 className={
-                  isHome
-                    ? 'header__logout header__button'
-                    : 'header__logout header__button-dark'
+                  isHome ? 'header__logout header__button' : 'header__logout '
                 }
               >
                 {user.userName == '' ? `Daniel` : user.userName}
                 <img
-                  className={
-                    isHome
-                      ? 'header__button-image'
-                      : 'header__button-image-dark'
-                  }
-                  src={exitImg}
+                  className="header__button-image"
+                  src={isHome ? exitImg : exitImgDark}
                   alt="Log out"
                 />
               </li>
-              <li>
+              <li
+                className={
+                  isHome
+                    ? 'header__saved header__button header__active-white header__items'
+                    : 'header__saved header__button selected-dark'
+                }
+              >
                 <NavLink
                   to="/saved-news"
-                  end
                   className={
                     isHome
-                      ? 'header__link header__button header__active-white '
-                      : 'header__link header__button selected-dark'
+                      ? 'header__saved header__button header__active-white header__items'
+                      : 'header__saved header__button selected-dark'
                   }
+                  end
                 >
                   saved news
                 </NavLink>
               </li>
-              <li>
+              <li
+                className={
+                  isHome
+                    ? 'header__home header__button header__active-white selected'
+                    : 'header__home-dark header__button'
+                }
+              >
                 <NavLink
                   className={
                     isHome
-                      ? 'header__link header__button header__active-white selected'
-                      : 'header__link header__button '
+                      ? 'header__home header__button header__active-white selected'
+                      : 'header__home header__button'
                   }
                   to="/"
                   end
@@ -91,7 +106,6 @@ function Header() {
             </>
           ) : (
             <>
-              {' '}
               <li
                 onClick={() => openPopup('signin')}
                 className="header__link header__button"
