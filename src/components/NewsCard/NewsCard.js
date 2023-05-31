@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import trashIcon from '../../images/icons/recycle-bin.svg';
 import saveIcon from '../../images/icons/save.svg';
+// import savedIcon from '../../images/icons/saved.svg';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
 const NewsCard = ({ card }) => {
@@ -17,13 +18,13 @@ const NewsCard = ({ card }) => {
   };
 
   return (
-    <article className="NewsCard">
+    <article className="newsCard">
       <div
-        className="NewsCard-img"
+        className="newsCard-img"
         style={{ backgroundImage: `url(${card.image})` }}
       >
-        <div className="NewsCard-img-container">
-          <button className="NewsCard-img-tagBtn">{card.keyword}</button>
+        <div className="newsCard-img-container">
+          <button className="newsCard-img-tagBtn">{card.keyword}</button>
           {!isHome ? (
             <>
               {showToolTip ? (
@@ -34,7 +35,7 @@ const NewsCard = ({ card }) => {
                 ''
               )}
 
-              <button className="NewsCard-img-icon NewsCard-img-delete">
+              <button className="newsCard-img-icon newsCard-img-delete">
                 <img
                   src={trashIcon}
                   alt="Remove from saved"
@@ -52,7 +53,7 @@ const NewsCard = ({ card }) => {
               ) : (
                 ''
               )}
-              <button className=" NewsCard-img-icon NewsCard-img-save">
+              <button className=" newsCard-img-icon newsCard-img-save">
                 <img
                   src={saveIcon}
                   alt="save"
@@ -65,11 +66,11 @@ const NewsCard = ({ card }) => {
           )}
         </div>
       </div>
-      <div className="NewsCard-text">
-        <p className="NewsCard-text-date">{card.date}</p>
-        <h3 className="NewsCard-text-title">{card.title}</h3>
-        <p className="NewsCard-text-text">{card.text}</p>
-        <p className="NewsCard-text-source">{card.source}</p>
+      <div className="newsCard-text">
+        <p className="newsCard-text-date">{card.date}</p>
+        <h3 className="newsCard-text-title">{card.title}</h3>
+        <p className="newsCard-text-text">{card.text}</p>
+        <p className="newsCard-text-source">{card.source}</p>
       </div>
     </article>
   );

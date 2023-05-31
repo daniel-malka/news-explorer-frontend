@@ -34,7 +34,7 @@ const SearchResolts = (props) => {
               visibleCards.length < props.searchResults.length && (
                 <button
                   onClick={handleShowMore}
-                  className="NewsCardList__button"
+                  className="newsCardList__button"
                 >
                   Show more
                 </button>

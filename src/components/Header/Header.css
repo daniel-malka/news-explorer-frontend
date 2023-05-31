@@ -1,8 +1,10 @@
 .header {
+  display: flex;
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
   background: rgba(196, 196, 196, 0.01);
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
   position: relative;
+  justify-content: center;
 }
 
 ul {
@@ -19,6 +21,7 @@ li.header__home.header__button {
 }
 
 .header__wrap {
+  width: 100%;
   box-sizing: border-box;
   padding: 0 116px;
   padding-top: 19px;
@@ -30,7 +33,6 @@ li.header__home.header__button {
   align-items: flex-start;
   height: 80px;
   min-height: 56px;
-  gap: 390px;
 }
 
 .header__logo {

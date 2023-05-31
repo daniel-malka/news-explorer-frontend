@@ -2,7 +2,7 @@
     margin: 62px 106px;
 } */
 
-.NewsCardList__cards {
+.newsCardList__cards {
   display: grid;
   grid-template-columns: 0fr 0fr 0fr;
   grid-gap: 16px;
@@ -10,7 +10,7 @@
   padding: 62px 102px;
 }
 
-button.NewsCardList__button {
+button.newsCardList__button {
   background: #ffffff;
   border-radius: 80px;
   font-family: 'Roboto', Arial, Helvetica, sans-serif, Arial, Helvetica,
@@ -23,34 +23,41 @@ button.NewsCardList__button {
   grid-column: 2 / 3;
   justify-self: center;
   cursor: pointer;
-  max-width: 288px;
-  padding: 0 50px;
+  width: 288px;
   height: 64px;
+  padding: 0 50px;
+  margin-top: 48px;
+
   border: none;
 }
 
-.NewsCardList__button:hover {
+.newsCardList__button:hover {
   background-color: #d3d3d3;
 }
 
-.NewsCardList__cards-listItem {
+.newsCardList__cards-listItem {
   margin: 0 auto;
 }
 
 @media screen and (max-width: 1110px) {
-  .NewsCardList__cards {
+  .newsCardList__cards {
     grid-template-columns: 0fr 0fr 0fr;
   }
 }
 
-@media screen and (max-width: 740px) {
-  .NewsCardList__cards {
+@media screen and (max-width: 780px) {
+  .newsCardList__cards {
     grid-template-columns: 0fr 0fr;
+  }
+  button.newsCardList__button {
+    margin-top: 24px;
+    width: 240px;
+    height: 56px;
   }
 }
 
 @media screen and (max-width: 565px) {
-  .NewsCardList__cards {
+  .newsCardList__cards {
     grid-template-columns: 0fr;
     padding: 62px 16px;
   }

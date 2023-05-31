@@ -1,6 +1,6 @@
 import { useAuth } from '../../contexts/AuthContext';
 import NewsCardList from '../NewsCardList/NewsCardList';
-import { useArticles } from '../../contexts/ArticlesContext';
+// import { useArticles } from '../../contexts/ArticlesContext';
 import { data } from '../../data';
 
 const SavedNews = () => {
@@ -43,7 +43,7 @@ const SavedNews = () => {
           By keywords: <strong>{keywordSelect()}</strong>
         </p>
       </section>
-      <section className="NewsCardList-container">
+      <section className="newsCardList-container">
         <NewsCardList />
       </section>
     </main>

@@ -1,4 +1,4 @@
-import { useArticles } from '../../contexts/ArticlesContext';
+// import { useArticles } from '../../contexts/ArticlesContext';
 import NewsCard from '../NewsCard/NewsCard';
 import Preloader from '../Preloader/preloader';
 import { data } from '../../data';
@@ -8,10 +8,10 @@ const NewsCardList = () => {
   // const { data } = useArticles();
 
   return (
-    <div className="NewsCardList">
-      <div className="NewsCardList__cards">
+    <div className="newsCardList">
+      <div className="newsCardList__cards">
         {data.map((card) => (
-          <div key={card._id} className="NewsCardList__cards-listItem">
+          <div key={card._id} className="newsCardList__cards-listItem">
             {card ? <NewsCard card={card} /> : <Preloader />}
           </div>
         ))}

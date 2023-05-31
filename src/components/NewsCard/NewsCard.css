@@ -1,38 +1,41 @@
-article.NewsCard {
+article.newsCard {  box-sizing: border-box;
   max-width: 400px;
   border-radius: 10px;
-  border: 1px solid;
+  border: none;
   max-height: 576px;
   background-color: #ffff;
 }
 
-.NewsCard-img {
+.newsCard-img {
   box-sizing: border-box;
   width: 400px;
   height: 272px;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
 }
-button.NewsCard-img-icon {
+
+button.newsCard-img-icon {
   background: #ffffff;
   border-radius: 8px;
   border: none;
   height: 40px;
   width: 40px;
+  box-sizing: border-box;
+  padding: 8px;
 }
 
-.NewsCard-img-icon > img:hover {
+.newsCard-img-icon > img:hover {
   filter: none;
 }
 
-button.NewsCard-img-icon > img {
+button.newsCard-img-icon > img {
   filter: invert(40%) sepia(100%) saturate(0%) hue-rotate(86deg)
     brightness(102%) contrast(102%);
   cursor: pointer;
 }
 
-.NewsCard-img-container {
+.newsCard-img-container {
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -42,7 +45,7 @@ button.NewsCard-img-icon > img {
   padding-top: 24px;
 }
 
-button.NewsCard-img-tagBtn {
+button.newsCard-img-tagBtn {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -73,14 +76,14 @@ button.news-card__tootltip {
 
 /*text parent*/
 
-.NewsCard-text {
+.newsCard-text {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   margin: 0 24px;
-  margin-bottom: 24px;
+  max-height: 304px;
 }
-p.NewsCard-text-date {
+p.newsCard-text-date {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
@@ -92,7 +95,7 @@ p.NewsCard-text-date {
   padding-top: 20px;
 }
 
-h3.NewsCard-text-title {
+h3.newsCard-text-title {
   box-sizing: border-box;
   max-height: 88px;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
@@ -109,7 +112,7 @@ h3.NewsCard-text-title {
   overflow: hidden;
 }
 
-p.NewsCard-text-text {
+p.newsCard-text-text {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -120,9 +123,9 @@ p.NewsCard-text-text {
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   line-height: 22px;
-  margin-bottom: 40px;
+  margin-bottom: 18px;
 }
-p.NewsCard-text-source {
+p.newsCard-text-source {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -134,22 +137,23 @@ p.NewsCard-text-source {
   color: #b6bcbf;
   margin-block-start: 0;
   margin-block-end: 0;
+  margin-bottom: 24px;
 }
 /* article text ends here */
 
 @media screen and (max-width: 1253px) {
-  .NewsCard-img {
+  .newsCard-img {
     box-sizing: border-box;
     width: 224px;
   }
-  article.NewsCard {
+  article.newsCard {
     max-width: 224px;
   }
-  h3.NewsCard-text-title {
+  h3.newsCard-text-title {
     font-size: 22px;
     line-height: 24px;
   }
-  p.NewsCard-text-text {
+  p.newsCard-text-text {
     max-width: 192px;
   }
   button.news-card__tootltip {
@@ -157,34 +161,34 @@ p.NewsCard-text-source {
   }
 }
 @media screen and (max-width: 780px) {
-  .NewsCard-img {
+  .newsCard-img {
     max-height: 150px;
     object-fit: fill;
   }
-  .NewsCard-img-container {
+  .newsCard-img-container {
     margin: 0px 8px;
     padding-top: 8px;
   }
 
-  .NewsCard-text {
+  .newsCard-text {
     margin: 16px;
   }
-  h3.NewsCard-text-title {
+  h3.newsCard-text-title {
     padding-bottom: 34px;
   }
-  p.NewsCard-text-text {
+  p.newsCard-text-text {
     margin-bottom: 12px;
   }
 }
 
 @media screen and (max-width: 565px) {
-  .NewsCardList__cards {
+  .newsCardList__cards {
     padding: 24px 16px;
   }
-  .NewsCard-img {
+  .newsCard-img {
     width: 288px;
   }
-  article.NewsCard {
+  article.newsCard {
     max-width: 288px;
   }
 }

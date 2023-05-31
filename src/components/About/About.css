@@ -4,12 +4,10 @@
   max-height: fit-content;
   display: flex;
   background: #ffffff;
-  padding: 80px 0;
-  padding-right: 40px;
+  padding: 80px 104px;
   z-index: 10;
   position: relative;
   gap: 56px;
-  margin-left: 104px;
 }
 
 .about__image {
