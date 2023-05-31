@@ -20,6 +20,7 @@
 }
 .search__title {
   margin: 0;
+  box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -31,6 +32,7 @@
 
 .search__pargraph {
   margin: 0;
+  box-sizing: border-box;
   font-family: 'Roboto', Arial, Helvetica, sans-serif, Arial, Helvetica,
     sans-serif;
   font-style: normal;
@@ -38,6 +40,8 @@
   font-size: 18px;
   line-height: 24px;
   color: #ffffff;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 .search__input {
@@ -103,8 +107,7 @@ button.newsCardList__button:hover {
 
 @media screen and (max-width: 780px) {
   .search {
-    min-height: 400px;
-    max-height: 536px;
+    min-height: 480px;
     padding-bottom: 48px;
   }
   .search__text {
@@ -117,8 +120,7 @@ button.newsCardList__button:hover {
     line-height: 40px;
     max-width: 385px;
   }
-  .search__pargraph {
-  }
+
   .search__results-container {
     grid-gap: 8px;
     grid-template-columns: 0fr 0fr;
@@ -129,10 +131,19 @@ button.newsCardList__button:hover {
 }
 
 @media screen and (max-width: 565px) {
+  .search {
+    min-height: 536px;
+    padding-bottom: 0;
+    gap: 122px;
+  }
   input#search {
     height: 56px;
     font-size: 16px;
     width: 92%;
+  }
+  .search__text {
+    margin-top: 150px;
+    margin-bottom: 0;
   }
   .search__input {
     flex-direction: column;
@@ -172,8 +183,6 @@ button.newsCardList__button:hover {
   .search__title {
     font-size: 36px;
     line-height: 40px;
-  }
-  .search__pargraph {
   }
 
   .search__input {

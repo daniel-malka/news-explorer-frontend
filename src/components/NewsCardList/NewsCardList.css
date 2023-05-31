@@ -7,6 +7,8 @@
 }
 
 button.newsCardList__button {
+  position: absolute;
+  bottom: -120px;
   background: #ffffff;
   border-radius: 80px;
   font-family: 'Roboto', Arial, Helvetica, sans-serif, Arial, Helvetica,
@@ -16,7 +18,6 @@ button.newsCardList__button {
   font-size: 18px;
   line-height: 24px;
   font-style: normal;
-  grid-column: 2 / 3;
   justify-self: center;
   cursor: pointer;
   width: 288px;
@@ -35,25 +36,16 @@ button.newsCardList__button {
 }
 
 @media screen and (max-width: 1110px) {
-  /*s  .newsCardList__cards {
-    grid-template-columns: 0fr 0fr 0fr;
-  }
-} */
-  @media screen and (max-width: 920px) {
-    button.newsCardList__button {
-      display: flex;
-      justify-content: center;
-      margin: auto 24px auto 40px;
-    }
-  }
-  /* @media screen and (max-width: 780px) {
-  .newsCardList__cards {
-    grid-template-columns: 0fr 0fr;
-  } */
   button.newsCardList__button {
-    margin-top: 24px;
+    margin: 0;
     width: 240px;
     height: 56px;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  button.newsCardList__button {
+    bottom: -120px;
   }
 }
 

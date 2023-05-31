@@ -45,6 +45,7 @@ const SavedNews = () => {
       </section>
       <section className="newsCardList-container">
         <NewsCardList />
+
       </section>
     </main>
   );

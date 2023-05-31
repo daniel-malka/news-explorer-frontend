@@ -4,6 +4,7 @@
   height: 100%;
   background: #f5f6f7;
   padding: 80px 104px;
+  padding-bottom: 208px;
   display: grid;
   justify-content: space-around;
 }
@@ -25,13 +26,13 @@
 }
 
 .searchResult__container {
+  position: relative;
   box-sizing: border-box;
   height: 100%;
   background: #f5f6f7;
   display: grid;
   grid-template-columns: repeat(3, minmax(288px, 400px));
   gap: 16px;
-  justify-content: center;
 }
 
 @media screen and (max-width: 920px) {
@@ -42,6 +43,7 @@
 @media screen and (max-width: 780px) {
   .searchResults__div {
     padding: 40px;
+    padding-bottom: 127px;
   }
   .searchResult-title {
     padding-bottom: 32px;

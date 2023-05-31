@@ -58,15 +58,20 @@ const SearchResolts = (props) => {
               ) : (
                 ''
               )}
+              {screenWidth > `920` ? (
+                <div>
+                  <button
+                    onClick={handleShowMore}
+                    className="newsCardList__button"
+                  >
+                    Show more
+                  </button>
+                </div>
+              ) : (
+                ''
+              )}
             </div>
-          </div>
-          {screenWidth > `920` ? (
-            <button onClick={handleShowMore} className="newsCardList__button">
-              Show more
-            </button>
-          ) : (
-            ''
-          )}
+          </div>{' '}
         </section>
       )}
     </>
