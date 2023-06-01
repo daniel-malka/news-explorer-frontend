@@ -1,15 +1,20 @@
 .newsCardList__cards {
+  box-sizing: border-box;
   display: grid;
-  grid-template-columns: 0fr 0fr 0fr;
+  grid-template-columns: repeat(3fr, minmax(288px, 350px));
   grid-gap: 16px;
   justify-content: center;
   padding: 62px 102px;
 }
-
+.newsCardList__cards-listItem {
+  box-sizing: border-box;
+}
 button.newsCardList__button {
   position: absolute;
-  bottom: -120px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #ffffff;
+  bottom: 89px;
   border-radius: 80px;
   font-family: 'Roboto', Arial, Helvetica, sans-serif, Arial, Helvetica,
     sans-serif;
@@ -18,12 +23,10 @@ button.newsCardList__button {
   font-size: 18px;
   line-height: 24px;
   font-style: normal;
-  justify-self: center;
   cursor: pointer;
   width: 288px;
   height: 64px;
   padding: 0 50px;
-  margin-top: 48px;
   border: none;
 }
 
@@ -44,13 +47,35 @@ button.newsCardList__button {
 }
 
 @media screen and (max-width: 920px) {
+  .newsCardList__cards {
+    grid-template-columns: repeat(2, minmax(288px, 400px));
+  }
   button.newsCardList__button {
-    bottom: -120px;
+    bottom: 40px;
   }
 }
 
-@media screen and (max-width: 565px) {
+@media screen and (max-width: 780px) {
+  button.newsCardList__button {
+    bottom: 32px;
+  }
   .newsCardList__cards {
-    padding: 62px 16px;
+    padding-top: 32px;
+    padding-right: 40px;
+    padding-left: 40px;
+    gap: 8px;
+  }
+}
+@media screen and (max-width:600px){
+  
+}
+@media screen and (max-width: 500px) {
+  .newsCardList__cards {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+  }
+  button.newsCardList__button {
+    bottom: 24px;
   }
 }

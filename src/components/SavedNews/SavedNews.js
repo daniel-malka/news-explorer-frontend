@@ -34,18 +34,17 @@ const SavedNews = () => {
 
   return (
     <main className="savedNews">
-      <section className="savedNews__text">
-        <p className="savedNews__P">saved articles</p>
-        <h2 className="savedNews__hsecond">
-          {user.firstName},you have {data.length} saved articles
+      <section className="savednews__text">
+        <p className="savednews__paragraph">saved articles</p>
+        <h2 className="savednews__title">
+          {user.userName},you have {data.length} saved articles
         </h2>
-        <p className="savedNews__keywords">
+        <p className="savednews__keywords">
           By keywords: <strong>{keywordSelect()}</strong>
         </p>
       </section>
       <section className="newsCardList-container">
         <NewsCardList />
-
       </section>
     </main>
   );

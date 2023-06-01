@@ -10,8 +10,10 @@ const SearchResolts = (props) => {
   const handleShowMore = () => {
     if (screenWidth > 920) {
       setCardsToShow(cardsToShow + 3);
-    } else {
+    } else if (screenWidth <= 920 && screenWidth > 600) {
       setCardsToShow(cardsToShow + 2);
+    } else {
+      setCardsToShow(cardsToShow + 1);
     }
   };
   useEffect(() => {
