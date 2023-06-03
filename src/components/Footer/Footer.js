@@ -7,10 +7,7 @@ const Footer = () => {
   const { isHome } = useHome();
 
   return (
-    <footer
-      className="footer"
-      style={{ backgroundColor: `${!isHome ? '#E5E5E5' : '#ffff'}` }}
-    >
+    <footer className="footer">
       <p className="footer__copyrights">
         © {new Date().getFullYear()} Supersite, Powered by News API
       </p>

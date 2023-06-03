@@ -1,14 +1,20 @@
 .newsCardList__cards {
   box-sizing: border-box;
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(3fr, minmax(288px, 350px));
+  grid-template-columns: repeat(3, minmax(288px, 350px));
   grid-gap: 16px;
   justify-content: center;
   padding: 62px 102px;
+  padding-bottom: 208px;
+}
+.newscardList__all-cards {
+  padding-bottom: 62px;
 }
 .newsCardList__cards-listItem {
   box-sizing: border-box;
 }
+
 button.newsCardList__button {
   position: absolute;
   left: 50%;
@@ -34,10 +40,6 @@ button.newsCardList__button {
   background-color: #d3d3d3;
 }
 
-.newsCardList__cards-listItem {
-  margin: 0 auto;
-}
-
 @media screen and (max-width: 1110px) {
   button.newsCardList__button {
     margin: 0;
@@ -47,9 +49,9 @@ button.newsCardList__button {
 }
 
 @media screen and (max-width: 920px) {
-  .newsCardList__cards {
-    grid-template-columns: repeat(2, minmax(288px, 400px));
-  }
+  /* .newsCardList__cards {
+    grid-template-columns: repeat(2fr, minmax(288px, 400px));
+  } */
   button.newsCardList__button {
     bottom: 40px;
   }
@@ -65,9 +67,11 @@ button.newsCardList__button {
     padding-left: 40px;
     gap: 8px;
   }
+  .newscardList__all-cards {
+    padding-bottom: 32px;
+  }
 }
-@media screen and (max-width:600px){
-  
+@media screen and (max-width: 600px) {
 }
 @media screen and (max-width: 500px) {
   .newsCardList__cards {
@@ -77,5 +81,8 @@ button.newsCardList__button {
   }
   button.newsCardList__button {
     bottom: 24px;
+  }
+  .newscardList__all-cards {
+    padding-bottom: 12px;
   }
 }

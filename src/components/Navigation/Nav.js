@@ -12,11 +12,15 @@ const Nav = () => {
     elemntClass[0].classList.remove('open');
   };
   return (
-    <div className={`navMobile ${popupState.nav ? 'nav_active' : ''}`}>
-      <div className="navMobile__ul">
+    <div className={`navMobile ${popupState.nav ? 'nav__active' : ''}`}>
+      <div
+        className={
+          isLoggedIn ? `navMobile__ul navMobile__ul-logged` : `navMobile__ul`
+        }
+      >
         {isLoggedIn ? (
           <>
-            <p className="navMobile__ul-home">
+            <p className="navMobile__ul-home ">
               <NavLink onClick={closeAllPopups} to="/">
                 Home
               </NavLink>
@@ -34,7 +38,7 @@ const Nav = () => {
           </>
         ) : (
           <>
-            <p className="navMobile__ul-home">
+            <p className="navMobile__ul-home ">
               <a href="/" onClick={closeAllPopups}>
                 Home
               </a>

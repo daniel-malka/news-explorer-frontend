@@ -13,6 +13,9 @@
   box-sizing: border-box;
   display: flex;
 }
+.searchresult__notfound {
+  grid-template-columns: 2 / 3;
+}
 .searchResult-title {
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -75,5 +78,11 @@
     line-height: 34px;
     padding-left: 0;
     padding-bottom: 58px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .searchResults__div {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 }

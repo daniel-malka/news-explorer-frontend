@@ -43,6 +43,7 @@ li.header__home.header__button {
 
 li.header__home,
 .header__saved {
+  box-sizing: border-box;
   padding-top: 11px;
 }
 li.header__home-dark {
@@ -72,6 +73,8 @@ li.header__link.header__button {
 }
 
 .header__div {
+  max-height: 61px;
+  
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: nowrap;
@@ -90,6 +93,7 @@ li.header__link.header__button {
 }
 
 a.header__redirect-text {
+  box-sizing: border-box;
   position: absolute;
   width: 64px;
   height: 22px;
@@ -168,6 +172,7 @@ a.header__link.header__button:hover {
 }
 
 .selected {
+  box-sizing: border-box;
   border-bottom: 3px solid white;
   padding-bottom: 23px;
 }

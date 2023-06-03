@@ -1,6 +1,6 @@
 .about {
   box-sizing: border-box;
-  min-height: minmax(624px, fit-content);
+  height: fit-content;
   display: flex;
   background: #ffffff;
   padding: 80px 104px;
@@ -39,20 +39,22 @@
   padding-bottom: 24px;
 }
 .about__paragraph {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-size: 18x;
-  line-height: 22px;
+  line-height: 24px;
   margin: 0;
 }
 .about__paragraph-opening,
 .about__paragraph-intro {
-  padding-bottom: 25px;
+  padding-bottom: 20px;
 }
 @media screen and (max-width: 900px) {
   .about {
-    min-height: 354px;
     padding: 0;
-    margin: 40px;
-    margin-bottom: 61px;
+    min-height: 354px;
+    padding-top: 40px;
+    margin: 0 40px;
+    padding-bottom: 61px;
     gap: 32px;
   }
   .about__image {
@@ -68,12 +70,12 @@
     padding-top: 0;
     margin-block-start: 0;
     margin-block-end: 0;
-    margin-bottom: 91px;
   }
 }
 
 @media screen and (max-width: 629px) {
   .about {
+    padding-top: 0;
     box-sizing: border-box;
     flex-direction: column;
     align-items: center;
@@ -96,7 +98,6 @@
     font-size: 16px;
     line-height: 24px;
     color: #1a1b22;
-    padding: 0 0px 128px 0px;
     margin: 0;
   }
   .about__image {

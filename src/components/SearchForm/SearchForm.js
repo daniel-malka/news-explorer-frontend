@@ -3,6 +3,7 @@ import { data } from '../../data';
 import { useEffect, useState } from 'react';
 import SearchResolts from '../SearchResolts/SearchResolts';
 import Preloader from '../Preloader/preloader';
+import NotFound from '../NotFound/NotFound';
 
 const SearchForm = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,7 +26,6 @@ const SearchForm = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-
     const filteredResults = filteredArr.filter((article) =>
       article.keyword.toLowerCase().includes(searchTerm.toLowerCase().trim())
     );
@@ -38,12 +38,10 @@ const SearchForm = () => {
   useEffect(() => {
     let timer;
     if (isLoading) {
-      timer = setTimeout(() => setIsLoading(false), 2000);
+      timer = setTimeout(() => setIsLoading(false), 1000);
     }
     return () => clearTimeout(timer);
   }, [isLoading]);
-
-  const visibleCards = showMore ? searchResults : searchResults.slice(0, 3);
 
   return (
     <>
@@ -79,9 +77,10 @@ const SearchForm = () => {
           </button>
         </form>
       </section>
-
       {isLoading ? (
         <Preloader />
+      ) : searchResults.length === 0 ? (
+        <NotFound />
       ) : (
         <SearchResolts
           showMore={showMore}

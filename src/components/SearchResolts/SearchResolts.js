@@ -32,7 +32,6 @@ const SearchResolts = (props) => {
       ) : (
         <section className="searchResults">
           <div className="searchResults__div">
-            <h3 className="searchResult-title">Search results</h3>
             <div className="searchResult__container">
               {visibleCards.length !== 0
                 ? visibleCards.map((card) => (
@@ -43,11 +42,8 @@ const SearchResolts = (props) => {
                       <NewsCard card={card} />
                     </div>
                   ))
-                : props.handleSearchClicked && (
-                    <div className="searchResult__cards-listItem">
-                      <NotFound />
-                    </div>
-                  )}
+                : props.handleSearchClicked && <NotFound />}
+
               {!props.showMore &&
               visibleCards.length < props.searchResults.length &&
               screenWidth <= `920` ? (
@@ -60,7 +56,8 @@ const SearchResolts = (props) => {
               ) : (
                 ''
               )}
-              {screenWidth > `920` ? (
+
+              {screenWidth > `920` && props.searchResults.length != 0 ? (
                 <div>
                   <button
                     onClick={handleShowMore}
@@ -73,9 +70,9 @@ const SearchResolts = (props) => {
                 ''
               )}
             </div>
-          </div>{' '}
+          </div>
         </section>
-      )}
+      )}{' '}
     </>
   );
 };

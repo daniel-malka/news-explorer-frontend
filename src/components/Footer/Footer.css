@@ -8,9 +8,11 @@ footer.footer {
   min-height: 80px;
   width: 100%;
   padding: 0 104px;
+  background-color: #fff;
 }
 .footer__link,
 .footer__email {
+  font-size: 18px;
   font-family: 'Roboto', Arial, Helvetica, sans-serif, Arial, Helvetica,
     sans-serif;
 }
@@ -95,7 +97,6 @@ p.footer__copyrights {
   }
 
   .footer__copyrights {
-    font-size: 16px;
     margin-top: 30px;
     padding-bottom: 2px;
   }

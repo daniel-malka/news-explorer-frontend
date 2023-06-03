@@ -31,7 +31,10 @@ export const PopupControler = ({ children }) => {
       }
     };
     const closeOnClick = (evt) => {
-      if (evt.target.classList.contains('popup__active')) {
+      if (
+        evt.target.classList.contains('popup__active') ||
+        evt.target.classList.contains('nav__active')
+      ) {
         closeAllPopups();
       }
     };
