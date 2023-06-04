@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import { data } from '../../data';
 
 const NewsCardList = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [cardsToShow, setCardsToShow] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(-3);
   const visibleCards = data.slice(0, cardsToShow);
 
-  const handleShowMore = () => {
+  const handleShowMore = useCallback(() => {
     if (screenWidth > 700) {
-      setCardsToShow(cardsToShow + 3);
+      setCardsToShow((prevCardsToShow) => prevCardsToShow + 3);
     } else if (screenWidth <= 700 && screenWidth > 500) {
-      setCardsToShow(cardsToShow + 2);
+      setCardsToShow((prevCardsToShow) => prevCardsToShow + 2);
     } else {
-      setCardsToShow(cardsToShow + 1);
+      setCardsToShow((prevCardsToShow) => prevCardsToShow + 1);
     }
-  };
+  }, [screenWidth]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,7 +28,7 @@ const NewsCardList = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [screenWidth]);
+  }, [screenWidth, handleShowMore]);
 
   return (
     <>

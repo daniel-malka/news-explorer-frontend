@@ -78,6 +78,7 @@ input#search::placeholder {
 }
 
 .search__input-button {
+  cursor: pointer;
   font-family: 'Roboto', Arial, Helvetica, sans-serif, Arial, Helvetica,
     sans-serif;
   background: #2f71e5;

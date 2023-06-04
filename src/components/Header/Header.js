@@ -44,7 +44,7 @@ function Header() {
 
   useEffect(() => {
     setIsNavActive(!isNavActive);
-  }, [!isNavActive]);
+  }, [isNavActive]);
 
   useEffect(() => {
     isHome
@@ -83,7 +83,7 @@ function Header() {
                   isHome ? 'header__logout header__button' : 'header__logout '
                 }
               >
-                {user.userName == '' ? `Daniel` : user.userName}
+                {user.userName === '' ? `Daniel` : user.userName}
                 <img
                   className="header__button-image"
                   src={isHome ? exitImg : exitImgDark}
@@ -156,12 +156,12 @@ function Header() {
           <img
             className="navFirst"
             src={isHome ? menuWhite : menuBlack}
-            alt=""
+            alt="open or close navigation menu"
           />
           <img
             className="navSecond"
             src={isHome ? menuWhite : menuBlack}
-            alt=""
+            alt="open or close navigation menu"
           />
         </div>
       </div>

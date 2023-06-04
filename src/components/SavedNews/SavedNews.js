@@ -37,7 +37,7 @@ const SavedNews = () => {
       <section className="savednews__text">
         <p className="savednews__paragraph">saved articles</p>
         <h2 className="savednews__title">
-          {user.userName == '' ? `Daniel` : user.userName}, you have
+          {user.userName === '' ? `Daniel` : user.userName}, you have
           {` ` + data.length} saved articles
         </h2>
         <p className="savednews__keywords">

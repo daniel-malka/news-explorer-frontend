@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import NotFound from '../NotFound/NotFound';
 
-const SearchResolts = (props) => {
+const SearchResults = (props) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [cardsToShow, setCardsToShow] = useState(0);
+  const [cardsToShow, setCardsToShow] = useState(-3);
   const visibleCards = props.searchResults.slice(0, cardsToShow);
 
-  const handleShowMore = () => {
+  const handleShowMore = useCallback(() => {
     if (screenWidth > 700) {
-      setCardsToShow(cardsToShow + 3);
+      setCardsToShow((prevCardsToShow) => prevCardsToShow + 3);
     } else if (screenWidth <= 700 && screenWidth > 500) {
-      setCardsToShow(cardsToShow + 2);
+      setCardsToShow((prevCardsToShow) => prevCardsToShow + 2);
     } else {
-      setCardsToShow(cardsToShow + 1);
+      setCardsToShow((prevCardsToShow) => prevCardsToShow + 1);
     }
-  };
-  useEffect(() => {
-    setScreenWidth(window.innerWidth);
-    window.addEventListener('resize', setScreenWidth);
-    handleShowMore();
-    return () => {
-      window.removeEventListener('resize', setScreenWidth);
-    };
   }, [screenWidth]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleShowMore();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [screenWidth, handleShowMore]);
 
   return (
     <>
@@ -46,7 +51,7 @@ const SearchResolts = (props) => {
 
               {!props.showMore &&
               visibleCards.length < props.searchResults.length &&
-              screenWidth <= `700` ? (
+              screenWidth <= 700 ? (
                 <button
                   onClick={handleShowMore}
                   className="newscardlist__button"
@@ -57,7 +62,7 @@ const SearchResolts = (props) => {
                 ''
               )}
 
-              {screenWidth > `700` && props.searchResults.length !== 0 ? (
+              {screenWidth > 700 && props.searchResults.length !== 0 ? (
                 <div>
                   <button
                     onClick={handleShowMore}
@@ -72,9 +77,9 @@ const SearchResolts = (props) => {
             </div>
           </div>
         </section>
-      )}{' '}
+      )}
     </>
   );
 };
 
-export default SearchResolts;
+export default SearchResults;

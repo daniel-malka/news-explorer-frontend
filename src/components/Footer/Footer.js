@@ -1,11 +1,8 @@
 import git from '../../images/Vector.svg';
 import facebook from '../../images/facebook.svg';
 import { NavLink } from 'react-router-dom';
-import { useHome } from '../../contexts/HomeContext';
 
 const Footer = () => {
-  const { isHome } = useHome();
-
   return (
     <footer className="footer">
       <p className="footer__copyrights">
