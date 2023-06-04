@@ -18,13 +18,13 @@ const NewsCard = ({ card }) => {
   };
 
   return (
-    <article className="newsCard">
+    <article className="newscard">
       <div
-        className="newsCard-img"
+        className="newscard-img"
         style={{ backgroundImage: `url(${card.image})` }}
       >
-        <div className="newsCard-img-container">
-          <button className="newsCard-img-tagBtn">{card.keyword}</button>
+        <div className="newscard-img-container">
+          <button className="newscard-img-tagbtn">{card.keyword}</button>
           {!isHome ? (
             <>
               {showToolTip ? (
@@ -35,7 +35,7 @@ const NewsCard = ({ card }) => {
                 ''
               )}
 
-              <button className="newsCard-img-icon newsCard-img-delete">
+              <button className="newscard-img-icon newscard-img-delete">
                 <img
                   src={trashIcon}
                   alt="Remove from saved"
@@ -53,7 +53,7 @@ const NewsCard = ({ card }) => {
               ) : (
                 ''
               )}
-              <button className=" newsCard-img-icon newsCard-img-save">
+              <button className=" newscard-img-icon newscard-img-save">
                 <img
                   src={saveIcon}
                   alt="save"
@@ -66,11 +66,11 @@ const NewsCard = ({ card }) => {
           )}
         </div>
       </div>
-      <div className="newsCard-text">
-        <p className="newsCard-text-date">{card.date}</p>
-        <h3 className="newsCard-text-title">{card.title}</h3>
-        <p className="newsCard-text-text">{card.text}</p>
-        <p className="newsCard-text-source">{card.source}</p>
+      <div className="newscard-text">
+        <p className="newscard-text-date">{card.date}</p>
+        <h3 className="newscard-text-title">{card.title}</h3>
+        <p className="newscard-text-text">{card.text}</p>
+        <p className="newscard-text-source">{card.source}</p>
       </div>
     </article>
   );

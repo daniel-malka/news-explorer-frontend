@@ -8,9 +8,9 @@ const SearchResolts = (props) => {
   const visibleCards = props.searchResults.slice(0, cardsToShow);
 
   const handleShowMore = () => {
-    if (screenWidth > 920) {
+    if (screenWidth > 700) {
       setCardsToShow(cardsToShow + 3);
-    } else if (screenWidth <= 920 && screenWidth > 600) {
+    } else if (screenWidth <= 700 && screenWidth > 500) {
       setCardsToShow(cardsToShow + 2);
     } else {
       setCardsToShow(cardsToShow + 1);
@@ -30,14 +30,14 @@ const SearchResolts = (props) => {
       {props.searchTerm.length === 0 ? (
         ''
       ) : (
-        <section className="searchResults">
-          <div className="searchResults__div">
-            <div className="searchResult__container">
+        <section className="searchresults">
+          <div className="searchresults__div">
+            <div className="searchresult__container">
               {visibleCards.length !== 0
                 ? visibleCards.map((card) => (
                     <div
                       key={card._id}
-                      className="searchResult__cards-listItem"
+                      className="searchresult__cards-listitem"
                     >
                       <NewsCard card={card} />
                     </div>
@@ -46,10 +46,10 @@ const SearchResolts = (props) => {
 
               {!props.showMore &&
               visibleCards.length < props.searchResults.length &&
-              screenWidth <= `920` ? (
+              screenWidth <= `700` ? (
                 <button
                   onClick={handleShowMore}
-                  className="newsCardList__button"
+                  className="newscardlist__button"
                 >
                   Show more
                 </button>
@@ -57,11 +57,11 @@ const SearchResolts = (props) => {
                 ''
               )}
 
-              {screenWidth > `920` && props.searchResults.length != 0 ? (
+              {screenWidth > `700` && props.searchResults.length !== 0 ? (
                 <div>
                   <button
                     onClick={handleShowMore}
-                    className="newsCardList__button"
+                    className="newscardlist__button"
                   >
                     Show more
                   </button>

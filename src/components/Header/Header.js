@@ -1,23 +1,33 @@
-import React, { useEffect } from 'react';
-import { Navigate, NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, NavLink, useLocation } from 'react-router-dom';
 // images
-import nav1 from '../../images/header/Rectangle1.png';
-import nav2 from '../../images/header/Rectangle2.png';
+import menuWhite from '../../images/icons/menuW.svg';
+import menuBlack from '../../images/icons/menuB.svg';
 import exitImg from '../../images/icons/logout.svg';
 import exitImgDark from '../../images/icons/logout-dark.svg';
 import blackLogo from '../../images/blackLogo.svg';
-import logo from '../../images/logo.svg';
+import whiteLogo from '../../images/logo.svg';
 // context
 import { usePopup } from '../../contexts/PopupContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
 
 function Header() {
-  const { isHome, location } = useHome();
+  const { isHome } = useHome();
   const { openPopup, closeAllPopups } = usePopup();
   const elemntClass = document.getElementsByClassName('header__navburger');
   const liClass = document.querySelectorAll('.header__button');
   const { isLoggedIn, user, handleLogout } = useAuth();
+  const location = useLocation();
+
+  let [isSavedNews, setIsSavedNews] = useState(false);
+  let [isNavActive, setIsNavActive] = useState(false);
+
+  isSavedNews = location.pathname === '/saved-news';
+
+  isNavActive = document
+    .querySelector('.navMobile')
+    ?.classList.contains('nav__active');
 
   const navBurgerChange = () => {
     if (!elemntClass[0].classList.contains('open')) {
@@ -29,8 +39,16 @@ function Header() {
   };
 
   useEffect(() => {
+    setIsSavedNews(location.pathname === '/saved-news');
+  }, [location]);
+
+  useEffect(() => {
+    setIsNavActive(!isNavActive);
+  }, [!isNavActive]);
+
+  useEffect(() => {
     isHome
-      ? liClass.forEach((li) => li.classList.add('header__active-white'))
+      ? liClass.forEach((li) => li.classList.add('header__active'))
       : liClass.forEach((li) => li.classList.add('li__active-dark'));
 
     // Add padding-top: 11px to header__home and header__saved classes
@@ -40,12 +58,19 @@ function Header() {
     homeElements.forEach((element) => {
       element.style.paddingTop = '11px';
     });
-  }, [location, isHome, liClass]);
+  });
+
   return (
-    <header className={isHome ? 'header' : 'header white-bg'}>
+    <header className={isHome || isSavedNews ? `header` : 'header white-bg'}>
       <div className="header__wrap">
         <img
-          src={isHome ? logo : blackLogo}
+          src={
+            isHome ||
+            (isNavActive && isSavedNews) ||
+            (!isSavedNews && !isNavActive)
+              ? whiteLogo
+              : blackLogo
+          }
           alt="Logo"
           className="header__logo"
         />
@@ -68,7 +93,7 @@ function Header() {
               <li
                 className={
                   isHome
-                    ? 'header__saved header__button header__active-white header__items'
+                    ? 'header__saved header__button header__active header__items'
                     : 'header__saved header__button selected-dark'
                 }
               >
@@ -76,7 +101,7 @@ function Header() {
                   to="/saved-news"
                   className={
                     isHome
-                      ? 'header__saved header__button header__active-white header__items'
+                      ? 'header__saved header__button header__active header__items'
                       : 'header__saved header__button selected-dark'
                   }
                   end
@@ -87,14 +112,14 @@ function Header() {
               <li
                 className={
                   isHome
-                    ? 'header__home header__button header__active-white selected'
+                    ? 'header__home header__button header__active selected'
                     : 'header__home-dark header__button'
                 }
               >
                 <NavLink
                   className={
                     isHome
-                      ? 'header__home header__button header__active-white selected'
+                      ? 'header__home header__button header__active selected'
                       : 'header__home header__button'
                   }
                   to="/"
@@ -128,8 +153,16 @@ function Header() {
             navBurgerChange();
           }}
         >
-          <img className="navFirst" src={nav1} alt="" />
-          <img className="navSecond" src={nav2} alt="" />
+          <img
+            className="navFirst"
+            src={isHome ? menuWhite : menuBlack}
+            alt=""
+          />
+          <img
+            className="navSecond"
+            src={isHome ? menuWhite : menuBlack}
+            alt=""
+          />
         </div>
       </div>
     </header>

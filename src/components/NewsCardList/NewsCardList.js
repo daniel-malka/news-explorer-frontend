@@ -4,13 +4,13 @@ import { data } from '../../data';
 
 const NewsCardList = () => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [cardsToShow, setCardsToShow] = useState(0); // Render 3 cards initially
+  const [cardsToShow, setCardsToShow] = useState(0);
   const visibleCards = data.slice(0, cardsToShow);
 
   const handleShowMore = () => {
-    if (screenWidth > 920) {
+    if (screenWidth > 700) {
       setCardsToShow(cardsToShow + 3);
-    } else if (screenWidth <= 920 && screenWidth > 600) {
+    } else if (screenWidth <= 700 && screenWidth > 500) {
       setCardsToShow(cardsToShow + 2);
     } else {
       setCardsToShow(cardsToShow + 1);
@@ -32,13 +32,13 @@ const NewsCardList = () => {
 
   return (
     <>
-      <div className="newsCardList">
-        <div className="newsCardList__cards">
+      <div className="newscardlist">
+        <div className="newscardlist__cards">
           {visibleCards.map((card, index) => (
             <NewsCard key={index} card={card} />
           ))}
         </div>{' '}
-        <button onClick={handleShowMore} className="newsCardList__button">
+        <button onClick={handleShowMore} className="newscardlist__button">
           Show more
         </button>
       </div>{' '}

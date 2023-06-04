@@ -71,7 +71,6 @@ input#search::placeholder {
   line-height: 22px;
   color: #b6bcbf;
 }
-
 .search__input-text {
   border-radius: 100px;
   width: 80%;
@@ -106,6 +105,9 @@ button.newsCardList__button:hover {
 }
 
 @media screen and (max-width: 780px) {
+  input#search {
+    color: #b6bcbf;
+  }
   .search {
     min-height: 480px;
     padding-bottom: 48px;

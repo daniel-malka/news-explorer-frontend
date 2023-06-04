@@ -1,4 +1,4 @@
-.searchResults__div {
+.searchresults__div {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
@@ -6,17 +6,17 @@
   padding: 0 104px;
   padding-top: 80px;
   display: grid;
-  justify-content: space-around;
+  justify-content: center;
 }
 
-.searchResult__cards-listItem {
+.searchresult__cards-listitem {
   box-sizing: border-box;
   display: flex;
 }
 .searchresult__notfound {
   grid-template-columns: 2 / 3;
 }
-.searchResult-title {
+.searchresult-title {
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -29,7 +29,7 @@
   padding-bottom: 64px;
 }
 
-.searchResult__container {
+.searchresult__container {
   position: relative;
   box-sizing: border-box;
   height: 100%;
@@ -41,38 +41,44 @@
 }
 
 @media screen and (max-width: 1230px) {
-  .searchResults__div {
+  .searchresults__div {
     padding-left: 40px;
     padding-right: 40px;
   }
 }
+
 @media screen and (max-width: 920px) {
-  .searchResult__container {
-    grid-template-columns: repeat(2, minmax(288px, 400px));
+  .searchresult__container {
+    grid-template-columns: repeat(3, minmax(224px, 288px));
   }
 }
 @media screen and (max-width: 780px) {
-  .searchResults__div {
+  .searchresults__div {
     padding: 40px;
     padding-top: 32px;
     padding-bottom: 0;
   }
-  .searchResult-title {
+  .searchresult-title {
     padding-bottom: 32px;
   }
-  .searchResult__container {
+  .searchresult__container {
     padding-bottom: 128px;
     gap: 8px;
   }
 }
-
+@media screen and (max-width: 700px) {
+  .searchresult__container {
+    grid-template-columns: repeat(2, minmax(224px, 288px));
+  }
+}
 @media screen and (max-width: 600px) {
-  .searchResult__container {
+  .searchresult__container {
     display: flex;
     flex-direction: column;
     max-width: 288px;
+    padding-bottom: 96px;
   }
-  .searchResult-title {
+  .searchresult-title {
     margin: 0;
     font-size: 30px;
     line-height: 34px;
@@ -81,7 +87,7 @@
   }
 }
 @media screen and (max-width: 450px) {
-  .searchResults__div {
+  .searchresults__div {
     padding-left: 16px;
     padding-right: 16px;
   }

@@ -74,7 +74,7 @@ li.header__link.header__button {
 
 .header__div {
   max-height: 61px;
-  
+
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: nowrap;
@@ -143,7 +143,7 @@ li.header__link.header__button {
   padding: 0 auto;
   transition: all 0.3s ease-in-out;
 }
-.header__active-white {
+.header__active {
   color: #ffff;
   text-decoration: auto;
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
@@ -270,7 +270,9 @@ li.header__link.header__button:hover {
     cursor: pointer;
   }
   .header__navburger > img {
-    height: 3px;
+    box-sizing: border-box;
+    width: 16px;
+    height: 2px;
     transition: all 0.3s ease-in-out;
   }
   .header__navburger.open img.navFirst {

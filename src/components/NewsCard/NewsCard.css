@@ -1,14 +1,14 @@
-article.newsCard {
+article.newscard {
   box-sizing: border-box;
   border-radius: 10px;
   border: none;
   height: 576px;
   background-color: #ffff;
 }
-.newsCardList {
+.newscardlist {
   position: relative;
 }
-.newsCard-img {
+.newscard-img {
   box-sizing: border-box;
   height: 272px;
   background-repeat: no-repeat;
@@ -16,7 +16,7 @@ article.newsCard {
   border-radius: 10px 10px 0 0;
 }
 
-button.newsCard-img-icon {
+button.newscard-img-icon {
   background: #ffffff;
   border-radius: 8px;
   border: none;
@@ -26,17 +26,17 @@ button.newsCard-img-icon {
   padding: 8px;
 }
 
-.newsCard-img-icon > img:hover {
+.newscard-img-icon > img:hover {
   filter: none;
 }
 
-button.newsCard-img-icon > img {
+button.newscard-img-icon > img {
   filter: invert(40%) sepia(100%) saturate(0%) hue-rotate(86deg)
     brightness(102%) contrast(102%);
   cursor: pointer;
 }
 
-.newsCard-img-container {
+.newscard-img-container {
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -46,7 +46,7 @@ button.newsCard-img-icon > img {
   padding-top: 24px;
 }
 
-button.newsCard-img-tagBtn {
+button.newscard-img-tagbtn {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -77,7 +77,7 @@ button.news-card__tootltip {
 
 /*text parent*/
 
-.newsCard-text {
+.newscard-text {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -85,7 +85,7 @@ button.news-card__tootltip {
   max-height: 304px;
   padding-bottom: 24px;
 }
-p.newsCard-text-date {
+p.newscard-text-date {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
@@ -97,9 +97,8 @@ p.newsCard-text-date {
   padding-top: 20px;
 }
 
-h3.newsCard-text-title {
+h3.newscard-text-title {
   box-sizing: border-box;
-  max-height: 88px;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -107,13 +106,14 @@ h3.newsCard-text-title {
   line-height: 30px;
   color: #1a1b22;
   margin: 0;
-  white-space: nowrap;
+  display: -webkit-box;
   text-overflow: ellipsis;
+  overflow: hidden;
   padding-bottom: 46px;
   max-height: 72px;
 }
 
-p.newsCard-text-text {
+p.newscard-text-text {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -128,7 +128,8 @@ p.newsCard-text-text {
   max-height: 110px;
   margin-bottom: 18px;
 }
-p.newsCard-text-source {
+
+p.newscard-text-source {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -144,52 +145,73 @@ p.newsCard-text-source {
 /* article text ends here */
 
 @media screen and (max-width: 1253px) {
-  h3.newsCard-text-title {
+  h3.newscard-text-title {
     font-size: 22px;
     line-height: 24px;
   }
-  /* p.newsCard-text-text {
-    max-width: 192px;
-  } */
+
   button.news-card__tootltip {
     display: none;
   }
 }
-@media screen and (max-width: 780px) {
-  .newsCard-img {
+@media screen and (max-width: 920px) {
+  .newscard-img {
     max-height: 150px;
     object-fit: fill;
   }
-  article.newsCard {
+  article.newscard {
     height: 420px;
   }
-  .newsCard-text {
+  .newscard-text {
     height: 270px;
+    margin: 0 16px;
   }
-  .newsCard-img-container {
+  .newscard-img-container {
     margin: 0px 8px;
     padding-top: 8px;
   }
-  p.newsCard-text-date {
-    padding-top: 16px;
-    padding-bottom: 12px;
+  p.newscard-text-date {
+    padding-top: 20px;
+    padding-bottom: 8px;
   }
-  h3.newsCard-text-title {
+  h3.newscard-text-title {
     padding-bottom: 10px;
+    min-height: 48px;
   }
-  p.newsCard-text-text {
+  p.newscard-text-text {
+    padding-top: 24px;
     margin-bottom: 12px;
+    min-height: 88px;
+    max-height: 112px;
   }
 }
 
 @media screen and (max-width: 565px) {
-  .newsCardList__cards {
+  .newscardList__cards {
     padding: 24px 16px;
   }
-  .newsCard-img {
-    width: 288px;
+  .newscard-img {
+    height: 196px;
   }
-  article.newsCard {
+  article.newscard {
     max-width: 288px;
+    height: 444px;
+  }
+  .newscard-text {
+    height: 244x;
+  }
+  .newscard-img-container {
+    margin: 0px 8px;
+    padding-top: 8px;
+  }
+  p.newscard-text-date {
+    padding-top: 16px;
+    padding-bottom: 10px;
+  }
+  h3.newscard-text-title {
+    padding-bottom: 14px;
+  }
+  p.newscard-text-text {
+    margin-bottom: 12px;
   }
 }

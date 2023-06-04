@@ -1,7 +1,16 @@
+p {
+  margin: 0;
+}
 button.signin__redirect-button {
   color: #2f71e5;
   border: none;
   background: none;
   box-sizing: border-box;
   cursor: pointer;
+  padding-top: 16px;
+}
+@media screen and (max-width: 600px) {
+  button.signin__redirect-button {
+    font-size: 14px;
+  }
 }

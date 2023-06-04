@@ -33,7 +33,7 @@ const SavedNews = () => {
   };
 
   return (
-    <main className="savedNews">
+    <main className="savednews">
       <section className="savednews__text">
         <p className="savednews__paragraph">saved articles</p>
         <h2 className="savednews__title">
@@ -44,7 +44,7 @@ const SavedNews = () => {
           By keywords: <strong>{keywordSelect()}</strong>
         </p>
       </section>
-      <section className="newsCardList-container">
+      <section className="newscardlist-container">
         <NewsCardList />
       </section>
     </main>
