@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { Navigate, NavLink, useLocation } from 'react-router-dom';
 // images
 import menuWhite from '../../images/icons/menuW.svg';
@@ -25,11 +25,8 @@ function Header() {
 
   isSavedNews = location.pathname === '/saved-news';
 
-  isNavActive = document
-    .querySelector('.navMobile')
-    ?.classList.contains('nav__active');
-
   const navBurgerChange = () => {
+    setIsNavActive(!isNavActive);
     if (!elemntClass[0].classList.contains('open')) {
       elemntClass[0].classList.add('open');
     } else {
@@ -38,15 +35,11 @@ function Header() {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setIsSavedNews(location.pathname === '/saved-news');
   }, [location]);
 
-  useEffect(() => {
-    setIsNavActive(!isNavActive);
-  }, [isNavActive]);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     isHome
       ? liClass.forEach((li) => li.classList.add('header__active'))
       : liClass.forEach((li) => li.classList.add('li__active-dark'));

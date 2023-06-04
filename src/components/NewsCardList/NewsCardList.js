@@ -10,7 +10,7 @@ const NewsCardList = () => {
   const handleShowMore = useCallback(() => {
     if (screenWidth > 700) {
       setCardsToShow((prevCardsToShow) => prevCardsToShow + 3);
-    } else if (screenWidth <= 700 && screenWidth > 500) {
+    } else if (screenWidth > 500) {
       setCardsToShow((prevCardsToShow) => prevCardsToShow + 2);
     } else {
       setCardsToShow((prevCardsToShow) => prevCardsToShow + 1);

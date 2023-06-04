@@ -10,9 +10,9 @@ const SearchResults = (props) => {
   const handleShowMore = useCallback(() => {
     if (screenWidth > 700) {
       setCardsToShow((prevCardsToShow) => prevCardsToShow + 3);
-    } else if (screenWidth <= 700 && screenWidth > 500) {
+    } else if (screenWidth > 500) {
       setCardsToShow((prevCardsToShow) => prevCardsToShow + 2);
-    } else {
+    } else if (screenWidth <= 500) {
       setCardsToShow((prevCardsToShow) => prevCardsToShow + 1);
     }
   }, [screenWidth]);
@@ -28,7 +28,7 @@ const SearchResults = (props) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [screenWidth, handleShowMore]);
+  }, [handleShowMore]);
 
   return (
     <>
@@ -51,7 +51,7 @@ const SearchResults = (props) => {
 
               {!props.showMore &&
               visibleCards.length < props.searchResults.length &&
-              screenWidth <= 700 ? (
+              screenWidth < 700 ? (
                 <button
                   onClick={handleShowMore}
                   className="newscardlist__button"
