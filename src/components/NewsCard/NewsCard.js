@@ -1,31 +1,126 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import trashIcon from '../../images/icons/recycle-bin.svg';
 import saveIcon from '../../images/icons/save.svg';
 // import savedIcon from '../../images/icons/saved.svg';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
-const NewsCard = ({ card }) => {
+import ArticlesContextProvider from '../../contexts/ArticlesContext';
+
+const NewsCard = ({
+  savedArticles,
+  searchTerm,
+  article,
+  userArticles,
+  setUserArticles,
+  handleDeleteArticleFunc,
+  articlesLength,
+  cardId,
+  allSavedArticles,
+  setAllSavedArticles,
+}) => {
+  const token = localStorage.getItem('token');
+  const api = useContext(ArticlesContextProvider);
+
+  const [isArticleSaved, setIsArticleSaved] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
   const { isHome } = useHome();
   const { isLoggedIn } = useAuth();
+  const date = new Date();
 
-  const onHoverMessage = () => {
+  const changeDate = (apiDate) => {
+    const date = new Date(apiDate);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    const formattedDate = `${day}.${month}.${year}`;
+    return formattedDate;
+  };
+
+  const [Article] = useState({
+    title: article.title,
+    keyword: searchTerm,
+    text: article.description,
+    date: changeDate(article.publishedAt) || changeDate(date),
+    source: article.source?.id ? article.source.id : article.source?.name,
+    image: article.urlToImage || null,
+    link: article.url,
+  });
+
+  const saveArticle = async () => {
+    try {
+      await api.saveArticle(Article, token);
+      savedArticles.add(article.id);
+      setIsArticleSaved(true);
+      const updatedArticles = await api.getSavedArticles(token);
+      setAllSavedArticles(updatedArticles);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const unSaveArticle = async (url) => {
+    try {
+    } catch {}
+  };
+
+  const handleArticleClick = (e) => {
+    const isButtonClicked = e.target.closest('button');
+    if (!isButtonClicked) {
+      article.url
+        ? window.open(article.url, '_blank')
+        : window.open(article.link, '_blank'); // Redirect to the URL
+    }
+  };
+
+  const onHoverMessage = (e) => {
+    e.preventDefault();
     setShowToolTip(true);
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (e) => {
+    e.preventDefault();
     setShowToolTip(false);
   };
 
+  useEffect(() => {
+    if (allSavedArticles && allSavedArticles.data) {
+      const isArticleSaved = allSavedArticles.data.some(
+        (element) => element.link === article.url
+      );
+      setIsArticleSaved(isArticleSaved);
+    }
+  }, [allSavedArticles, article.url]);
+
   return (
-    <article className="newscard">
+    <article className="newscard" onClick={handleArticleClick}>
       <div
         className="newscard-img"
-        style={{ backgroundImage: `url(${card.image})` }}
+        style={{ backgroundImage: `url(${article.urlToImage})` }}
       >
         <div className="newscard-img-container">
-          <button className="newscard-img-tagbtn">{card.keyword}</button>
-          {!isHome ? (
+          <button
+            className="newscard-img-tagbtn"
+            onClick={isArticleSaved ? unSaveArticle : saveArticle}
+          >
+            {article.source.name || article.keyword}
+          </button>
+          {isHome ? (
+            <>
+              {!isLoggedIn && showToolTip && (
+                <button className="news-card__tootltip">
+                  Sign in to save articles
+                </button>
+              )}
+              <button className=" newscard-img-icon newscard-img-save">
+                <img
+                  src={saveIcon}
+                  alt="save"
+                  title="please login to save articles"
+                  onMouseEnter={onHoverMessage}
+                  onMouseLeave={handleMouseLeave}
+                />
+              </button>
+            </>
+          ) : (
             <>
               {showToolTip ? (
                 <button className="news-card__tootltip">
@@ -44,33 +139,14 @@ const NewsCard = ({ card }) => {
                 />
               </button>
             </>
-          ) : (
-            <>
-              {isLoggedIn && showToolTip ? (
-                <button className="news-card__tootltip">
-                  Sign in to save articles
-                </button>
-              ) : (
-                ''
-              )}
-              <button className=" newscard-img-icon newscard-img-save">
-                <img
-                  src={saveIcon}
-                  alt="save"
-                  title="please login to save articles"
-                  onMouseEnter={onHoverMessage}
-                  onMouseLeave={handleMouseLeave}
-                />
-              </button>
-            </>
           )}
         </div>
       </div>
       <div className="newscard-text">
-        <p className="newscard-text-date">{card.date}</p>
-        <h3 className="newscard-text-title">{card.title}</h3>
-        <p className="newscard-text-text">{card.text}</p>
-        <p className="newscard-text-source">{card.source}</p>
+        <p className="newscard-text-date">{Article.date}</p>
+        <h3 className="newscard-text-title">{Article.title}</h3>
+        <p className="newscard-text-text">{Article.text}</p>
+        <p className="newscard-text-source">{Article.source.name}</p>
       </div>
     </article>
   );

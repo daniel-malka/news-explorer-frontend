@@ -48,7 +48,9 @@
   padding-bottom: 28px;
   box-sizing: border-box;
 }
-
+.signup__container {
+  height: 457px;
+}
 .popup__active {
   visibility: visible;
   opacity: 1;

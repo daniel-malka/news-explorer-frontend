@@ -4,6 +4,7 @@ article.newscard {
   border: none;
   height: 576px;
   background-color: #ffff;
+  cursor: pointer;
 }
 .newscardlist {
   position: relative;

@@ -1,4 +1,4 @@
-import newsApi from '../utilities/NewsApi';
+import { newsApi } from '../utilities/NewsApi';
 import {
   getSavedArticles,
   saveArticle,
@@ -12,7 +12,12 @@ const ArticlesContext = createContext();
 const ArticlesContextProvider = ({ children }) => {
   return (
     <ArticlesContext.Provider
-      value={{ newsApi, getSavedArticles, saveArticle, deleteArticle }}
+      value={{
+        newsApi,
+        getSavedArticles,
+        saveArticle,
+        deleteArticle,
+      }}
     >
       {children}
     </ArticlesContext.Provider>

@@ -1,47 +1,41 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
-import { data } from '../../data';
+import { useAuth } from '../../contexts/AuthContext';
+import { useHome } from '../../contexts/HomeContext';
+import { useArticles } from '../../contexts/ArticlesContext';
 
-const NewsCardList = () => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const [cardsToShow, setCardsToShow] = useState(-3);
-  const visibleCards = data.slice(0, cardsToShow);
-
-  const handleShowMore = useCallback(() => {
-    if (screenWidth > 700) {
-      setCardsToShow((prevCardsToShow) => prevCardsToShow + 3);
-    } else if (screenWidth > 500) {
-      setCardsToShow((prevCardsToShow) => prevCardsToShow + 2);
-    } else {
-      setCardsToShow((prevCardsToShow) => prevCardsToShow + 1);
-    }
-  }, [screenWidth]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleShowMore();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [screenWidth, handleShowMore]);
+const NewsCardList = ({
+  userArticles,
+  setUserArticles,
+  handleDeleteArticleFunc,
+  articlesLength,
+}) => {
+  const token = localStorage.getItem('token');
+  const { isLoggedIn } = useAuth();
+  const { isHome } = useHome();
+  const { api } = useArticles();
+  const [showToolTip, setShowToolTip] = useState(false);
+  const [articleSaved, setArticleSaved] = useState(false);
 
   return (
     <>
       <div className="newscardlist">
         <div className="newscardlist__cards">
-          {visibleCards.map((card, index) => (
-            <NewsCard key={index} card={card} />
-          ))}
-        </div>{' '}
-        <button onClick={handleShowMore} className="newscardlist__button">
-          Show more
-        </button>
-      </div>{' '}
+          {!userArticles?.data || userArticles === [] ? (
+            <p>Sorry, you haven't saved any articles</p>
+          ) : (
+            userArticles.map((article) => (
+              <NewsCard
+                article={article}
+                userArticles={userArticles}
+                setUserArticles={setUserArticles}
+                handleDeleteArticleFunc={handleDeleteArticleFunc}
+                articlesLength={articlesLength}
+              />
+            ))
+          )}
+        </div>
+      </div>
     </>
   );
 };

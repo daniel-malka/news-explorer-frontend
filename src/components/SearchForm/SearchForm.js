@@ -1,47 +1,80 @@
 import mainHeaderImg from '../../images/main.jpg';
-import { data } from '../../data';
-import { useEffect, useState } from 'react';
-import SearchResolts from '../SearchResolts/SearchResolts';
+import { useState, useRef } from 'react';
+import { useArticles } from '../../contexts/ArticlesContext';
+import SearchResults from '../SearchResults/SearchResults';
 import Preloader from '../Preloader/preloader';
-import NotFound from '../NotFound/NotFound';
 
 const SearchForm = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [handleSearchClicked, setHandleSearchClicked] = useState(true);
+  const [handleSearchClicked] = useState(true);
   const [showMore, setShowMore] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [allResolts, setAllResolts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [counter, setCounter] = useState(0);
+  const [screenWidth] = useState(window.innerWidth);
+  const { api } = useArticles();
+  const inputRef = useRef('');
+  let filter = '';
 
-  const filteredArr = data;
-
-  const handleInputChange = (event) => {
-    event.preventDefault();
-    setSearchTerm(event.target.value);
-  };
-
-  const onClickShowmore = (event) => {
+  const onClickShowmore = async (event) => {
     event.preventDefault();
     setShowMore(true);
-  };
 
-  const handleSearch = (event) => {
-    event.preventDefault();
-    const filteredResults = filteredArr.filter((article) =>
-      article.keyword.toLowerCase().includes(searchTerm.toLowerCase().trim())
-    );
-
-    setSearchResults(filteredResults);
-    setIsLoading(true);
-    setHandleSearchClicked(true);
-  };
-
-  useEffect(() => {
-    let timer;
-    if (isLoading) {
-      timer = setTimeout(() => setIsLoading(false), 1000);
+    let nextCounter;
+    if (screenWidth > 700) {
+      nextCounter = counter + 3;
+    } else if (screenWidth > 500) {
+      nextCounter = counter + 2;
+    } else if (screenWidth <= 500) {
+      nextCounter = counter + 1;
     }
-    return () => clearTimeout(timer);
-  }, [isLoading]);
+
+    const allResoltsArray = Array.from(allResolts);
+    const filteredArticles = allResoltsArray.filter(
+      (_, index) => index < nextCounter
+    );
+    const filter =
+      filteredArticles.length > 3 && showMore === false
+        ? Object.values(filteredArticles)
+        : filteredArticles;
+    setSearchResults(filter);
+    setCounter(nextCounter);
+    setShowMore(false);
+  };
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    const input = inputRef.current?.value;
+    setSearchTerm(input);
+    setIsLoading(true);
+
+    try {
+      const response = await api.newsApi.getArticles(input);
+      const data = await response.json();
+      setAllResolts(data);
+
+      let nextCounter;
+      if (screenWidth > 700) {
+        nextCounter = 3;
+      } else if (screenWidth > 500) {
+        nextCounter = 2;
+      } else if (screenWidth <= 500) {
+        nextCounter = 1;
+      }
+
+      filter =
+        data.articles.length > 3 && showMore === false
+          ? Object.values(data.articles.slice(0, nextCounter))
+          : data.articles;
+      setSearchResults(filter);
+      setCounter(nextCounter);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -62,17 +95,17 @@ const SearchForm = () => {
           </p>
         </div>
 
-        <form className="search__input">
+        <form onSubmit={handleSearch} className="search__input">
           <input
             id="search"
             name="search"
-            onChange={handleInputChange}
+            ref={inputRef}
             className="search__input-text"
             type="text"
             autoComplete="true"
             placeholder="Enter topic"
           />
-          <button onClick={handleSearch} className="search__input-button">
+          <button type="submit" className="search__input-button">
             Search
           </button>
         </form>
@@ -80,14 +113,13 @@ const SearchForm = () => {
       {isLoading ? (
         <Preloader />
       ) : searchResults.length === 0 ? (
-        <NotFound />
+        <Preloader />
       ) : (
-        <SearchResolts
+        <SearchResults
           showMore={showMore}
           onClickShowmore={onClickShowmore}
-          searchResults={searchResults}
+          searchResults={Object.values(searchResults)}
           handleSearchClicked={handleSearchClicked}
-          filteredArr={filteredArr}
           searchTerm={searchTerm}
           isLoading={isLoading}
           setIsLoading={setIsLoading}
