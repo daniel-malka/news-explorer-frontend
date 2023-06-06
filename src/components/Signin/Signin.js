@@ -18,7 +18,6 @@ const SignIn = ({
     email: '',
     password: '',
   });
-  const localEmail = localStorage.getItem('email');
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,7 +28,7 @@ const SignIn = ({
 
   const closePopup = () => {
     setPopupState({
-      popupState,
+      ...popupState,
       signin: false,
     });
   };
@@ -100,7 +99,7 @@ const SignIn = ({
         id="email"
         className="popup__input login-form__input"
         placeholder="Email"
-        value={localEmail || userLoginInfo.email}
+        value={userLoginInfo.email}
         onChange={handleEmailInput}
         required
       />

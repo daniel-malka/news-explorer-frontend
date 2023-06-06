@@ -1,36 +1,41 @@
+import { useCallback, useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useHome } from '../../contexts/HomeContext';
 import NewsCardList from '../NewsCardList/NewsCardList';
-// import { useArticles } from '../../contexts/ArticlesContext';
-import { data } from '../../data';
+import { useArticles } from '../../contexts/ArticlesContext';
 
 const SavedNews = () => {
-  //temporary commented
-  // const { data } = useArticles();
-
+  const [userArticles, setUserArticles] = useState([]);
   const { user } = useAuth();
-
-  const keywordSelect = () => {
-    let uniqKeywords = [];
-    const keyW = data.map((article) => article.keyword);
-
-    for (let i = 0; i < keyW.length; i++) {
-      if (keyW[0] === keyW[i] && uniqKeywords.includes(keyW[i])) {
-        continue;
-      } else {
-        uniqKeywords.push(keyW[i]);
-      }
-    }
-    if (uniqKeywords.length > 3) {
-      return `${uniqKeywords[0]}, ${uniqKeywords[1]}, and ${
+  const api = useArticles();
+  const { isHome } = useHome();
+  const token = localStorage.getItem('token');
+  const keywordSelect = useCallback(() => {
+    const keyW =
+      userArticles && userArticles?.data.map((article) => article.keyword);
+    const uniqKeywords = [...new Set(keyW)];
+    if (uniqKeywords > 3)
+      return `${uniqKeywords[0] + ' '}, ${uniqKeywords[1] + ' '}, and ${
         uniqKeywords.length - 2
       } others`;
-    } else {
-      const keywordElements = uniqKeywords.map((keyword) => {
-        return keyword;
-      });
-      return keywordElements;
-    }
-  };
+    else if (uniqKeywords.length <= 3)
+      return uniqKeywords.map((word) => word).join(', ');
+    else return 'None';
+  }, [userArticles]);
+
+  useEffect(() => {
+    const getSavedArticles = async () => {
+      try {
+        return await api.getSavedArticles(token);
+      } catch {
+        return (err) => console.log(err);
+      }
+    };
+    if (isHome)
+      getSavedArticles()
+        .then((res) => setUserArticles(res))
+        .catch((err) => console.log(err));
+  }, [api, isHome, keywordSelect, userArticles]);
 
   return (
     <main className="savednews">
@@ -38,7 +43,7 @@ const SavedNews = () => {
         <p className="savednews__paragraph">saved articles</p>
         <h2 className="savednews__title">
           {user.userName === '' ? `Daniel` : user.userName}, you have
-          {` ` + data.length} saved articles
+          {` ` + useArticles.length} saved articles
         </h2>
         <p className="savednews__keywords">
           By keywords: <strong>{keywordSelect()}</strong>
