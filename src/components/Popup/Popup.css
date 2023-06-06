@@ -161,7 +161,9 @@
   position: relative;
   top: 0;
 }
-
+.success__container {
+  height: 182px;
+}
 @media screen and (max-width: 565px) {
   .popup__input {
     max-width: 238px;

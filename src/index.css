@@ -7,7 +7,7 @@
 @import './components/About/About.css';
 @import './components/Footer/Footer.css';
 @import './components/Navigation/Nav.css';
-@import './components/Signin/Signin.css';
+@import './components/SignIn/SignIn.css';
 @import './components/PopupWithForm/PopupWithForm.css';
 @import './components/SavedNews/SavedNews.css';
 @import './components/NewsCard/NewsCard.css';

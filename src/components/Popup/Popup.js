@@ -3,8 +3,10 @@ const Popup = ({ isOpen, onClose, name, title, children }) => {
     <div className={`popup ${name} ${isOpen ? 'popup__active' : ''}`}>
       <div
         className={
-          name === 'signup'
-            ? 'popup__container signup__container '
+          name === 'success'
+            ? 'popup__container success__container'
+            : name === 'signup'
+            ? 'popup__container signup__container'
             : 'popup__container'
         }
       >

@@ -1,28 +1,30 @@
 import { useState } from 'react';
 import Nav from '../Navigation/Nav';
-import Signup from '../Signup/Signup';
-import Signin from '../Signin/Signin';
+import SignUp from '../SignUp/SignUp';
+import SignIn from '../SignIn/SignIn';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
 import { usePopup } from '../../contexts/PopupContext';
 import { useAuth } from '../../contexts/AuthContext';
-const Popups = ({ signIn, signUp }) => {
+const Popups = ({ signin, signup }) => {
   const { popupState, setPopupState } = usePopup();
   const { setIsLoggedIn, setToken, checkToken } = useAuth();
   const [errMessage, setErrMessage] = useState('');
-
   const handleLogin = (email, password) => {
-    signIn(email, password)
+    
+    signin(email, password)
       .then((res) => {
-        if (res.token) {
-          setIsLoggedIn(true);
-          localStorage.setItem('token', res.token);
-          setToken(res.token);
-          checkToken(res.token);
-          setPopupState({
-            ...popupState,
-            signin: false,
-          });
-        }
+        res.json().then((res) => {
+          if (res.token) {
+            setIsLoggedIn(true);
+            localStorage.setItem('token', res.token);
+            setToken(res.token);
+            checkToken(res.token);
+            setPopupState({
+              ...popupState,
+              signin: false,
+            });
+          }
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -32,7 +34,7 @@ const Popups = ({ signIn, signUp }) => {
 
   const handleRegister = (email, username, password) => {
     setErrMessage('');
-    if (password.length < 4) {
+    if (password.length <= 4) {
       setErrMessage('Password must be longer then 4 digits');
       return;
     } else if (username.length < 3) {
@@ -40,29 +42,32 @@ const Popups = ({ signIn, signUp }) => {
       return;
     }
 
-    signUp(email, username, password)
+    signup(email, username, password)
       .then((res) => {
-        if (res.data._id) {
-          localStorage.setItem('email', email);
-          setPopupState({
-            popupState,
-            signup: false,
-            successPopup: true,
-          });
-        }
+        res.json().then((res) => {
+          if (res.user._id) {
+            localStorage.setItem('email', email);
+            setPopupState({
+              popupState,
+              signup: false,
+              successPopup: true,
+            });
+          }
+        });
       })
       .catch((err) => console.log(err));
   };
 
   return (
     <>
-      <Signup
+      <SignUp
         handleRegister={handleRegister}
         popupState={popupState}
         errMessage={errMessage}
         setErrMessage={setErrMessage}
+        setPopupState={setPopupState}
       />
-      <Signin
+      <SignIn
         handleLogin={handleLogin}
         popupState={popupState}
         setPopupState={setPopupState}

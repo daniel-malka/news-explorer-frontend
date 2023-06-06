@@ -1,4 +1,4 @@
-import { NEWS_API, BASE_API } from './constants';
+import { NEWS_API, BASE_API, DEV_API } from './constants';
 
 export const getSavedArticles = (token) => {
   return fetch(`${NEWS_API}/articles`, {
@@ -37,7 +37,8 @@ export const deleteArticle = (articleId, token) => {
 /*Auth*/
 
 export const signup = (email, username, password) => {
-  return fetch(`${BASE_API}/signup`, {
+  console.log(email, username, password);
+  return fetch(`${DEV_API}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ export const signup = (email, username, password) => {
 };
 
 export const signin = (email, password) => {
-  return fetch(`${BASE_API}/signin`, {
+  return fetch(`${DEV_API}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ export const signin = (email, password) => {
 };
 
 export const checkToken = (token) => {
-  return fetch(`${BASE_API}/users/me`, {
+  return fetch(`${DEV_API}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

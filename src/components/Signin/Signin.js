@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 
-const Signin = ({
+const SignIn = ({
   isLoading,
   handleLogin,
   popupState,
@@ -10,7 +10,6 @@ const Signin = ({
   setErrMessage,
 }) => {
   const [isFormValid, setIsFormValid] = useState(false);
-
   const [userLoginInfo, setUserLoginInfo] = useState({
     email: '',
     password: '',
@@ -19,6 +18,7 @@ const Signin = ({
     email: '',
     password: '',
   });
+  const localEmail = localStorage.getItem('email');
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -35,7 +35,7 @@ const Signin = ({
   };
   const handleEmailInput = (event) => {
     const { name, value } = event.target;
-    const emailPattern = /^[^\s@]{4,}@[^\s@]+\.[^\s@]+$/;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const isEmailValid = value.trim() !== '' && emailPattern.test(value);
     setValidation((prevValidation) => ({
       ...prevValidation,
@@ -43,7 +43,7 @@ const Signin = ({
     }));
 
     setUserLoginInfo((prevUserInfo) => ({
-      prevUserInfo,
+      ...prevUserInfo,
       [name]: value,
     }));
   };
@@ -57,7 +57,7 @@ const Signin = ({
     }));
 
     setUserLoginInfo((prevUserInfo) => ({
-      prevUserInfo,
+      ...prevUserInfo,
       [name]: value,
     }));
   };
@@ -100,7 +100,7 @@ const Signin = ({
         id="email"
         className="popup__input login-form__input"
         placeholder="Email"
-        value={userLoginInfo.email}
+        value={localEmail || userLoginInfo.email}
         onChange={handleEmailInput}
         required
       />
@@ -121,4 +121,4 @@ const Signin = ({
   );
 };
 
-export default Signin;
+export default SignIn;

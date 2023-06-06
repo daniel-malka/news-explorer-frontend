@@ -1,27 +1,31 @@
 import { useState, useEffect } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { usePopup } from '../../contexts/PopupContext';
-
-const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
+const SignUp = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
   const { popupState, setPopupState } = usePopup(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
   const [userLoginInfo, setUserLoginInfo] = useState({
     email: '',
-    username: '',
     password: '',
+    username: '',
   });
 
   const [validation, setValidation] = useState({
     email: '',
-    username: '',
     password: '',
+    username: '',
   });
 
   const onClose = () => {
     setPopupState({
       ...popupState,
       signup: false,
+    });
+    setValidation({
+      email: '',
+      password: '',
+      username: '',
     });
   };
   function handleSubmit(e) {
@@ -32,6 +36,16 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
       ...popupState,
       signup: false,
       successPopup: true,
+    });
+    setUserLoginInfo({
+      email: '',
+      password: '',
+      username: '',
+    });
+    setValidation({
+      email: '',
+      password: '',
+      username: '',
     });
   }
 
@@ -83,7 +97,7 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
     validation &&
     validation.email === '' &&
     validation.password === '' &&
-    validation.username === '';
+    validation.ame === '';
   const validateForm = () => {
     if (
       userLoginInfo.email !== '' &&
@@ -125,7 +139,7 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
         id="email"
         className="popup__input login-form__input"
         placeholder="Email"
-        defaultValue={userLoginInfo.email || ''}
+        defaultValue={userLoginInfo.email}
         onChange={handleEmailInput}
         required
       />
@@ -138,7 +152,7 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
         id="password"
         className="popup__input login-form__input"
         placeholder="Password"
-        defaultValue={userLoginInfo.password || ''}
+        defaultValue={userLoginInfo.password}
         onChange={handlePasswordInput}
         required
       />
@@ -151,11 +165,11 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
         id="username"
         className="popup__input login-form__input"
         placeholder="user name"
-        defaultValue={userLoginInfo.username || ''}
+        defaultValue={userLoginInfo.username}
         onChange={handleNameInput}
         required
       />
     </PopupWithForm>
   );
 };
-export default Signup;
+export default SignUp;
