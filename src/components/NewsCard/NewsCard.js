@@ -14,7 +14,7 @@ const NewsCard = ({
   setUserArticles,
   handleDeleteArticleFunc,
   articlesLength,
-  cardId,
+  articleId,
   allSavedArticles,
   setAllSavedArticles,
 }) => {
@@ -48,6 +48,9 @@ const NewsCard = ({
 
   const saveArticle = async () => {
     try {
+      console.log('Article', Article);
+      console.log('article', article);
+      console.log('allSaved', allSavedArticles);
       await api.saveArticle(Article, token);
       savedArticles.add(article.id);
       setIsArticleSaved(true);
@@ -59,7 +62,13 @@ const NewsCard = ({
   };
   const unSaveArticle = async (url) => {
     try {
-    } catch {}
+      await api.deleteArticle(
+        allSavedArticles.data.find((element) => element.link === url).id
+      );
+      setAllSavedArticles(await api.getSavedArticles(token));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleArticleClick = (e) => {

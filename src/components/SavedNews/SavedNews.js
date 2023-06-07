@@ -10,10 +10,14 @@ const SavedNews = () => {
   const api = useArticles();
   const { isHome } = useHome();
   const token = localStorage.getItem('token');
+
   const keywordSelect = useCallback(() => {
+    let uniqKeywords = [];
     const keyW =
-      userArticles && userArticles?.data.map((article) => article.keyword);
-    const uniqKeywords = [...new Set(keyW)];
+      useArticles?.data && useArticles?.data.map((article) => article.keyword);
+    console.log(keyW, userArticles);
+    // uniqKeywords.push(new Set(keyW));
+
     if (uniqKeywords > 3)
       return `${uniqKeywords[0] + ' '}, ${uniqKeywords[1] + ' '}, and ${
         uniqKeywords.length - 2
@@ -23,17 +27,21 @@ const SavedNews = () => {
     else return 'None';
   }, [userArticles]);
 
+  const getSaved = async () => {
+    try {
+      return await api.getSavedArticles(token);
+    } catch {
+      return (err) => console.log(err);
+    }
+  };
+
   useEffect(() => {
-    const getSavedArticles = async () => {
-      try {
-        return await api.getSavedArticles(token);
-      } catch {
-        return (err) => console.log(err);
-      }
-    };
     if (isHome)
-      getSavedArticles()
-        .then((res) => setUserArticles(res))
+      getSaved()
+        .then((res) => {
+          console.log(res);
+          setUserArticles(res);
+        })
         .catch((err) => console.log(err));
   }, [api, isHome, keywordSelect, userArticles]);
 

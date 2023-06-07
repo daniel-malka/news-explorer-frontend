@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (isLoggedIn && localStorage.getItem('token')) {
       checkToken(token)
         .then((res) => {
           if (res._id) {

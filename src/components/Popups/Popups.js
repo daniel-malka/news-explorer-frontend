@@ -9,10 +9,13 @@ const Popups = ({ signin, signup }) => {
   const { popupState, setPopupState } = usePopup();
   const { setIsLoggedIn, setToken, checkToken } = useAuth();
   const [errMessage, setErrMessage] = useState('');
+
   const handleLogin = (email, password) => {
-    
     signin(email, password)
       .then((res) => {
+        if (res.status === 401) {
+          setErrMessage('incorrct Email or password');
+        }
         res.json().then((res) => {
           if (res.token) {
             setIsLoggedIn(true);
@@ -23,6 +26,7 @@ const Popups = ({ signin, signup }) => {
               ...popupState,
               signin: false,
             });
+            setErrMessage('');
           }
         });
       })

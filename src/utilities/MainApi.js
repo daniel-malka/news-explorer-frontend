@@ -1,7 +1,7 @@
 import { NEWS_API, BASE_API, DEV_API } from './constants';
 
 export const getSavedArticles = (token) => {
-  return fetch(`${NEWS_API}/articles`, {
+  return fetch(`${BASE_API}/articles`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -11,7 +11,7 @@ export const getSavedArticles = (token) => {
   });
 };
 export const saveArticle = (article, token) => {
-  return fetch(`${NEWS_API}/articles`, {
+  return fetch(`${BASE_API}/articles`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ export const saveArticle = (article, token) => {
 };
 
 export const deleteArticle = (articleId, token) => {
-  return fetch(`${NEWS_API}/articles/${articleId}`, {
+  return fetch(`${BASE_API}/articles/${articleId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export const signup = (email, username, password) => {
 };
 
 export const signin = (email, password) => {
-  return fetch(`https://api.news-expo.mooo.com/signin`, {
+  return fetch(`${BASE_API}/signin`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ export const signin = (email, password) => {
 };
 
 export const checkToken = (token) => {
-  return fetch(`https://api.news-expo.mooo.com/users/me`, {
+  return fetch(`${BASE_API}/users/me`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

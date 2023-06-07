@@ -5,6 +5,9 @@ const PopupWithForm = (props) => {
   const { popupState, setPopupState } = usePopup();
   const popupToOpen = props.name === 'signin' ? 'signup' : 'signin';
 
+  // let errMessageText = props.errMessage;
+  console.log(props.validation);
+
   const handleRedirect = () => {
     props.setIsFormValid(true);
     setPopupState((prevState) => ({

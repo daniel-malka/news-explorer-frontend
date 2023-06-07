@@ -51,7 +51,7 @@ const SignIn = ({
     const { name, value } = event.target;
     const isPasswordValid = value.trim() !== '';
     setValidation((prevValidation) => ({
-      prevValidation,
+      ...prevValidation,
       password: isPasswordValid ? '' : "Password can't be empty",
     }));
 
@@ -90,32 +90,46 @@ const SignIn = ({
       buttonText={`${isLoading ? 'Connecting...' : 'Sign in'}`}
       onSubmit={handleSubmit}
     >
-      <label className="signin-label signin-label-email " htmlFor="email">
-        Email
-      </label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        className="popup__input login-form__input"
-        placeholder="Email"
-        value={userLoginInfo.email}
-        onChange={handleEmailInput}
-        required
-      />
-      <label className="signin-label" htmlFor="password">
-        Password
-      </label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        className="popup__input login-form__input"
-        placeholder="Password"
-        value={userLoginInfo.password}
-        onChange={handlePasswordInput}
-        required
-      />
+      <div className="popup__inputs-div">
+        <label className="signin-label signin-label-email" htmlFor="email">
+          Email
+        </label>
+        <input
+          title={validation.email}
+          type="email"
+          name="email"
+          id="email"
+          className="popup__input login-form__input"
+          placeholder="Email"
+          value={userLoginInfo.email}
+          onChange={handleEmailInput}
+          required
+        />
+        {validation.email !== '' && (
+          <span className="popup__error-message email">{validation.email}</span>
+        )}
+      </div>
+      <div className="popup__inputs-div">
+        <label className="signin-label" htmlFor="password">
+          Password
+        </label>
+        <input
+          title={validation.password}
+          type="password"
+          name="password"
+          id="password"
+          className="popup__input login-form__input"
+          placeholder="Password"
+          value={userLoginInfo.password}
+          onChange={handlePasswordInput}
+          required
+        />
+        {validation.password !== '' && (
+          <span className="popup__error-message password">
+            {validation.password}
+          </span>
+        )}
+      </div>
     </PopupWithForm>
   );
 };
