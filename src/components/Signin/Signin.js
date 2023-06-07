@@ -90,12 +90,11 @@ const SignIn = ({
       buttonText={`${isLoading ? 'Connecting...' : 'Sign in'}`}
       onSubmit={handleSubmit}
     >
-      <div className="popup__inputs-div">
+      <div className="popup__inputs-div signin">
         <label className="signin-label signin-label-email" htmlFor="email">
           Email
         </label>
         <input
-          title={validation.email}
           type="email"
           name="email"
           id="email"
@@ -109,12 +108,11 @@ const SignIn = ({
           <span className="popup__error-message email">{validation.email}</span>
         )}
       </div>
-      <div className="popup__inputs-div">
+      <div className="popup__inputs-div signin">
         <label className="signin-label" htmlFor="password">
           Password
         </label>
         <input
-          title={validation.password}
           type="password"
           name="password"
           id="password"

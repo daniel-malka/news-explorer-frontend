@@ -31,7 +31,11 @@ const PopupWithForm = (props) => {
       >
         {props.children}
         <button
-          className={`popup__submit-button popup__submit-button-${props.name}`}
+          className={`popup__submit-button popup__submit-button-${props.name} ${
+            props.validation.email === '' && props.validation.password === ''
+              ? 'popup__submit-button-filled'
+              : ''
+          }`}
           type="submit"
         >
           {props.buttonText}

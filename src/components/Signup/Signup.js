@@ -130,45 +130,65 @@ const SignUp = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
       name="signup"
       buttonText={`${isLoading ? 'Connecting...' : 'sign up'}`}
     >
-      <label className="signin-label signin-label-email" htmlFor="email">
-        Email
-      </label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        className="popup__input login-form__input"
-        placeholder="Email"
-        defaultValue={userLoginInfo.email}
-        onChange={handleEmailInput}
-        required
-      />
-      <label className="signin-label" htmlFor="password">
-        Password
-      </label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        className="popup__input login-form__input"
-        placeholder="Password"
-        defaultValue={userLoginInfo.password}
-        onChange={handlePasswordInput}
-        required
-      />
-      <label className="signin-label" htmlFor="username">
-        Username
-      </label>
-      <input
-        type="text"
-        name="username"
-        id="username"
-        className="popup__input login-form__input"
-        placeholder="user name"
-        defaultValue={userLoginInfo.username}
-        onChange={handleNameInput}
-        required
-      />
+      <div className="popup__inputs-div signup">
+        <label className="signin-label signin-label-email" htmlFor="email">
+          Email
+        </label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          className="popup__input login-form__input"
+          placeholder="Email"
+          defaultValue={userLoginInfo.email}
+          onChange={handleEmailInput}
+          required
+        />
+        {validation.email !== '' && (
+          <span className="popup__error-message email">{validation.email}</span>
+        )}
+      </div>
+      <div className="popup__inputs-div signup">
+        {' '}
+        <label className="signin-label" htmlFor="password">
+          Password
+        </label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          className="popup__input login-form__input"
+          placeholder="Password"
+          defaultValue={userLoginInfo.password}
+          onChange={handlePasswordInput}
+          required
+        />
+        {validation.password !== '' && (
+          <span className="popup__error-message password">
+            {validation.password}
+          </span>
+        )}
+      </div>
+      <div className="popup__inputs-div signup">
+        <label className="signin-label" htmlFor="username">
+          Username
+        </label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          className="popup__input login-form__input"
+          placeholder="user name"
+          defaultValue={userLoginInfo.username}
+          onChange={handleNameInput}
+          required
+        />
+        {validation.username !== '' && (
+          <span className="popup__error-message username">
+            {validation.username}
+          </span>
+        )}
+      </div>
     </PopupWithForm>
   );
 };
