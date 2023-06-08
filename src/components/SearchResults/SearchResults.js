@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import NotFound from '../NotFound/NotFound';
 import { useHome } from '../../contexts/HomeContext';
 import { useArticles } from '../../contexts/ArticlesContext';
 
 const SearchResults = (props) => {
-  const [screenWidth] = useState(window.innerWidth);
   const [allSavedArticles, setAllSavedArticles] = useState([]);
   const [savedArticlesSet, setSavedArticlesSet] = useState(new Set());
   const token = localStorage.getItem('token');
@@ -65,13 +64,13 @@ const SearchResults = (props) => {
                       </div>
                     );
                   })
-                : props.handleSearchClicked && (
+                : !props.searchResults && (
                     <div className="searchresult__cards-listitem">
                       <NotFound />
                     </div>
                   )}
 
-              {props.searchResults.length !== 0 ? (
+              {props.showMore ? (
                 <div>
                   <button
                     onClick={props.onClickShowmore}
