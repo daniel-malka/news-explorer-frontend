@@ -12,7 +12,7 @@ const SearchForm = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [allResults, setAllResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(3);
   const [screenWidth] = useState(window.innerWidth);
   const { api } = useArticles();
   const inputRef = useRef('');
