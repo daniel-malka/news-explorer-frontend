@@ -16,10 +16,10 @@ const SearchResults = (props) => {
     if (isHome) {
       const fetchSavedArticles = async () => {
         try {
-          const articles = await api.getSavedArticles(token);
-          setAllSavedArticles(articles);
+          const savedarticles = await api.getSavedArticles(token);
+          setAllSavedArticles(savedarticles);
           const articleSet = new Set(
-            articles.data?.map((element) => element.link)
+            savedarticles.data?.map((element) => element.link)
           );
           setSavedArticlesSet(articleSet);
         } catch (error) {
@@ -65,7 +65,11 @@ const SearchResults = (props) => {
                       </div>
                     );
                   })
-                : props.handleSearchClicked && <NotFound />}
+                : props.handleSearchClicked && (
+                    <div className="searchresult__cards-listitem">
+                      <NotFound />
+                    </div>
+                  )}
 
               {props.searchResults.length !== 0 ? (
                 <div>

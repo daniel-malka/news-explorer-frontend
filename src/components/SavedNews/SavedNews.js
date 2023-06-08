@@ -15,8 +15,7 @@ const SavedNews = () => {
     let uniqKeywords = [];
     const keyW =
       useArticles?.data && useArticles?.data.map((article) => article.keyword);
-    console.log(keyW, userArticles);
-    // uniqKeywords.push(new Set(keyW));
+    uniqKeywords.push(new Set(keyW))
 
     if (uniqKeywords > 3)
       return `${uniqKeywords[0] + ' '}, ${uniqKeywords[1] + ' '}, and ${

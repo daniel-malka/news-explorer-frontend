@@ -30,27 +30,25 @@ const SearchForm = () => {
       nextCounter = counter + 1;
     }
 
-    const allResoltsArray = Array.from(allResolts);
-    const filteredArticles = allResoltsArray.filter(
-      (_, index) => index < nextCounter
-    );
+    const allResoltsArr = Array.from(allResolts);
+    console.log(allResoltsArr);
     const filter =
-      filteredArticles.length > 3 && showMore === false
-        ? Object.values(filteredArticles)
-        : filteredArticles;
+      allResoltsArr.length > 3 && showMore === false
+        ? Object.values(allResoltsArr.slice(0, nextCounter))
+        : allResoltsArr.articles;
     setSearchResults(filter);
-    setCounter(nextCounter);
+    // setCounter(nextCounter);
     setShowMore(false);
   };
 
   const handleSearch = async (event) => {
     event.preventDefault();
-    const input = inputRef.current?.value;
+    const input = inputRef.current.value;
     setSearchTerm(input);
     setIsLoading(true);
-
+    console.log(searchTerm);
     try {
-      const response = await api.newsApi.getArticles(input);
+      const response = await api.newsApi.getArticles(searchTerm);
       const data = await response.json();
       setAllResolts(data);
 
@@ -75,7 +73,6 @@ const SearchForm = () => {
       setIsLoading(false);
     }
   };
-
   return (
     <>
       <section
@@ -110,9 +107,7 @@ const SearchForm = () => {
           </button>
         </form>
       </section>
-      {isLoading ? (
-        <Preloader />
-      ) : searchResults.length === 0 ? (
+      {isLoading || !searchResults.length === 0 ? (
         <Preloader />
       ) : (
         <SearchResults

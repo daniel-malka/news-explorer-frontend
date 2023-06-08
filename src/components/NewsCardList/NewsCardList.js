@@ -21,18 +21,30 @@ const NewsCardList = ({
     <>
       <div className="newscardlist">
         <div className="newscardlist__cards">
+          {console.log(useArticles.data)}
           {!userArticles?.data || userArticles === [] ? (
             <p>Sorry, you haven't saved any articles</p>
           ) : (
-            userArticles.map((article) => (
-              <NewsCard
-                article={article}
-                userArticles={userArticles}
-                setUserArticles={setUserArticles}
-                handleDeleteArticleFunc={handleDeleteArticleFunc}
-                articlesLength={articlesLength}
-              />
-            ))
+            userArticles.map(
+              (article) => (
+                console.log(article),
+                (
+                  <div
+                    id={article.id}
+                    key={article.id}
+                    className="NewsCardList__cards-listItem"
+                  >
+                    <NewsCard
+                      article={article}
+                      userArticles={userArticles}
+                      setUserArticles={setUserArticles}
+                      handleDeleteArticleFunc={handleDeleteArticleFunc}
+                      articlesLength={articlesLength}
+                    />
+                  </div>
+                )
+              )
+            )
           )}
         </div>
       </div>
