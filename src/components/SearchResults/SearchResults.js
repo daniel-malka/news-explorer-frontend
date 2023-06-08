@@ -74,7 +74,7 @@ const SearchResults = (props) => {
                 <div>
                   <button
                     onClick={props.onClickShowmore}
-                    className="newscardlist__button"
+                    className="savedcardlist__button"
                   >
                     Show more
                   </button>

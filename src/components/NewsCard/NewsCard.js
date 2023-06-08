@@ -48,9 +48,6 @@ const NewsCard = ({
 
   const saveArticle = async () => {
     try {
-      console.log('Article', Article);
-      console.log('article', article);
-      console.log('allSaved', allSavedArticles);
       await api.saveArticle(Article, token);
       savedArticles.add(article.id);
       setIsArticleSaved(true);

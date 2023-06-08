@@ -96,7 +96,7 @@ input#search::placeholder {
   background-color: #2a65cc;
 }
 
-button.newsCardList__button:hover {
+button.savedardList__button:hover {
   background-color: rgba(232, 232, 232, 1);
 }
 

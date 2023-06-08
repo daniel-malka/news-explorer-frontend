@@ -6,10 +6,10 @@ article.newscard {
   background-color: #ffff;
   cursor: pointer;
 }
-.newscardlist {
+.savedcardlist {
   position: relative;
 }
-.newscard-img {
+.savedcard-img {
   box-sizing: border-box;
   height: 272px;
   background-repeat: no-repeat;
@@ -17,7 +17,7 @@ article.newscard {
   border-radius: 10px 10px 0 0;
 }
 
-button.newscard-img-icon {
+button.savedcard-img-icon {
   background: #ffffff;
   border-radius: 8px;
   border: none;
@@ -27,17 +27,17 @@ button.newscard-img-icon {
   padding: 8px;
 }
 
-.newscard-img-icon > img:hover {
+.savedcard-img-icon > img:hover {
   filter: none;
 }
 
-button.newscard-img-icon > img {
+button.savedcard-img-icon > img {
   filter: invert(40%) sepia(100%) saturate(0%) hue-rotate(86deg)
     brightness(102%) contrast(102%);
   cursor: pointer;
 }
 
-.newscard-img-container {
+.savedcard-img-container {
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -47,7 +47,7 @@ button.newscard-img-icon > img {
   padding-top: 24px;
 }
 
-button.newscard-img-tagbtn {
+button.savedcard-img-tagbtn {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -61,7 +61,7 @@ button.newscard-img-tagbtn {
   border: none;
 }
 
-button.news-card__tootltip {
+button.saved-card__tootltip {
   position: absolute;
   right: 50px;
   background: #ffffff;
@@ -78,7 +78,7 @@ button.news-card__tootltip {
 
 /*text parent*/
 
-.newscard-text {
+.savedcard-text {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ button.news-card__tootltip {
   max-height: 304px;
   padding-bottom: 24px;
 }
-p.newscard-text-date {
+p.savedcard-text-date {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
@@ -98,7 +98,7 @@ p.newscard-text-date {
   padding-top: 20px;
 }
 
-h3.newscard-text-title {
+h3.savedcard-text-title {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -114,7 +114,7 @@ h3.newscard-text-title {
   max-height: 72px;
 }
 
-p.newscard-text-text {
+p.savedcard-text-text {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -130,7 +130,7 @@ p.newscard-text-text {
   margin-bottom: 18px;
 }
 
-p.newscard-text-source {
+p.savedcard-text-source {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -146,40 +146,40 @@ p.newscard-text-source {
 /* article text ends here */
 
 @media screen and (max-width: 1253px) {
-  h3.newscard-text-title {
+  h3.savedcard-text-title {
     font-size: 22px;
     line-height: 24px;
   }
 
-  button.news-card__tootltip {
+  button.saved-card__tootltip {
     display: none;
   }
 }
 @media screen and (max-width: 920px) {
-  .newscard-img {
+  .savedcard-img {
     max-height: 150px;
     object-fit: fill;
   }
-  article.newscard {
+  article.savedcard {
     height: 420px;
   }
-  .newscard-text {
+  .savedcard-text {
     height: 270px;
     margin: 0 16px;
   }
-  .newscard-img-container {
+  .savedcard-img-container {
     margin: 0px 8px;
     padding-top: 8px;
   }
-  p.newscard-text-date {
+  p.savedcard-text-date {
     padding-top: 20px;
     padding-bottom: 8px;
   }
-  h3.newscard-text-title {
+  h3.savedcard-text-title {
     padding-bottom: 10px;
     min-height: 48px;
   }
-  p.newscard-text-text {
+  p.savedcard-text-text {
     padding-top: 24px;
     margin-bottom: 12px;
     min-height: 88px;
@@ -188,31 +188,31 @@ p.newscard-text-source {
 }
 
 @media screen and (max-width: 565px) {
-  .newscardList__cards {
+  .savedcardList__cards {
     padding: 24px 16px;
   }
-  .newscard-img {
+  .savedcard-img {
     height: 196px;
   }
-  article.newscard {
+  article.savedcard {
     max-width: 288px;
     height: 444px;
   }
-  .newscard-text {
+  .savedcard-text {
     height: 244x;
   }
-  .newscard-img-container {
+  .savedcard-img-container {
     margin: 0px 8px;
     padding-top: 8px;
   }
-  p.newscard-text-date {
+  p.savedcard-text-date {
     padding-top: 16px;
     padding-bottom: 10px;
   }
-  h3.newscard-text-title {
+  h3.savedcard-text-title {
     padding-bottom: 14px;
   }
-  p.newscard-text-text {
+  p.savedcard-text-text {
     margin-bottom: 12px;
   }
 }

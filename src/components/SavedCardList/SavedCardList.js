@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
 import { useArticles } from '../../contexts/ArticlesContext';
 
-const NewsCardList = ({
+const SavedCardList = ({
   userArticles,
   setUserArticles,
   handleDeleteArticleFunc,
@@ -19,8 +19,8 @@ const NewsCardList = ({
 
   return (
     <>
-      <div className="newscardlist">
-        <div className="newscardlist__cards">
+      <div className="savedcardlist">
+        <div className="savedcardlist__cards">
           {console.log(useArticles.data)}
           {!userArticles?.data || userArticles === [] ? (
             <p>Sorry, you haven't saved any articles</p>
@@ -32,7 +32,7 @@ const NewsCardList = ({
                   <div
                     id={article.id}
                     key={article.id}
-                    className="NewsCardList__cards-listItem"
+                    className="SavedCardList__cards-listItem"
                   >
                     <NewsCard
                       article={article}
@@ -52,4 +52,4 @@ const NewsCardList = ({
   );
 };
 
-export default NewsCardList;
+export default SavedCardList;

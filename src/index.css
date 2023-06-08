@@ -1,17 +1,16 @@
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/font.css);
 @import url(./components/Popup/Popup.css);
-
 @import './components/Header/Header.css';
 @import './components/Main/Main.css';
 @import './components/About/About.css';
 @import './components/Footer/Footer.css';
 @import './components/Navigation/Nav.css';
-@import './components/SignIn/SignIn.css';
+@import './components/Signin/Signin.css';
 @import './components/PopupWithForm/PopupWithForm.css';
 @import './components/SavedNews/SavedNews.css';
 @import './components/NewsCard/NewsCard.css';
-@import './components/NewsCardList/NewsCardList.css';
+@import './components/SavedCardList/SavedCardList.css';
 @import './components/SuccessPopup/SuccessPopup.css';
 @import './components/SearchForm/SearchForm.css';
 @import './components/NotFound/NotFound.css';

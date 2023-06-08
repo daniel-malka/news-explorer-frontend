@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Nav from '../Navigation/Nav';
-import SignUp from '../SignUp/SignUp';
-import SignIn from '../SignIn/SignIn';
+import SignUp from '../Signup/Signup';
+import SignIn from '../Signin/Signin';
 import SuccessPopup from '../SuccessPopup/SuccessPopup';
 import { usePopup } from '../../contexts/PopupContext';
 import { useAuth } from '../../contexts/AuthContext';

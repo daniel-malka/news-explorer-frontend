@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
-import NewsCardList from '../NewsCardList/NewsCardList';
+import SavedCardList from '../SavedCardList/SavedCardList';
 import { useArticles } from '../../contexts/ArticlesContext';
 
 const SavedNews = () => {
@@ -15,7 +15,7 @@ const SavedNews = () => {
     let uniqKeywords = [];
     const keyW =
       useArticles?.data && useArticles?.data.map((article) => article.keyword);
-    uniqKeywords.push(new Set(keyW))
+    uniqKeywords.push(new Set(keyW));
 
     if (uniqKeywords > 3)
       return `${uniqKeywords[0] + ' '}, ${uniqKeywords[1] + ' '}, and ${
@@ -56,8 +56,8 @@ const SavedNews = () => {
           By keywords: <strong>{keywordSelect()}</strong>
         </p>
       </section>
-      <section className="newscardlist-container">
-        <NewsCardList />
+      <section className="savedcardlist-container">
+        <SavedCardList />
       </section>
     </main>
   );

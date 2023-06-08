@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { usePopup } from '../../contexts/PopupContext';
-const SignUp = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
+const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
   const { popupState, setPopupState } = usePopup(false);
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -192,4 +192,4 @@ const SignUp = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
     </PopupWithForm>
   );
 };
-export default SignUp;
+export default Signup;
