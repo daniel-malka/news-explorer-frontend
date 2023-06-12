@@ -48,7 +48,7 @@ const SavedNews = () => {
       </section>
       <div className="newscardlist">
         <div className="newscardlist__cards">
-          <NewsCardList userArticle={userArticle} />
+          <NewsCardList userArticle={userArticle} setUserArticle={setUserArticle} />
         </div>
       </div>
     </main>

@@ -1,20 +1,22 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import trashIcon from '../../images/icons/recycle-bin.svg';
 import saveIcon from '../../images/icons/save.svg';
 import savedIcon from '../../images/icons/saved.svg';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
 import { useArticles } from '../../contexts/ArticlesContext';
+import { usePopup } from '../../contexts/PopupContext';
 
 const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, setAllSavedArticles }) => {
   const token = localStorage.getItem('token');
   const { api } = useArticles();
-  const [isArticleSaved, setIsArticleSaved] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
   const { isHome } = useHome();
   const { isLoggedIn } = useAuth();
+  const popup = usePopup();
   const date = new Date();
-  const toolTipText = isLoggedIn && isArticleSaved ? `Remove from saved` : `Sign in to save articles`;
+
+  const toolTipText = isLoggedIn && !isHome ? `Remove from saved` : `Sign in to save articles`;
   const changeDate = (apiDate) => {
     const date = new Date(apiDate);
     const day = String(date.getDate()).padStart(2, '0');
@@ -23,6 +25,7 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
     const formattedDate = `${day}.${month}.${year}`;
     return formattedDate;
   };
+
   const [Article] = useState({
     title: article.title,
     keyword: searchTerm,
@@ -33,41 +36,48 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
     link: article.url,
   });
 
-  const saveArticle = useCallback(async () => {
+  const saveArticle = async () => {
+    if (!isLoggedIn) {
+      popup.openPopup('signin');
+    }
+
     try {
+      console.log('saved');
       const response = await api.saveArticle(Article, token);
       const savedResult = await response.json();
       savedArticlesSet.add(savedResult._id);
-      setIsArticleSaved(savedArticlesSet.has(savedResult._id));
       const response2 = await api.getSavedArticles(token);
       const updatedArticles = await response2.json();
       setAllSavedArticles(updatedArticles);
     } catch (err) {
       console.log(err);
     }
-  }, [api, Article, savedArticlesSet, setAllSavedArticles, setIsArticleSaved, token]);
-  const unSaveArticle = useCallback(
-    async (url) => {
-      try {
-        const filteredArticle = allSavedArticles.articles.filter((card) => card.url === url);
-        if (filteredArticle.length > 0) {
-          const response = await api.deleteArticle(filteredArticle[0]._id);
-          const deletedArticle = await response.json();
-          console.log(deletedArticle);
-          savedArticlesSet.delete(deletedArticle._id);
-          savedArticlesSet.has(deletedArticle._id);
-          const response2 = await api.getSavedArticles(token);
-          const updatedArticles = await response2.json();
-          setAllSavedArticles(updatedArticles);
-        }
-      } catch (err) {
-        console.log(err);
-        // Handle the error here, e.g., show an error message
-      }
-    },
-    [allSavedArticles, api, savedArticlesSet, setAllSavedArticles, token]
-  );
+  };
 
+  const unSaveArticle = async (articleId) => {
+    try {
+      console.log('usaved');
+      const filteredArticle = allSavedArticles.articles.filter((card) => card._id === articleId);
+      if (filteredArticle.length > 0) {
+        const response = await api.deleteArticle(filteredArticle[0]._id);
+        const deletedArticle = await response.json();
+        savedArticlesSet.delete(deletedArticle._id);
+        savedArticlesSet.has(deletedArticle._id);
+        const response2 = await api.getSavedArticles(token);
+        const updatedArticles = await response2.json();
+        setAllSavedArticles(updatedArticles);
+      }
+    } catch (err) {
+      console.log(err);
+      // Handle the error here, e.g., show an error message
+    }
+  };
+
+  const toggleSave = (articleId) => {
+    let isArticleSaved = savedArticlesSet.has(articleId);
+    if (isArticleSaved) unSaveArticle(articleId);
+    else if (!isArticleSaved) saveArticle();
+  };
   const handleArticleClick = (e) => {
     const isButtonClicked = e.target.closest('button');
     if (!isButtonClicked) {
@@ -92,12 +102,9 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
           <div className="newscard-img-container">
             <button className="newscard-img-tagbtn">{article.source.name || article.keyword}</button>
             {showToolTip && <button className="news-card__tootltip">{toolTipText}</button>}
-            <button
-              className="newscard-img-icon newscard-img-save"
-              onClick={isArticleSaved ? () => unSaveArticle(article.url) : saveArticle}
-            >
+            <button className="newscard-img-icon newscard-img-save" onClick={() => toggleSave(article._id)}>
               <img
-                src={isHome && isArticleSaved ? savedIcon : isHome ? saveIcon : trashIcon}
+                src={isLoggedIn && !isHome ? trashIcon : savedArticlesSet.has(article._id) ? savedIcon : saveIcon}
                 alt={toolTipText}
                 title={toolTipText}
                 onMouseEnter={onHoverMessage}

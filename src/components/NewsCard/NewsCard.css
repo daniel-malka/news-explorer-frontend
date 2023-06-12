@@ -28,12 +28,11 @@ button.newscard-img-icon {
 }
 
 .newscard-img-icon > img:hover {
-  filter: none;
+  /* filter: invert(40%) sepia(100%) saturate(0%) hue-rotate(86deg) brightness(102%) contrast(102%); */
 }
 
 button.newscard-img-icon > img {
-  filter: invert(40%) sepia(100%) saturate(0%) hue-rotate(86deg)
-    brightness(102%) contrast(102%);
+  /* filter: none; */
   cursor: pointer;
 }
 

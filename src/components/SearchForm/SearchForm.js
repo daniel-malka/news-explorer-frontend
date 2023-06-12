@@ -90,17 +90,32 @@ const SearchForm = () => {
         </div>
 
         <form onSubmit={handleSearch} className="search__input">
-          <input id="search" name="search" ref={inputRef} className="search__input-text" type="text" autoComplete="true" placeholder="Enter topic" />
+          <input
+            id="search"
+            name="search"
+            ref={inputRef}
+            className="search__input-text"
+            type="text"
+            autoComplete="true"
+            placeholder="Enter topic"
+          />
           <button type="submit" className="search__input-button">
             Search
           </button>
         </form>
       </section>
       {isLoading && <Preloader />}
-      {searchResults === undefined ? (
+      {searchResults === [] ? (
         <NotFound />
       ) : (
-        <SearchResults showMore={showMore} onClickShowmore={onClickShowmore} searchResults={searchResults} searchTerm={searchTerm} isLoading={isLoading} setIsLoading={setIsLoading} />
+        <SearchResults
+          showMore={showMore}
+          onClickShowmore={onClickShowmore}
+          searchResults={searchResults}
+          searchTerm={searchTerm}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
       )}
     </>
   );

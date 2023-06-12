@@ -4,13 +4,13 @@ import { useHome } from '../../contexts/HomeContext';
 
 const NewsCardList = (props) => {
   const { isHome } = useHome();
-  console.log(props.articles);
+  console.log(props.userArticle);
   return (
     <>
       <div className="newscardlist">
         <div className="newscardlist__cards">
           {!isHome &&
-            props.userArticle?.articles.map(
+            props.userArticle.map(
               <NewsCard
                 article={props.article}
                 userArticle={props.userArticle}

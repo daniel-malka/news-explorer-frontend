@@ -18,7 +18,7 @@ const SearchResults = (props) => {
           const response = await api.getSavedArticles(token);
           const savedarticles = await response.json();
           setAllSavedArticles(savedarticles);
-          const articleSet = new Set(savedarticles.data?.map((element) => element.link));
+          const articleSet = new Set(savedarticles.articles.map((element) => element._id));
           setSavedArticlesSet(articleSet);
         } catch (error) {
           console.log(error);
