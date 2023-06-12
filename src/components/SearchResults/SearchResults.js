@@ -15,11 +15,10 @@ const SearchResults = (props) => {
     if (isHome) {
       const fetchSavedArticles = async () => {
         try {
-          const savedarticles = await api.getSavedArticles(token);
+          const response = await api.getSavedArticles(token);
+          const savedarticles = await response.json();
           setAllSavedArticles(savedarticles);
-          const articleSet = new Set(
-            savedarticles.data?.map((element) => element.link)
-          );
+          const articleSet = new Set(savedarticles.data?.map((element) => element.link));
           setSavedArticlesSet(articleSet);
         } catch (error) {
           console.log(error);
@@ -36,24 +35,16 @@ const SearchResults = (props) => {
           ''
         ) : (
           <div className="searchresults__div">
-            <div className="searchresult__container">
+            <div className={props.showMore ? `searchresult__container` : `searchresult__container searchresult__container-all`}>
               {props.searchResults.length !== 0
                 ? props.searchResults.map((article) => {
                     let uniqueArticleId = (article.source.id ?? 'default')
                       .split('')
-                      .map(
-                        (w) =>
-                          w.toString() +
-                          Math.floor(Math.random() * 100).toString()
-                      )
+                      .map((w) => w.toString() + Math.floor(Math.random() * 100).toString())
                       .join('');
 
                     return (
-                      <div
-                        id={uniqueArticleId}
-                        key={uniqueArticleId}
-                        className="searchresult__cards-listitem"
-                      >
+                      <div id={uniqueArticleId} key={uniqueArticleId} className="searchresult__cards-listitem">
                         <NewsCard
                           savedArticlesSet={savedArticlesSet}
                           article={article}
@@ -72,10 +63,7 @@ const SearchResults = (props) => {
 
               {props.showMore ? (
                 <div>
-                  <button
-                    onClick={props.onClickShowmore}
-                    className="savedcardlist__button"
-                  >
+                  <button onClick={props.onClickShowmore} className="savedcardlist__button">
                     Show more
                   </button>
                 </div>

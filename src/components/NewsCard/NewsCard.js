@@ -1,32 +1,30 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useCallback } from 'react';
 import trashIcon from '../../images/icons/recycle-bin.svg';
 import saveIcon from '../../images/icons/save.svg';
-// import savedIcon from '../../images/icons/saved.svg';
+import savedIcon from '../../images/icons/saved.svg';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
-import ArticlesContextProvider from '../../contexts/ArticlesContext';
+import { useArticles } from '../../contexts/ArticlesContext';
 
 const NewsCard = ({
-  savedArticles,
+  savedArticlesSet,
   searchTerm,
   article,
   userArticles,
   setUserArticles,
   handleDeleteArticleFunc,
-  articlesLength,
   articleId,
   allSavedArticles,
   setAllSavedArticles,
 }) => {
   const token = localStorage.getItem('token');
-  const api = useContext(ArticlesContextProvider);
-
+  const { api } = useArticles();
   const [isArticleSaved, setIsArticleSaved] = useState(false);
   const [showToolTip, setShowToolTip] = useState(false);
   const { isHome } = useHome();
   const { isLoggedIn } = useAuth();
   const date = new Date();
-
+  const toolTipText = isLoggedIn && isArticleSaved ? `Remove from saved` : `Sign in to save articles`;
   const changeDate = (apiDate) => {
     const date = new Date(apiDate);
     const day = String(date.getDate()).padStart(2, '0');
@@ -35,45 +33,58 @@ const NewsCard = ({
     const formattedDate = `${day}.${month}.${year}`;
     return formattedDate;
   };
-
   const [Article] = useState({
     title: article.title,
     keyword: searchTerm,
     text: article.description,
     date: changeDate(article.publishedAt) || changeDate(date),
-    source: article.source?.id ? article.source.id : article.source?.name,
+    source: article.source.name,
     image: article.urlToImage || null,
     link: article.url,
   });
 
-  const saveArticle = async () => {
+  const saveArticle = useCallback(async () => {
+    console.log('save');
     try {
-      await api.saveArticle(Article, token);
-      savedArticles.add(article.id);
-      setIsArticleSaved(true);
-      const updatedArticles = await api.getSavedArticles(token);
+      const response = await api.saveArticle(Article, token);
+      const savedResult = await response.json();
+      savedArticlesSet.add(savedResult._id);
+      setIsArticleSaved(savedArticlesSet.has(savedResult._id));
+      const response2 = await api.getSavedArticles(token);
+      const updatedArticles = await response2.json();
       setAllSavedArticles(updatedArticles);
     } catch (err) {
       console.log(err);
     }
-  };
-  const unSaveArticle = async (url) => {
-    try {
-      await api.deleteArticle(
-        allSavedArticles.data.find((element) => element.link === url).id
-      );
-      setAllSavedArticles(await api.getSavedArticles(token));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  }, [api, Article, savedArticlesSet, setAllSavedArticles, setIsArticleSaved, token]);
+  console.log(allSavedArticles);
+  const unSaveArticle = useCallback(
+    async (url) => {
+      try {
+        console.log('unsave');
+        const filteredArticle = allSavedArticles.articles.filter((card) => card.url === url);
+        if (filteredArticle.length > 0) {
+          const response = await api.deleteArticle(filteredArticle[0]._id);
+          const deletedArticle = await response.json();
+          console.log(deletedArticle);
+          savedArticlesSet.delete(deletedArticle._id);
+          savedArticlesSet.has(deletedArticle._id);
+          const response2 = await api.getSavedArticles(token);
+          const updatedArticles = await response2.json();
+          setAllSavedArticles(updatedArticles);
+        }
+      } catch (err) {
+        console.log(err);
+        // Handle the error here, e.g., show an error message
+      }
+    },
+    [allSavedArticles, api, savedArticlesSet, setAllSavedArticles, token]
+  );
 
   const handleArticleClick = (e) => {
     const isButtonClicked = e.target.closest('button');
     if (!isButtonClicked) {
-      article.url
-        ? window.open(article.url, '_blank')
-        : window.open(article.link, '_blank'); // Redirect to the URL
+      article.url ? window.open(article.url, '_blank') : window.open(article.link, '_blank'); // Redirect to the URL
     }
   };
 
@@ -87,74 +98,36 @@ const NewsCard = ({
     setShowToolTip(false);
   };
 
-  useEffect(() => {
-    if (allSavedArticles && allSavedArticles.data) {
-      const isArticleSaved = allSavedArticles.data.some(
-        (element) => element.link === article.url
-      );
-      setIsArticleSaved(isArticleSaved);
-    }
-  }, [allSavedArticles, article.url]);
-
   return (
-    <article className="newscard" onClick={handleArticleClick}>
-      <div
-        className="newscard-img"
-        style={{ backgroundImage: `url(${article.urlToImage})` }}
-      >
-        <div className="newscard-img-container">
-          <button
-            className="newscard-img-tagbtn"
-            onClick={isArticleSaved ? unSaveArticle : saveArticle}
-          >
-            {article.source.name || article.keyword}
-          </button>
-          {isHome ? (
-            <>
-              {!isLoggedIn && showToolTip && (
-                <button className="news-card__tootltip">
-                  Sign in to save articles
-                </button>
-              )}
-              <button className=" newscard-img-icon newscard-img-save">
-                <img
-                  src={saveIcon}
-                  alt="save"
-                  title="please login to save articles"
-                  onMouseEnter={onHoverMessage}
-                  onMouseLeave={handleMouseLeave}
-                />
-              </button>
-            </>
-          ) : (
-            <>
-              {showToolTip ? (
-                <button className="news-card__tootltip">
-                  Remove from saved
-                </button>
-              ) : (
-                ''
-              )}
-
-              <button className="newscard-img-icon newscard-img-delete">
-                <img
-                  src={trashIcon}
-                  alt="Remove from saved"
-                  onMouseEnter={onHoverMessage}
-                  onMouseLeave={handleMouseLeave}
-                />
-              </button>
-            </>
-          )}
+    <>
+      <article className="newscard" onClick={handleArticleClick}>
+        <div className="newscard-img" style={{ backgroundImage: `url(${article.urlToImage})` }}>
+          <div className="newscard-img-container">
+            <button className="newscard-img-tagbtn">{article.source.name || article.keyword}</button>
+            {showToolTip && <button className="news-card__tootltip">{toolTipText}</button>}
+            <button
+              className="newscard-img-icon newscard-img-save"
+              onClick={isArticleSaved ? () => unSaveArticle(article.url) : saveArticle}
+            >
+              <img
+                src={isHome && isArticleSaved ? savedIcon : isHome ? saveIcon : trashIcon}
+                alt={toolTipText}
+                title={toolTipText}
+                onMouseEnter={onHoverMessage}
+                onMouseLeave={handleMouseLeave}
+              />
+            </button>
+          </div>
         </div>
-      </div>
-      <div className="newscard-text">
-        <p className="newscard-text-date">{Article.date}</p>
-        <h3 className="newscard-text-title">{Article.title}</h3>
-        <p className="newscard-text-text">{Article.text}</p>
-        <p className="newscard-text-source">{Article.source.name}</p>
-      </div>
-    </article>
+        <div className="newscard-text">
+          <p className="newscard-text-date">{Article.date}</p>
+          <h3 className="newscard-text-title">{Article.title}</h3>
+          <p className="newscard-text-text">{Article.text}</p>
+          <p className="newscard-text-source">{Article.source}</p>
+        </div>
+      </article>
+    </>
   );
 };
+
 export default NewsCard;

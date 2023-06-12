@@ -6,9 +6,7 @@ class Api {
     this._apiKey = apiKey;
   }
   _customFetch(url, headers) {
-    return fetch(url, headers).then((res) =>
-      res.ok ? res.json() : Promise.reject(res.statusText)
-    );
+    return fetch(url, headers).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
   }
 
   getArticles(input) {

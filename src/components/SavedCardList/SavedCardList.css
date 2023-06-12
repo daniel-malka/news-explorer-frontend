@@ -18,12 +18,11 @@
 button.savedcardlist__button {
   position: absolute;
   left: 50%;
+  bottom: 89px;
   transform: translateX(-50%);
   background: #ffffff;
-  bottom: 89px;
   border-radius: 80px;
-  font-family: 'Roboto', Arial, Helvetica, sans-serif, Arial, Helvetica,
-    sans-serif;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
@@ -31,11 +30,11 @@ button.savedcardlist__button {
   font-style: normal;
   cursor: pointer;
   width: 288px;
+  align-self: center;
   height: 64px;
   padding: 0 50px;
   border: none;
 }
-
 .savedcardlist__button:hover {
   background-color: #d3d3d3;
 }

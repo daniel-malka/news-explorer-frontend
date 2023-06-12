@@ -10,7 +10,7 @@ export const getSavedArticles = (token) => {
     },
   });
 };
-export const saveArticle = (article, token) => {
+export const saveArticle = (Article, token) => {
   return fetch(`${BASE_API}/articles`, {
     method: 'POST',
     headers: {
@@ -19,7 +19,7 @@ export const saveArticle = (article, token) => {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
-      article,
+      Article,
     }),
   });
 };
@@ -37,8 +37,7 @@ export const deleteArticle = (articleId, token) => {
 /*Auth*/
 
 export const signup = (email, username, password) => {
-  console.log(email, username, password);
-  return fetch(`https://api.news-expo.mooo.com/signup`, {
+  return fetch(`${BASE_API}/signup`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

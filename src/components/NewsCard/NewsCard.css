@@ -6,10 +6,10 @@ article.newscard {
   background-color: #ffff;
   cursor: pointer;
 }
-.savedcardlist {
+.newscardlist {
   position: relative;
 }
-.savedcard-img {
+.newscard-img {
   box-sizing: border-box;
   height: 272px;
   background-repeat: no-repeat;
@@ -17,7 +17,7 @@ article.newscard {
   border-radius: 10px 10px 0 0;
 }
 
-button.savedcard-img-icon {
+button.newscard-img-icon {
   background: #ffffff;
   border-radius: 8px;
   border: none;
@@ -27,17 +27,17 @@ button.savedcard-img-icon {
   padding: 8px;
 }
 
-.savedcard-img-icon > img:hover {
+.newscard-img-icon > img:hover {
   filter: none;
 }
 
-button.savedcard-img-icon > img {
+button.newscard-img-icon > img {
   filter: invert(40%) sepia(100%) saturate(0%) hue-rotate(86deg)
     brightness(102%) contrast(102%);
   cursor: pointer;
 }
 
-.savedcard-img-container {
+.newscard-img-container {
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -47,7 +47,7 @@ button.savedcard-img-icon > img {
   padding-top: 24px;
 }
 
-button.savedcard-img-tagbtn {
+button.newscard-img-tagbtn {
   font-family: 'Roboto', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
@@ -61,7 +61,7 @@ button.savedcard-img-tagbtn {
   border: none;
 }
 
-button.saved-card__tootltip {
+button.news-card__tootltip {
   position: absolute;
   right: 50px;
   background: #ffffff;
@@ -78,7 +78,7 @@ button.saved-card__tootltip {
 
 /*text parent*/
 
-.savedcard-text {
+.newscard-text {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -86,7 +86,7 @@ button.saved-card__tootltip {
   max-height: 304px;
   padding-bottom: 24px;
 }
-p.savedcard-text-date {
+p.newscard-text-date {
   font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 400;
@@ -98,7 +98,7 @@ p.savedcard-text-date {
   padding-top: 20px;
 }
 
-h3.savedcard-text-title {
+h3.newscard-text-title {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -114,7 +114,7 @@ h3.savedcard-text-title {
   max-height: 72px;
 }
 
-p.savedcard-text-text {
+p.newscard-text-text {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -130,7 +130,7 @@ p.savedcard-text-text {
   margin-bottom: 18px;
 }
 
-p.savedcard-text-source {
+p.newscard-text-source {
   box-sizing: border-box;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
@@ -146,40 +146,40 @@ p.savedcard-text-source {
 /* article text ends here */
 
 @media screen and (max-width: 1253px) {
-  h3.savedcard-text-title {
+  h3.newscard-text-title {
     font-size: 22px;
     line-height: 24px;
   }
 
-  button.saved-card__tootltip {
+  button.news-card__tootltip {
     display: none;
   }
 }
 @media screen and (max-width: 920px) {
-  .savedcard-img {
+  .newscard-img {
     max-height: 150px;
     object-fit: fill;
   }
-  article.savedcard {
+  article.newscard {
     height: 420px;
   }
-  .savedcard-text {
+  .newscard-text {
     height: 270px;
     margin: 0 16px;
   }
-  .savedcard-img-container {
+  .newscard-img-container {
     margin: 0px 8px;
     padding-top: 8px;
   }
-  p.savedcard-text-date {
+  p.newscard-text-date {
     padding-top: 20px;
     padding-bottom: 8px;
   }
-  h3.savedcard-text-title {
+  h3.newscard-text-title {
     padding-bottom: 10px;
     min-height: 48px;
   }
-  p.savedcard-text-text {
+  p.newscard-text-text {
     padding-top: 24px;
     margin-bottom: 12px;
     min-height: 88px;
@@ -188,31 +188,31 @@ p.savedcard-text-source {
 }
 
 @media screen and (max-width: 565px) {
-  .savedcardList__cards {
+  .newscardList__cards {
     padding: 24px 16px;
   }
-  .savedcard-img {
+  .newscard-img {
     height: 196px;
   }
-  article.savedcard {
+  article.newscard {
     max-width: 288px;
     height: 444px;
   }
-  .savedcard-text {
+  .newscard-text {
     height: 244x;
   }
-  .savedcard-img-container {
+  .newscard-img-container {
     margin: 0px 8px;
     padding-top: 8px;
   }
-  p.savedcard-text-date {
+  p.newscard-text-date {
     padding-top: 16px;
     padding-bottom: 10px;
   }
-  h3.savedcard-text-title {
+  h3.newscard-text-title {
     padding-bottom: 14px;
   }
-  p.savedcard-text-text {
+  p.newscard-text-text {
     margin-bottom: 12px;
   }
 }

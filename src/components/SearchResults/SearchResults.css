@@ -39,7 +39,9 @@
   gap: 16px;
   padding-bottom: 208px;
 }
-
+.searchresult__container-all {
+  padding-bottom: 64px;
+}
 @media screen and (max-width: 1230px) {
   .searchresults__div {
     padding-left: 40px;
@@ -62,8 +64,11 @@
     padding-bottom: 32px;
   }
   .searchresult__container {
-    padding-bottom: 128px;
     gap: 8px;
+    padding-bottom: 128px;
+  }
+  .searchresult__container-all {
+    padding-bottom: 32px;
   }
 }
 @media screen and (max-width: 700px) {
@@ -90,5 +95,8 @@
   .searchresults__div {
     padding-left: 16px;
     padding-right: 16px;
+  }
+  .searchresult__container-all {
+    padding-bottom: 12px;
   }
 }
