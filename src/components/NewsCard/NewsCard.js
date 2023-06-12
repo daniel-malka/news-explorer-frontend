@@ -6,17 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
 import { useArticles } from '../../contexts/ArticlesContext';
 
-const NewsCard = ({
-  savedArticlesSet,
-  searchTerm,
-  article,
-  userArticles,
-  setUserArticles,
-  handleDeleteArticleFunc,
-  articleId,
-  allSavedArticles,
-  setAllSavedArticles,
-}) => {
+const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, setAllSavedArticles }) => {
   const token = localStorage.getItem('token');
   const { api } = useArticles();
   const [isArticleSaved, setIsArticleSaved] = useState(false);
@@ -44,7 +34,6 @@ const NewsCard = ({
   });
 
   const saveArticle = useCallback(async () => {
-    console.log('save');
     try {
       const response = await api.saveArticle(Article, token);
       const savedResult = await response.json();
@@ -57,11 +46,9 @@ const NewsCard = ({
       console.log(err);
     }
   }, [api, Article, savedArticlesSet, setAllSavedArticles, setIsArticleSaved, token]);
-  console.log(allSavedArticles);
   const unSaveArticle = useCallback(
     async (url) => {
       try {
-        console.log('unsave');
         const filteredArticle = allSavedArticles.articles.filter((card) => card.url === url);
         if (filteredArticle.length > 0) {
           const response = await api.deleteArticle(filteredArticle[0]._id);
