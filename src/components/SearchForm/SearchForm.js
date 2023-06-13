@@ -104,8 +104,9 @@ const SearchForm = () => {
           </button>
         </form>
       </section>
-      {isLoading && <Preloader />}
-      {searchResults === [] ? (
+      {isLoading ? (
+        <Preloader />
+      ) : searchResults.length === 0 ? (
         <NotFound />
       ) : (
         <SearchResults
@@ -113,7 +114,6 @@ const SearchForm = () => {
           onClickShowmore={onClickShowmore}
           searchResults={searchResults}
           searchTerm={searchTerm}
-          isLoading={isLoading}
           setIsLoading={setIsLoading}
         />
       )}

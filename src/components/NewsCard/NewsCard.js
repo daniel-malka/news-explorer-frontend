@@ -15,7 +15,6 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
   const { isLoggedIn } = useAuth();
   const popup = usePopup();
   const date = new Date();
-
   const toolTipText = isLoggedIn && !isHome ? `Remove from saved` : `Sign in to save articles`;
   const changeDate = (apiDate) => {
     const date = new Date(apiDate);

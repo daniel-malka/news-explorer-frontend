@@ -3,14 +3,15 @@ import NewsCard from '../NewsCard/NewsCard';
 import NotFound from '../NotFound/NotFound';
 import { useHome } from '../../contexts/HomeContext';
 import { useArticles } from '../../contexts/ArticlesContext';
+import SavedNews from '../SavedNews/SavedNews';
 
-const SearchResults = (props) => {
+const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm }) => {
   const [allSavedArticles, setAllSavedArticles] = useState([]);
   const [savedArticlesSet, setSavedArticlesSet] = useState(new Set());
   const token = localStorage.getItem('token');
   const { isHome } = useHome();
   const { api } = useArticles();
-
+  //make a state to check if user tried to search if not dont render not found .. else render when searthresults = 0
   useEffect(() => {
     if (isHome) {
       const fetchSavedArticles = async () => {
@@ -30,14 +31,15 @@ const SearchResults = (props) => {
 
   return (
     <>
-      <section className="searchresults">
-        {props.searchTerm.length === 0 ? (
-          ''
-        ) : (
-          <div className="searchresults__div">
-            <div className={props.showMore ? `searchresult__container` : `searchresult__container searchresult__container-all`}>
-              {props.searchResults.length !== 0
-                ? props.searchResults.map((article) => {
+      {isHome ? (
+        <section className="searchresults">
+          {searchTerm.length === 0 ? (
+            ''
+          ) : (
+            <div className="searchresults__div">
+              <div className={showMore ? `searchresult__container` : `searchresult__container searchresult__container-all`}>
+                {searchResults.length !== 0 ? (
+                  searchResults.map((article) => {
                     let uniqueArticleId = (article.source.id ?? 'default')
                       .split('')
                       .map((w) => w.toString() + Math.floor(Math.random() * 100).toString())
@@ -48,32 +50,35 @@ const SearchResults = (props) => {
                         <NewsCard
                           savedArticlesSet={savedArticlesSet}
                           article={article}
-                          searchTerm={props.searchTerm}
+                          searchTerm={searchTerm}
                           allSavedArticles={allSavedArticles}
                           setAllSavedArticles={setAllSavedArticles}
                         />
                       </div>
                     );
                   })
-                : !props.searchResults && (
-                    <div className="searchresult__cards-listitem">
-                      <NotFound />
-                    </div>
-                  )}
+                ) : (
+                  <div className="searchresult__cards-listitem">
+                    <NotFound />
+                  </div>
+                )}
 
-              {props.showMore ? (
-                <div>
-                  <button onClick={props.onClickShowmore} className="savedcardlist__button">
-                    Show more
-                  </button>
-                </div>
-              ) : (
-                ''
-              )}
+                {showMore ? (
+                  <div>
+                    <button onClick={onClickShowmore} className="savedcardlist__button">
+                      Show more
+                    </button>
+                  </div>
+                ) : (
+                  ''
+                )}
+              </div>
             </div>
-          </div>
-        )}
-      </section>
+          )}
+        </section>
+      ) : (
+        <SavedNews showMore={showMore} onClickShowmore={onClickShowmore} />
+      )}
     </>
   );
 };

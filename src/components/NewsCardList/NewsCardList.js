@@ -1,25 +1,26 @@
+import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
-import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
 
-const NewsCardList = (props) => {
+const NewsCardList = ({ articlesObj, handleDeleteArticle }) => {
+  console.log(articlesObj.articles);
   const { isHome } = useHome();
-  console.log(props.userArticle);
   return (
     <>
-      <div className="newscardlist">
-        <div className="newscardlist__cards">
-          {!isHome &&
-            props.userArticle.map(
-              <NewsCard
-                article={props.article}
-                userArticle={props.userArticle}
-                setUserArticles={props.setUserArticles}
-                articlesLength={props.articlesLength}
-              />
-            )}
-        </div>
-      </div>
+      {!isHome &&
+        articlesObj !== undefined &&
+        articlesObj.articles.map((article) => {
+          const uniqueArticleId = article.source
+            .split('')
+            .map((w) => w.toString() + Math.floor(Math.random() * 100).toString())
+            .join('');
+
+          return (
+            <div id={uniqueArticleId} key={uniqueArticleId} className="savedarticles-article">
+              <NewsCard article={article} handleDeleteArticle={handleDeleteArticle} />
+            </div>
+          );
+        })}
     </>
   );
 };
