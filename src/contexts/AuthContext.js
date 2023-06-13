@@ -10,13 +10,11 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState();
   const [user, setUser] = useState({
     email: '',
-    firstName: '',
-    userName: '',
+    username: '',
   });
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUser({});
     localStorage.clear();
     setToken(localStorage.getItem('token'));
     history('/');
@@ -30,9 +28,10 @@ const AuthProvider = ({ children }) => {
             setIsLoggedIn(true);
             setUser({
               email: res.email,
-              firstName: res.name,
+              username: res.username,
               id: res._id,
             });
+            console.log(user);
           }
         })
         .catch((err) => {
@@ -50,6 +49,7 @@ const AuthProvider = ({ children }) => {
         setIsLoggedIn,
         token,
         setToken,
+        setUser,
         user,
         handleLogout,
       }}

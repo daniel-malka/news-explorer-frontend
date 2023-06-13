@@ -16,6 +16,7 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
   const popup = usePopup();
   const date = new Date();
   const toolTipText = isLoggedIn && !isHome ? `Remove from saved` : `Sign in to save articles`;
+
   const changeDate = (apiDate) => {
     const date = new Date(apiDate);
     const day = String(date.getDate()).padStart(2, '0');
@@ -29,19 +30,19 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
     title: article.title,
     keyword: searchTerm,
     text: article.description,
-    date: changeDate(article.publishedAt) || changeDate(date),
-    source: article.source.name,
-    image: article.urlToImage || null,
+    date: changeDate(date || article.date) || changeDate(article.publishedAt),
+    source: article.source.name || article.source,
+    image: article.urlToImage || article.image || null,
     link: article.url,
   });
 
   const saveArticle = async () => {
     if (!isLoggedIn) {
       popup.openPopup('signin');
+      return;
     }
-
+    console.log('if you see this you are logged in');
     try {
-      console.log('saved');
       const response = await api.saveArticle(Article, token);
       const savedResult = await response.json();
       savedArticlesSet.add(savedResult._id);

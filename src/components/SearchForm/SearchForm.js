@@ -12,11 +12,11 @@ const SearchForm = () => {
   const [allResults, setAllResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [counter, setCounter] = useState(3);
+  const [triedTosearch, setTriedTosearch] = useState(false);
   const [isFirstClick, setIsFirstClick] = useState(true);
   const [screenWidth] = useState(window.innerWidth);
   const { api } = useArticles();
   const inputRef = useRef('');
-
   useEffect(() => {
     if (screenWidth > 700) {
       setCounter(3);
@@ -52,6 +52,7 @@ const SearchForm = () => {
 
   const handleSearch = async (event) => {
     event.preventDefault();
+    setTriedTosearch(true);
     setAllResults([]);
     setCounter(3);
 
@@ -106,11 +107,14 @@ const SearchForm = () => {
       </section>
       {isLoading ? (
         <Preloader />
-      ) : searchResults.length === 0 ? (
-        <NotFound />
+      ) : triedTosearch && searchResults === 0 ? (
+        <div className="searchresult__cards-listitem">
+          <NotFound />
+        </div>
       ) : (
         <SearchResults
           showMore={showMore}
+          triedTosearch={triedTosearch}
           onClickShowmore={onClickShowmore}
           searchResults={searchResults}
           searchTerm={searchTerm}

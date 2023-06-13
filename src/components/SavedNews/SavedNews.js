@@ -29,8 +29,8 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
 
   const keywordSelect = useCallback(() => {
     let uniqKeywords = [];
-    if (!userArticles === []) {
-      const keyW = userArticles.map((article) => article.keyword);
+    if (articlesObj.articles !== undefined) {
+      const keyW = articlesObj.articles.map((article) => article.keyword);
       uniqKeywords.push(new Set(keyW));
 
       if (uniqKeywords > 3) return `${uniqKeywords[0]}, ${uniqKeywords[1]}, and ${uniqKeywords.length - 2} others`;
@@ -38,15 +38,14 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
       else return 'None';
     }
   }, [setUserArticles]);
-
   return (
     <>
       <main className="savednews">
         <section className="savednews__text">
           <p className="savednews__paragraph">saved articles</p>
           <h2 className="savednews__title">
-            {user.username}, you have
-            {` ` + useArticles.length} saved articles
+            {user.username + ` you have` + ` `}
+            {articlesObj.articles !== undefined && articlesObj.articles.length} saved articles
           </h2>
           <p className="savednews__keywords">
             By keywords: <strong>{keywordSelect()}</strong>
@@ -56,11 +55,9 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
           <div className="savedarticles__container">
             <NewsCardList articlesObj={articlesObj} handleDeleteArticle={handleDeleteArticle} />
             {showMore ? (
-              <div>
-                <button onClick={onClickShowmore} className="savedcardlist__button">
-                  Show more
-                </button>
-              </div>
+              <button onClick={onClickShowmore} className="savedcardlist__button">
+                Show more
+              </button>
             ) : (
               ''
             )}

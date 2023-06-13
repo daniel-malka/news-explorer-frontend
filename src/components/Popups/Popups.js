@@ -7,7 +7,7 @@ import { usePopup } from '../../contexts/PopupContext';
 import { useAuth } from '../../contexts/AuthContext';
 const Popups = ({ signin, signup }) => {
   const { popupState, setPopupState } = usePopup();
-  const { setIsLoggedIn, setToken, checkToken } = useAuth();
+  const { setUser, user, setIsLoggedIn, setToken, checkToken } = useAuth();
   const [errMessage, setErrMessage] = useState('');
 
   const handleLogin = (email, password) => {
@@ -45,7 +45,7 @@ const Popups = ({ signin, signup }) => {
       setErrMessage('Name must be longer');
       return;
     }
-
+    setUser({ email: email, username: username });
     signup(email, username, password)
       .then((res) => {
         res.json().then((res) => {

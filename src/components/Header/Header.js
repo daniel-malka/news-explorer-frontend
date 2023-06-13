@@ -45,9 +45,7 @@ function Header() {
       : liClass.forEach((li) => li.classList.add('li__active-dark'));
 
     // Add padding-top: 11px to header__home and header__saved classes
-    const homeElements = document.querySelectorAll(
-      '.header__link .header__saved'
-    );
+    const homeElements = document.querySelectorAll('.header__link .header__saved');
     homeElements.forEach((element) => {
       element.style.paddingTop = '11px';
     });
@@ -57,31 +55,16 @@ function Header() {
     <header className={isHome || isSavedNews ? `header` : 'header white-bg'}>
       <div className="header__wrap">
         <img
-          src={
-            isHome ||
-            (isNavActive && isSavedNews) ||
-            (!isSavedNews && !isNavActive)
-              ? whiteLogo
-              : blackLogo
-          }
+          src={isHome || (isNavActive && isSavedNews) || (!isSavedNews && !isNavActive) ? whiteLogo : blackLogo}
           alt="Logo"
           className="header__logo"
         />
         <ul className="header__div">
           {isLoggedIn ? (
             <>
-              <li
-                onClick={() => handleLogout()}
-                className={
-                  isHome ? 'header__logout header__button' : 'header__logout '
-                }
-              >
-                {user.userName === '' ? `Daniel` : user.userName}
-                <img
-                  className="header__button-image"
-                  src={isHome ? exitImg : exitImgDark}
-                  alt="Log out"
-                />
+              <li onClick={() => handleLogout()} className={isHome ? 'header__logout header__button' : 'header__logout '}>
+                {user.username}
+                <img className="header__button-image" src={isHome ? exitImg : exitImgDark} alt="Log out" />
               </li>
               <li
                 className={
@@ -102,19 +85,9 @@ function Header() {
                   saved news
                 </NavLink>
               </li>
-              <li
-                className={
-                  isHome
-                    ? 'header__home header__button header__active selected'
-                    : 'header__home-dark header__button'
-                }
-              >
+              <li className={isHome ? 'header__home header__button header__active selected' : 'header__home-dark header__button'}>
                 <NavLink
-                  className={
-                    isHome
-                      ? 'header__home header__button header__active selected'
-                      : 'header__home header__button'
-                  }
+                  className={isHome ? 'header__home header__button header__active selected' : 'header__home header__button'}
                   to="/"
                   end
                 >
@@ -146,16 +119,8 @@ function Header() {
             navBurgerChange();
           }}
         >
-          <img
-            className="navFirst"
-            src={isHome ? menuWhite : menuBlack}
-            alt="open or close navigation menu"
-          />
-          <img
-            className="navSecond"
-            src={isHome ? menuWhite : menuBlack}
-            alt="open or close navigation menu"
-          />
+          <img className="navFirst" src={isHome ? menuWhite : menuBlack} alt="open or close navigation menu" />
+          <img className="navSecond" src={isHome ? menuWhite : menuBlack} alt="open or close navigation menu" />
         </div>
       </div>
     </header>

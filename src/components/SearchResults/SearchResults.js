@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import NotFound from '../NotFound/NotFound';
 import { useHome } from '../../contexts/HomeContext';
@@ -11,6 +11,7 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
   const token = localStorage.getItem('token');
   const { isHome } = useHome();
   const { api } = useArticles();
+
   //make a state to check if user tried to search if not dont render not found .. else render when searthresults = 0
   useEffect(() => {
     if (isHome) {
@@ -61,16 +62,11 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
                   <div className="searchresult__cards-listitem">
                     <NotFound />
                   </div>
-                )}
-
-                {showMore ? (
-                  <div>
-                    <button onClick={onClickShowmore} className="savedcardlist__button">
-                      Show more
-                    </button>
-                  </div>
-                ) : (
-                  ''
+                )}{' '}
+                {showMore && (
+                  <button onClick={onClickShowmore} className="savedcardlist__button">
+                    Show more
+                  </button>
                 )}
               </div>
             </div>
@@ -78,7 +74,7 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
         </section>
       ) : (
         <SavedNews showMore={showMore} onClickShowmore={onClickShowmore} />
-      )}
+      )}{' '}
     </>
   );
 };
