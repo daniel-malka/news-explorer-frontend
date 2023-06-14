@@ -1,9 +1,5 @@
 import { newsApi } from '../utilities/NewsApi';
-import {
-  getSavedArticles,
-  saveArticle,
-  deleteArticle,
-} from '../utilities/MainApi';
+import { getSavedArticles, saveArticle, unsaveArticle } from '../utilities/MainApi';
 const { createContext, useContext } = require('react');
 
 const ArticlesContext = createContext();
@@ -16,7 +12,7 @@ const ArticlesContextProvider = ({ children }) => {
         newsApi,
         getSavedArticles,
         saveArticle,
-        deleteArticle,
+        unsaveArticle,
       }}
     >
       {children}

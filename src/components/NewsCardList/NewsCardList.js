@@ -6,8 +6,6 @@ const NewsCardList = ({ articlesObj, handleDeleteArticle }) => {
     <>
       {articlesObj.articles !== undefined &&
         articlesObj.articles.map((article) => {
-          return console.log(article);
-
           const uniqueArticleId = article.source
             .split('')
             .map((w) => w.toString() + Math.floor(Math.random() * 100).toString())

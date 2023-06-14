@@ -30,22 +30,21 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
     title: article.title,
     keyword: searchTerm,
     text: article.description,
-    date: changeDate(date || article.date) || changeDate(article.publishedAt),
-    source: article.source.name || article.source,
+    date: changeDate(date) || changeDate(article.publishedAt),
+    source: article.source.name || article.source.id,
     image: article.urlToImage || article.image || null,
     link: article.url,
   });
 
-  const saveArticle = async () => {
+  const saveArticle = async (findArticle) => {
     if (!isLoggedIn) {
       popup.openPopup('signin');
       return;
     }
-    console.log('if you see this you are logged in');
     try {
-      const response = await api.saveArticle(Article, token);
+      const response = await api.saveArticle(findArticle, token);
       const savedResult = await response.json();
-      savedArticlesSet.add(savedResult._id);
+      console.log('the article is saved', savedResult);
       const response2 = await api.getSavedArticles(token);
       const updatedArticles = await response2.json();
       setAllSavedArticles(updatedArticles);
@@ -55,29 +54,28 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
   };
 
   const unSaveArticle = async (articleId) => {
+    console.log('unsaved function', articleId);
     try {
-      console.log('usaved');
-      const filteredArticle = allSavedArticles.articles.filter((card) => card._id === articleId);
-      if (filteredArticle.length > 0) {
-        const response = await api.deleteArticle(filteredArticle[0]._id);
-        const deletedArticle = await response.json();
-        savedArticlesSet.delete(deletedArticle._id);
-        savedArticlesSet.has(deletedArticle._id);
-        const response2 = await api.getSavedArticles(token);
-        const updatedArticles = await response2.json();
-        setAllSavedArticles(updatedArticles);
-      }
+      const response = await api.unsaveArticle(articleId, token);
+      const deletedArticle = await response.json();
+      console.log('the article is removed', deletedArticle);
+      const response2 = await api.getSavedArticles(token);
+      const updatedArticles = await response2.json();
+      setAllSavedArticles(updatedArticles);
     } catch (err) {
       console.log(err);
       // Handle the error here, e.g., show an error message
     }
   };
 
-  const toggleSave = (articleId) => {
-    let isArticleSaved = savedArticlesSet.has(articleId);
-    if (isArticleSaved) unSaveArticle(articleId);
-    else if (!isArticleSaved) saveArticle();
+  const toggleSave = (article) => {
+    console.log('toggle got this article', article);
+    const findArticle = allSavedArticles.articles.find((savedArticle) => savedArticle.link === article.link);
+    if (findArticle) {
+      unSaveArticle(findArticle._id);
+    } else saveArticle(article);
   };
+
   const handleArticleClick = (e) => {
     const isButtonClicked = e.target.closest('button');
     if (!isButtonClicked) {
@@ -102,9 +100,9 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
           <div className="newscard-img-container">
             <button className="newscard-img-tagbtn">{article.source.name || article.keyword}</button>
             {showToolTip && <button className="news-card__tootltip">{toolTipText}</button>}
-            <button className="newscard-img-icon newscard-img-save" onClick={() => toggleSave(article._id)}>
+            <button className="newscard-img-icon newscard-img-save" onClick={() => toggleSave(Article)}>
               <img
-                src={isLoggedIn && !isHome ? trashIcon : savedArticlesSet.has(article._id) ? savedIcon : saveIcon}
+                src={isLoggedIn && !isHome ? trashIcon : saveIcon}
                 alt={toolTipText}
                 title={toolTipText}
                 onMouseEnter={onHoverMessage}

@@ -42,6 +42,26 @@
 .searchresult__container-all {
   padding-bottom: 64px;
 }
+
+button.newscardlist__button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ffffff;
+  bottom: 89px;
+  border-radius: 80px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  font-style: normal;
+  cursor: pointer;
+  width: 288px;
+  height: 64px;
+  padding: 0 50px;
+  border: none;
+}
 @media screen and (max-width: 1230px) {
   .searchresults__div {
     padding-left: 40px;

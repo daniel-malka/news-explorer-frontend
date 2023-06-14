@@ -24,7 +24,7 @@ export const saveArticle = (Article, token) => {
   });
 };
 
-export const deleteArticle = (articleId, token) => {
+export const unsaveArticle = (articleId, token) => {
   return fetch(`${BASE_API}/articles/${articleId}`, {
     method: 'DELETE',
     headers: {

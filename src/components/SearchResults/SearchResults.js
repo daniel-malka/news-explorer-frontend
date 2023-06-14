@@ -64,7 +64,7 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
                   </div>
                 )}{' '}
                 {showMore && (
-                  <button onClick={onClickShowmore} className="savedcardlist__button">
+                  <button onClick={onClickShowmore} className="newscardlist__button">
                     Show more
                   </button>
                 )}
