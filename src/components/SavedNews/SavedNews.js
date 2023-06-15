@@ -23,8 +23,9 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
   useEffect(() => {
     getSaved();
   }, [!isHome]);
+  
   const handleDeleteArticle = async (articleId) => {
-    await api.deleteArticle(articleId);
+    await api.unsaveArticle(articleId);
   };
 
   const keywordSelect = useCallback(() => {

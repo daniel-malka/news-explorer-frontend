@@ -7,14 +7,17 @@ import { useHome } from '../../contexts/HomeContext';
 import { useArticles } from '../../contexts/ArticlesContext';
 import { usePopup } from '../../contexts/PopupContext';
 
-const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, setAllSavedArticles }) => {
+const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }) => {
   const token = localStorage.getItem('token');
   const { api } = useArticles();
   const [showToolTip, setShowToolTip] = useState(false);
   const { isHome } = useHome();
   const { isLoggedIn } = useAuth();
+  let isSaved;
+  const thisArtice = article;
   const popup = usePopup();
   const date = new Date();
+
   const toolTipText = isLoggedIn && !isHome ? `Remove from saved` : `Sign in to save articles`;
 
   const changeDate = (apiDate) => {
@@ -27,15 +30,17 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
   };
 
   const [Article] = useState({
-    title: article.title,
+    title: thisArtice.title,
     keyword: searchTerm,
-    text: article.description,
-    date: changeDate(date) || changeDate(article.publishedAt),
-    source: article.source.name || article.source.id,
-    image: article.urlToImage || article.image || null,
-    link: article.url,
+    text: thisArtice.description,
+    date: changeDate(date) || changeDate(thisArtice.publishedAt),
+    source: thisArtice.source.name || thisArtice.source.id,
+    image: thisArtice.urlToImage || thisArtice.image || null,
+    link: thisArtice.url,
   });
-
+  if (allSavedArticles?.articles !== undefined) {
+    isSaved = allSavedArticles?.articles.some((savedArticle) => savedArticle.link === thisArtice.url);
+  }
   const saveArticle = async (findArticle) => {
     if (!isLoggedIn) {
       popup.openPopup('signin');
@@ -43,36 +48,31 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
     }
     try {
       const response = await api.saveArticle(findArticle, token);
-      const savedResult = await response.json();
-      console.log('the article is saved', savedResult);
-      const response2 = await api.getSavedArticles(token);
-      const updatedArticles = await response2.json();
-      setAllSavedArticles(updatedArticles);
+      const savedArticle = await response.json();
+      console.log('the article is saved', savedArticle);
+
+      setAllSavedArticles((prevArticles) => [...prevArticles, savedArticle]);
     } catch (err) {
       console.log(err);
     }
   };
-
-  const unSaveArticle = async (articleId) => {
-    console.log('unsaved function', articleId);
+  const unSaveArticle = async (article) => {
     try {
-      const response = await api.unsaveArticle(articleId, token);
+      const response = await api.unsaveArticle(article, token);
       const deletedArticle = await response.json();
-      console.log('the article is removed', deletedArticle);
-      const response2 = await api.getSavedArticles(token);
-      const updatedArticles = await response2.json();
-      setAllSavedArticles(updatedArticles);
+      console.log(deletedArticle);
+      
+      setAllSavedArticles((prevSavedArticles) => prevSavedArticles.filter((item) => item !== deletedArticle));
     } catch (err) {
       console.log(err);
-      // Handle the error here, e.g., show an error message
     }
   };
 
   const toggleSave = (article) => {
-    console.log('toggle got this article', article);
-    const findArticle = allSavedArticles.articles.find((savedArticle) => savedArticle.link === article.link);
-    if (findArticle) {
-      unSaveArticle(findArticle._id);
+    const isArticleIsSaved = allSavedArticles.articles.find((savedArticle) => savedArticle.link === article.link);
+
+    if (isArticleIsSaved) {
+      unSaveArticle(isArticleIsSaved);
     } else saveArticle(article);
   };
 
@@ -99,10 +99,10 @@ const NewsCard = ({ savedArticlesSet, searchTerm, article, allSavedArticles, set
         <div className="newscard-img" style={{ backgroundImage: `url(${article.urlToImage})` }}>
           <div className="newscard-img-container">
             <button className="newscard-img-tagbtn">{article.source.name || article.keyword}</button>
-            {showToolTip && <button className="news-card__tootltip">{toolTipText}</button>}
+            {showToolTip && !isHome && <button className="news-card__tootltip">{toolTipText}</button>}
             <button className="newscard-img-icon newscard-img-save" onClick={() => toggleSave(Article)}>
               <img
-                src={isLoggedIn && !isHome ? trashIcon : saveIcon}
+                src={isLoggedIn && !isHome ? trashIcon : isLoggedIn && isSaved ? savedIcon : saveIcon}
                 alt={toolTipText}
                 title={toolTipText}
                 onMouseEnter={onHoverMessage}
