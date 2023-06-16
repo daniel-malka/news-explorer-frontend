@@ -5,7 +5,11 @@ import Popups from '../Popups/Popups';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import SavedNews from '../SavedNews/SavedNews';
+<<<<<<< HEAD
 // import { useAuth } from '../../contexts/AuthContext';
+=======
+import { signin, signup } from '../../utilities/MainApi';
+>>>>>>> stage-3
 
 // css
 import '../../index.css';
@@ -29,7 +33,11 @@ function App() {
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
       <Footer />
+<<<<<<< HEAD
       <Popups />
+=======
+      <Popups signin={signin} signup={signup} />
+>>>>>>> stage-3
     </div>
   );
 }

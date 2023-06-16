@@ -1,6 +1,7 @@
 import git from '../../images/Vector.svg';
 import facebook from '../../images/facebook.svg';
 import { NavLink } from 'react-router-dom';
+<<<<<<< HEAD
 import { useHome } from '../../contexts/HomeContext';
 
 const Footer = () => {
@@ -11,6 +12,12 @@ const Footer = () => {
       className="footer"
       style={{ backgroundColor: `${isHome ? '#E5E5E5' : '#ffff'}` }}
     >
+=======
+
+const Footer = () => {
+  return (
+    <footer className="footer">
+>>>>>>> stage-3
       <p className="footer__copyrights">
         © {new Date().getFullYear()} Supersite, Powered by News API
       </p>

@@ -1,8 +1,16 @@
 .header {
+<<<<<<< HEAD
+=======
+  display: flex;
+>>>>>>> stage-3
   border-bottom: 1px solid rgba(84, 84, 84, 0.7);
   background: rgba(196, 196, 196, 0.01);
   box-shadow: inset 0px -1px 0px rgba(255, 255, 255, 0.2);
   position: relative;
+<<<<<<< HEAD
+=======
+  justify-content: center;
+>>>>>>> stage-3
 }
 
 ul {
@@ -19,6 +27,10 @@ li.header__home.header__button {
 }
 
 .header__wrap {
+<<<<<<< HEAD
+=======
+  width: 100%;
+>>>>>>> stage-3
   box-sizing: border-box;
   padding: 0 116px;
   padding-top: 19px;
@@ -27,6 +39,7 @@ li.header__home.header__button {
   background: rgba(196, 196, 196, 0.01);
   top: 0;
   z-index: 1;
+<<<<<<< HEAD
   align-items: center;
   max-height: 80px;
   min-height: 56px;
@@ -35,18 +48,52 @@ li.header__home.header__button {
 
 .header__logo {
   width: 140px;
+=======
+  align-items: flex-start;
+  height: 80px;
+  min-height: 56px;
+}
+
+.header__logo {
+  box-sizing: border-box;
+  width: 140px;
+  padding-top: 11px;
+}
+
+li.header__home,
+.header__saved {
+  box-sizing: border-box;
+  padding-top: 11px;
+}
+li.header__home-dark {
+  background-color: transparent;
+  text-decoration: none;
+  padding-top: 11px;
+>>>>>>> stage-3
 }
 
 li.header__link {
   box-sizing: border-box;
   width: 178px;
   height: 48px;
+<<<<<<< HEAD
 }
 
 li.header__link.header__button {
   background: transparent;
   color: #a9a9a9;
   font-weight: 400;
+=======
+  padding-left: 57px;
+  padding-top: 12px;
+}
+
+li.header__link.header__button {
+  position: relative;
+  background: transparent;
+  color: #a9a9a9;
+  font-weight: 600;
+>>>>>>> stage-3
   font-size: 18px;
   font-family: 'Inter', sans-serif;
   font-style: normal;
@@ -55,10 +102,18 @@ li.header__link.header__button {
 }
 
 .header__div {
+<<<<<<< HEAD
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: nowrap;
   align-items: baseline;
+=======
+  max-height: 61px;
+
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+>>>>>>> stage-3
   float: right;
   justify-content: space-between;
   gap: 42px;
@@ -66,6 +121,7 @@ li.header__link.header__button {
 }
 
 .header__button-image {
+<<<<<<< HEAD
   padding-left: 20px;
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg)
     brightness(102%) contrast(102%);
@@ -80,6 +136,17 @@ li.header__link.header__button {
 }
 
 a.header__redirect-text {
+=======
+  position: absolute;
+  left: 80px;
+  top: 10px;
+  width: 24px;
+  height: 24px;
+}
+
+a.header__redirect-text {
+  box-sizing: border-box;
+>>>>>>> stage-3
   position: absolute;
   width: 64px;
   height: 22px;
@@ -96,36 +163,81 @@ a.header__redirect-text {
 .header__navburger {
   display: none;
 }
+<<<<<<< HEAD
+=======
+.header__logout {
+  box-sizing: border-box;
+  color: #f9f9f9;
+  font-weight: 600;
+  line-height: 22px;
+  font-size: 18px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  cursor: pointer;
+  border: 1px solid #d1d2d6;
+  backdrop-filter: blur(4px);
+  border-radius: 100px;
+  min-width: 112px;
+  padding: 12px 15px 12px 19px;
+  margin-bottom: 13px;
+}
+>>>>>>> stage-3
 
 li.header__link.header__button {
   background: transparent;
   color: #f9f9f9;
   font-weight: 400;
   font-size: 18px;
+<<<<<<< HEAD
   font-family: 'Inter', sans-serif;
+=======
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+>>>>>>> stage-3
   font-style: normal;
   float: right;
   cursor: pointer;
   border: 1px solid #d1d2d6;
   backdrop-filter: blur(4px);
   border-radius: 100px;
+<<<<<<< HEAD
   padding: 12px 0;
   padding-left: 55px;
   transition: all 0.3s ease-in-out;
 }
+=======
+  box-sizing: border-box;
+  padding: 0 auto;
+  transition: all 0.3s ease-in-out;
+}
+.header__active {
+  color: #ffff;
+  text-decoration: auto;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+}
+>>>>>>> stage-3
 
 .header__button-dark {
   background: transparent;
   color: rgba(26, 27, 34, 1);
+<<<<<<< HEAD
   font-weight: 400;
   font-size: 18px;
   font-family: 'Inter', sans-serif;
   font-style: normal;
   float: right;
+=======
+  font-style: normal;
+>>>>>>> stage-3
   cursor: pointer;
   border: 1px solid rgba(26, 27, 34, 1);
   backdrop-filter: blur(4px);
   border-radius: 100px;
+<<<<<<< HEAD
   padding: 12px 42px;
 }
 
@@ -135,10 +247,22 @@ li.header__link.header__button {
 }
 
 a.header__link.header__button.header__active-white:hover {
+=======
+}
+
+.header__button-dark:hover {
+  color: rgba(232, 232, 232, 1);
+}
+a.header__link.header__button:hover {
+>>>>>>> stage-3
   color: rgba(232, 232, 232, 1);
 }
 
 .selected {
+<<<<<<< HEAD
+=======
+  box-sizing: border-box;
+>>>>>>> stage-3
   border-bottom: 3px solid white;
   padding-bottom: 23px;
 }
@@ -152,6 +276,7 @@ a.header__link.header__button.header__active-white:hover {
   background-color: #ffff;
 }
 
+<<<<<<< HEAD
 .header__active-white {
   color: #ffff;
   text-decoration: auto;
@@ -162,6 +287,8 @@ a.header__link.header__button.header__active-white:hover {
   line-height: 24px;
 }
 
+=======
+>>>>>>> stage-3
 .li__active-dark {
   color: #1a1b22;
   text-decoration: auto;
@@ -194,23 +321,58 @@ li.header__link.header__button:hover {
     padding: 0 40px;
     padding-top: 14px;
   }
+<<<<<<< HEAD
+=======
+  .header__logo {
+    padding-top: 9px;
+  }
+  .header__button-image {
+    top: 7px;
+  }
+  li.header__home,
+  .header__saved {
+    padding-top: 9px;
+  }
+  li.header__link.header__button {
+    max-width: 128px;
+    height: 40px;
+    padding-left: 35px;
+    padding-top: 9px;
+  }
+>>>>>>> stage-3
   .selected-dark {
     padding-bottom: 17px;
   }
   .selected {
     padding-bottom: 17px;
   }
+<<<<<<< HEAD
+=======
+  .header__logout {
+    padding: 8px 13px 8px 15px;
+    line-height: 24px;
+    font-size: 18px;
+  }
+>>>>>>> stage-3
 }
 @media screen and (max-width: 565px) {
   .header {
     z-index: 2;
+<<<<<<< HEAD
     padding: 0 16px;
+=======
+>>>>>>> stage-3
     top: 0;
   }
   .header__div {
     display: none;
   }
   .header__logo {
+<<<<<<< HEAD
+=======
+    margin: 0;
+    padding: 0;
+>>>>>>> stage-3
     width: 117px;
   }
   .header__navburger {
@@ -224,7 +386,13 @@ li.header__link.header__button:hover {
     cursor: pointer;
   }
   .header__navburger > img {
+<<<<<<< HEAD
     height: 3px;
+=======
+    box-sizing: border-box;
+    width: 16px;
+    height: 2px;
+>>>>>>> stage-3
     transition: all 0.3s ease-in-out;
   }
   .header__navburger.open img.navFirst {
@@ -234,9 +402,17 @@ li.header__link.header__button:hover {
     transform: rotate(-45deg);
   }
   .header__wrap {
+<<<<<<< HEAD
     box-sizing: border-box;
     gap: 0;
     height: 56px;
     padding: 0;
+=======
+    align-items: center;
+    box-sizing: border-box;
+    gap: 0;
+    height: 56px;
+    padding: 16px;
+>>>>>>> stage-3
   }
 }

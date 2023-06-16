@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .navMobile {
     background: #1A1B22;
     background-color: rgba(0, 0, 0, .5);
@@ -101,3 +102,117 @@ p.navMobile__home:hover {
         color: #ffffff;
     }
 }
+=======
+.navmobile {
+  background: #1a1b22;
+  background-color: rgba(0, 0, 0, 0.5);
+  bottom: 0;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  transition: all 0.35s ease-in-out;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.navmobile__ul {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0%;
+  height: 216px;
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 48px;
+  background: #1a1b22;
+  width: 100%;
+  padding-top: 72px;
+  color: hsl(0, 0%, 100%);
+}
+
+button.navmobile__signin {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  background: transparent;
+  border-radius: 100px;
+  align-items: center;
+  text-align: center;
+  color: #ffff;
+  border: 1px solid #ffffff;
+  height: 56px;
+  width: 288px;
+  display: block;
+  padding: 16px 16px;
+  margin: 0 auto;
+  margin-bottom: 24px;
+}
+
+button.navmobile__signin:hover {
+  color: #9b9b9b;
+  border: 1px solid #9b9b9b;
+}
+.navmobile__home {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  padding: 10px 16px;
+  height: 265px;
+}
+
+p.navmobile__home:hover {
+  color: #9b9b9b;
+  border: 1px solid #9b9b9b;
+}
+
+.nav__active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.img.navsecond {
+  transform: rotate(45deg);
+}
+
+.navmobile__home > a {
+  color: #ffff;
+  text-decoration: none;
+}
+
+.navmobile__home > a:hover {
+  color: #9b9b9b;
+}
+
+@media screen and (max-width: 565px) {
+  .navmobile__ul > p {
+    margin: 0;
+    margin-bottom: 16px;
+    padding-left: 16px;
+    text-decoration: none;
+  }
+  p.navmobile__ul-saved-articles > a {
+    text-decoration: auto;
+    color: #ffff;
+  }
+  .navmobile__ul-home > a .active {
+    text-decoration: none;
+    cursor: pointer;
+    color: #ffffff;
+  }
+  p.navmobile__ul-home > a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #ffffff;
+  }
+  .navmobile__ul-logged {
+    height: 260px;
+  }
+}
+>>>>>>> stage-3

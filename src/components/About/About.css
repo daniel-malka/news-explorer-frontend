@@ -1,5 +1,6 @@
 .about {
   box-sizing: border-box;
+<<<<<<< HEAD
   min-height: 624px;
   max-height: fit-content;
   display: flex;
@@ -9,6 +10,15 @@
   position: relative;
   gap: 56px;
   margin-left: 104px;
+=======
+  height: fit-content;
+  display: flex;
+  background: #ffffff;
+  padding: 80px 104px;
+  z-index: 10;
+  position: relative;
+  gap: 56px;
+>>>>>>> stage-3
 }
 
 .about__image {
@@ -37,6 +47,7 @@
   line-height: 46px;
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-weight: 400;
+<<<<<<< HEAD
   margin-block-end: 0;
   margin-block-start: 0;
 }
@@ -47,6 +58,28 @@
     padding: 0;
     margin: 40px;
     margin-bottom: 61px;
+=======
+  margin: 0;
+  padding-bottom: 24px;
+}
+.about__paragraph {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 18x;
+  line-height: 24px;
+  margin: 0;
+}
+.about__paragraph-opening,
+.about__paragraph-intro {
+  padding-bottom: 20px;
+}
+@media screen and (max-width: 900px) {
+  .about {
+    padding: 0;
+    min-height: 354px;
+    padding-top: 40px;
+    margin: 0 40px;
+    padding-bottom: 61px;
+>>>>>>> stage-3
     gap: 32px;
   }
   .about__image {
@@ -62,14 +95,24 @@
     padding-top: 0;
     margin-block-start: 0;
     margin-block-end: 0;
+<<<<<<< HEAD
     margin-bottom: 91px;
+=======
+>>>>>>> stage-3
   }
 }
 
 @media screen and (max-width: 629px) {
   .about {
+<<<<<<< HEAD
     box-sizing: border-box;
     flex-direction: column;
+=======
+    padding-top: 0;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: center;
+>>>>>>> stage-3
     margin: 0 16px;
     gap: 24px;
 
@@ -89,7 +132,10 @@
     font-size: 16px;
     line-height: 24px;
     color: #1a1b22;
+<<<<<<< HEAD
     padding: 32px 0px 128px 0px;
+=======
+>>>>>>> stage-3
     margin: 0;
   }
   .about__image {

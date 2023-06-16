@@ -1,3 +1,4 @@
+<<<<<<< HEAD
  .popup__redirect {
      font-family: 'Inter', sans-serif;
      font-style: normal;
@@ -13,3 +14,20 @@
      cursor: pointer;
      ;
  }
+=======
+.popup__redirect {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 15px;
+  color: #2f71e5;
+  text-align: initial;
+  margin: 0;
+  position: absolute;
+  bottom: 51px;
+  border: none;
+  background-color: #ffff0000;
+  cursor: pointer;
+}
+>>>>>>> stage-3
