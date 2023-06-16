@@ -38,10 +38,10 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     image: thisArtice.urlToImage || thisArtice.image || null,
     link: thisArtice.url,
   });
-  if (allSavedArticles?.articles !== undefined) {
-    isSaved = allSavedArticles?.articles.some((savedArticle) => savedArticle.link === thisArtice.url);
+  if (allSavedArticles !== undefined) {
+    isSaved = allSavedArticles.some((savedArticle) => savedArticle.link === thisArtice.url);
   }
-  const saveArticle = async (findArticle) => {
+  const SaveArticle = async (findArticle) => {
     if (!isLoggedIn) {
       popup.openPopup('signin');
       return;
@@ -56,24 +56,33 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
       console.log(err);
     }
   };
-  const unSaveArticle = async (article) => {
+  const UnsaveArticle = async (articleId) => {
     try {
-      const response = await api.unsaveArticle(article, token);
+      const response = await api.unsaveArticle(articleId, token);
       const deletedArticle = await response.json();
-      console.log(deletedArticle);
-      
-      setAllSavedArticles((prevSavedArticles) => prevSavedArticles.filter((item) => item !== deletedArticle));
+      console.log(response);
+
+      // setAllSavedArticles((prevSavedArticles) => prevSavedArticles.filter((item) => item !== deletedArticle));
     } catch (err) {
       console.log(err);
     }
   };
 
   const toggleSave = (article) => {
-    const isArticleIsSaved = allSavedArticles.articles.find((savedArticle) => savedArticle.link === article.link);
+    if (allSavedArticles.length === 0) {
+      if (!isLoggedIn) {
+        popup.openPopup('signin');
+        return;
+      }
+    }
+    if (allSavedArticles.length > 0) {
+      console.log(allSavedArticles);
+      const isArticleIsSaved = allSavedArticles.find((savedArticle) => savedArticle.link === article.link);
 
-    if (isArticleIsSaved) {
-      unSaveArticle(isArticleIsSaved);
-    } else saveArticle(article);
+      if (isArticleIsSaved) {
+        UnsaveArticle(isArticleIsSaved._id);
+      } else SaveArticle(article);
+    } else SaveArticle(article);
   };
 
   const handleArticleClick = (e) => {

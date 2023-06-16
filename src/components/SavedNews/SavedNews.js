@@ -23,15 +23,12 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
   useEffect(() => {
     getSaved();
   }, [!isHome]);
-  
-  const handleDeleteArticle = async (articleId) => {
-    await api.unsaveArticle(articleId);
-  };
+
 
   const keywordSelect = useCallback(() => {
     let uniqKeywords = [];
-    if (articlesObj.articles !== undefined) {
-      const keyW = articlesObj.articles.map((article) => article.keyword);
+    if (articlesObj !== undefined) {
+      const keyW = articlesObj.map((article) => article.keyword);
       uniqKeywords.push(new Set(keyW));
 
       if (uniqKeywords > 3) return `${uniqKeywords[0]}, ${uniqKeywords[1]}, and ${uniqKeywords.length - 2} others`;
@@ -54,7 +51,7 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
         </section>
         <section className="savedarticles__div">
           <div className="savedarticles__container">
-            <NewsCardList articlesObj={articlesObj} handleDeleteArticle={handleDeleteArticle} />
+            <NewsCardList articlesObj={articlesObj} />
             {showMore ? (
               <button onClick={onClickShowmore} className="savedcardlist__button">
                 Show more

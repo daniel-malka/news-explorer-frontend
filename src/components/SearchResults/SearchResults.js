@@ -2,33 +2,32 @@ import { useState, useEffect } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import NotFound from '../NotFound/NotFound';
 import { useHome } from '../../contexts/HomeContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { useArticles } from '../../contexts/ArticlesContext';
 import SavedNews from '../SavedNews/SavedNews';
 
 const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm }) => {
   const [allSavedArticles, setAllSavedArticles] = useState([]);
-  const [savedArticlesSet, setSavedArticlesSet] = useState(new Set());
+
   const token = localStorage.getItem('token');
   const { isHome } = useHome();
   const { api } = useArticles();
-
+  const { isLoggedIn } = useAuth();
   //make a state to check if user tried to search if not dont render not found .. else render when searthresults = 0
   useEffect(() => {
-    if (isHome) {
+    if (isHome && isLoggedIn) {
       const fetchSavedArticles = async () => {
         try {
           const response = await api.getSavedArticles(token);
           const savedarticles = await response.json();
           setAllSavedArticles(savedarticles);
-          const articleSet = new Set(savedarticles.articles.map((element) => element._id));
-          setSavedArticlesSet(articleSet);
         } catch (error) {
           console.log(error);
         }
       };
       fetchSavedArticles();
     }
-  }, [api, isHome, token]);
+  }, [isHome, token]);
 
   return (
     <>
@@ -49,7 +48,6 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
                     return (
                       <div id={uniqueArticleId} key={uniqueArticleId} className="searchresult__cards-listitem">
                         <NewsCard
-                          savedArticlesSet={savedArticlesSet}
                           article={article}
                           searchTerm={searchTerm}
                           allSavedArticles={allSavedArticles}
