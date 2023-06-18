@@ -14,7 +14,9 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
   const { isHome } = useHome();
   const { isLoggedIn } = useAuth();
   let isSaved;
-  const thisArtice = article;
+  const undifindImg =
+    'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg';
+  const thisArticle = article;
   const popup = usePopup();
   const date = new Date();
 
@@ -30,24 +32,27 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
   };
 
   const [Article] = useState({
-    title: thisArtice.title,
+    title: thisArticle.title,
     keyword: searchTerm,
-    text: thisArtice.description,
-    date: changeDate(date) || changeDate(thisArtice.publishedAt),
-    source: thisArtice.source.name || thisArtice.source.id,
-    image: thisArtice.urlToImage || thisArtice.image || null,
-    link: thisArtice.url,
+    text: thisArticle.description,
+    date: changeDate(date) || changeDate(thisArticle.publishedAt),
+    source: thisArticle.source?.name || thisArticle.source,
+    image: thisArticle.urlToImage || thisArticle.image || undifindImg,
+    link: thisArticle.link || thisArticle.url,
+    _id: thisArticle._id,
   });
+
   if (allSavedArticles !== undefined) {
-    isSaved = allSavedArticles.some((savedArticle) => savedArticle.link === thisArtice.url);
+    isSaved = allSavedArticles.some((savedArticle) => savedArticle.link === thisArticle.url);
   }
-  const SaveArticle = async (findArticle) => {
+
+  const SaveArticle = async (foundArticle) => {
     if (!isLoggedIn) {
       popup.openPopup('signin');
       return;
     }
     try {
-      const response = await api.saveArticle(findArticle, token);
+      const response = await api.saveArticle(foundArticle, token);
       const savedArticle = await response.json();
       console.log('the article is saved', savedArticle);
 
@@ -56,39 +61,36 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
       console.log(err);
     }
   };
-  const UnsaveArticle = async (articleId) => {
-    try {
-      const response = await api.unsaveArticle(articleId, token);
-      const deletedArticle = await response.json();
-      console.log(response);
 
-      // setAllSavedArticles((prevSavedArticles) => prevSavedArticles.filter((item) => item !== deletedArticle));
+  const UnsaveArticle = async (article) => {
+    try {
+      const response = await api.unsaveArticle(article._id, token);
+      const deletedArticle = await response.json();
+      setAllSavedArticles((prevSavedArticles) => prevSavedArticles.filter((item) => item !== article));
     } catch (err) {
       console.log(err);
     }
   };
 
-  const toggleSave = (article) => {
-    if (allSavedArticles.length === 0) {
+  const toggleSave = (isSavedArticle) => {
+    if (allSavedArticles !== undefined) {
       if (!isLoggedIn) {
         popup.openPopup('signin');
         return;
       }
-    }
-    if (allSavedArticles.length > 0) {
-      console.log(allSavedArticles);
-      const isArticleIsSaved = allSavedArticles.find((savedArticle) => savedArticle.link === article.link);
+      const isArticleIsSaved = allSavedArticles.find((savedArticle) => savedArticle.link === isSavedArticle.link);
 
-      if (isArticleIsSaved) {
-        UnsaveArticle(isArticleIsSaved._id);
-      } else SaveArticle(article);
-    } else SaveArticle(article);
+      if (isArticleIsSaved !== undefined) {
+        console.log(isArticleIsSaved);
+        UnsaveArticle(isArticleIsSaved);
+      } else SaveArticle(isSavedArticle);
+    }
   };
 
   const handleArticleClick = (e) => {
     const isButtonClicked = e.target.closest('button');
     if (!isButtonClicked) {
-      article.url ? window.open(article.url, '_blank') : window.open(article.link, '_blank'); // Redirect to the URL
+      article.url ? window.open(thisArticle.url, '_blank') : window.open(thisArticle.link, '_blank'); // Redirect to the URL
     }
   };
 
@@ -105,9 +107,14 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
   return (
     <>
       <article className="newscard" onClick={handleArticleClick}>
-        <div className="newscard-img" style={{ backgroundImage: `url(${article.urlToImage})` }}>
+        <div
+          className="newscard-img"
+          style={{
+            backgroundImage: `url(${(Article.urlToImage !== undefined && Article.urlToImage) || Article.image})`,
+          }}
+        >
           <div className="newscard-img-container">
-            <button className="newscard-img-tagbtn">{article.source.name || article.keyword}</button>
+            <button className="newscard-img-tagbtn">{Article.keyword}</button>
             {showToolTip && !isHome && <button className="news-card__tootltip">{toolTipText}</button>}
             <button className="newscard-img-icon newscard-img-save" onClick={() => toggleSave(Article)}>
               <img
@@ -123,8 +130,8 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
         <div className="newscard-text">
           <p className="newscard-text-date">{Article.date}</p>
           <h3 className="newscard-text-title">{Article.title}</h3>
-          <p className="newscard-text-text">{Article.text}</p>
-          <p className="newscard-text-source">{Article.source}</p>
+          <p className="newscard-text-text">{Article.text || thisArticle.text}</p>
+          <p className="newscard-text-source">{Article.source || thisArticle.source}</p>
         </div>
       </article>
     </>
