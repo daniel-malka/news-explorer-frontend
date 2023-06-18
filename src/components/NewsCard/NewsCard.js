@@ -66,13 +66,14 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     try {
       const response = await api.unsaveArticle(article._id, token);
       const deletedArticle = await response.json();
-      setAllSavedArticles((prevSavedArticles) => prevSavedArticles.filter((item) => item !== article));
+      setAllSavedArticles((prevSavedArticles) => prevSavedArticles.filter((item) => item._id !== article._id));
     } catch (err) {
       console.log(err);
     }
   };
 
   const toggleSave = (isSavedArticle) => {
+    console.log('haloo');
     if (allSavedArticles !== undefined) {
       if (!isLoggedIn) {
         popup.openPopup('signin');
@@ -81,7 +82,6 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
       const isArticleIsSaved = allSavedArticles.find((savedArticle) => savedArticle.link === isSavedArticle.link);
 
       if (isArticleIsSaved !== undefined) {
-        console.log(isArticleIsSaved);
         UnsaveArticle(isArticleIsSaved);
       } else SaveArticle(isSavedArticle);
     }
@@ -103,7 +103,6 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     e.preventDefault();
     setShowToolTip(false);
   };
-
   return (
     <>
       <article className="newscard" onClick={handleArticleClick}>

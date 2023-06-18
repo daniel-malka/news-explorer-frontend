@@ -71,7 +71,12 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
           )}
         </section>
       ) : (
-        <SavedNews showMore={showMore} onClickShowmore={onClickShowmore} />
+        <SavedNews
+          showMore={showMore}
+          onClickShowmore={onClickShowmore}
+          allSavedArticles={allSavedArticles}
+          setAllSavedArticles={setAllSavedArticles}
+        />
       )}{' '}
     </>
   );

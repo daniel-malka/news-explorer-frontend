@@ -4,19 +4,17 @@ import { useHome } from '../../contexts/HomeContext';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import { useArticles } from '../../contexts/ArticlesContext';
 
-const SavedNews = ({ showMore, onClickShowmore }) => {
+const SavedNews = ({ showMore, onClickShowmore, allSavedArticles, setAllSavedArticles }) => {
   const { user } = useAuth();
   const { api } = useArticles();
   const { isHome } = useHome();
   const token = localStorage.getItem('token');
-  const [userArticles, setUserArticles] = useState([]);
-  const articlesObj = userArticles;
 
   const getSaved = async () => {
     try {
       const response = await api.getSavedArticles(token);
       const savedArticles = await response.json();
-      setUserArticles(savedArticles);
+      setAllSavedArticles(savedArticles);
     } catch {
       return (err) => console.log(err);
     }
@@ -27,8 +25,8 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
   }, [!isHome]);
   const keywordSelect = useCallback(() => {
     let uniqKeywords = [];
-    if (articlesObj !== undefined) {
-      const keyW = articlesObj.map((article) => article.keyword);
+    if (allSavedArticles !== undefined) {
+      const keyW = allSavedArticles.map((article) => article.keyword);
       console.log(keyW);
       uniqKeywords.push(new Set(keyW));
 
@@ -36,7 +34,7 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
       else if (uniqKeywords.length <= 3) return uniqKeywords.map((word) => word).join(', ');
       else return 'None';
     }
-  }, [setUserArticles]);
+  }, [setAllSavedArticles]);
   return (
     <>
       <main className="savednews">
@@ -44,7 +42,7 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
           <p className="savednews__paragraph">saved articles</p>
           <h2 className="savednews__title">
             {user.username + ` you have` + ` `}
-            {articlesObj !== undefined && articlesObj.length} saved articles
+            {allSavedArticles !== undefined && allSavedArticles.length} saved articles
           </h2>
           <p className="savednews__keywords">
             By keywords: <strong>{() => keywordSelect()}</strong>
@@ -52,7 +50,7 @@ const SavedNews = ({ showMore, onClickShowmore }) => {
         </section>
         <section className="savedarticles__div">
           <div className="savedarticles__container">
-            <NewsCardList articlesObj={articlesObj} />
+            <NewsCardList />
             {showMore ? (
               <button onClick={onClickShowmore} className="savedcardlist__button">
                 Show more
