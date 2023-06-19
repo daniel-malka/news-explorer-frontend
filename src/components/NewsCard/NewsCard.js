@@ -21,21 +21,18 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
   const date = new Date();
 
   const toolTipText = isLoggedIn && !isHome ? `Remove from saved` : `Sign in to save articles`;
-
-  const changeDate = (apiDate) => {
-    const date = new Date(apiDate);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    const formattedDate = `${day}.${month}.${year}`;
-    return formattedDate;
-  };
+  function setDateString() {
+    const isoDate = thisArticle.publishedAt || thisArticle.date;
+    const date = new Date(isoDate);
+    const options = { month: 'long', day: 'numeric', year: 'numeric' };
+    return date.toLocaleDateString('en-US', options);
+  }
 
   const [Article] = useState({
     title: thisArticle.title,
     keyword: searchTerm,
     text: thisArticle.description,
-    date: changeDate(date) || changeDate(thisArticle.publishedAt),
+    date: setDateString(),
     source: thisArticle.source?.name || thisArticle.source,
     image: thisArticle.urlToImage || thisArticle.image || undifindImg,
     link: thisArticle.url || thisArticle.link,
