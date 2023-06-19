@@ -38,7 +38,7 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     date: changeDate(date) || changeDate(thisArticle.publishedAt),
     source: thisArticle.source?.name || thisArticle.source,
     image: thisArticle.urlToImage || thisArticle.image || undifindImg,
-    link: thisArticle.link || thisArticle.url,
+    link: thisArticle.url || thisArticle.link,
     _id: thisArticle._id,
   });
 
@@ -54,8 +54,6 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     try {
       const response = await api.saveArticle(foundArticle, token);
       const savedArticle = await response.json();
-      console.log('the article is saved', savedArticle);
-
       setAllSavedArticles((prevArticles) => [...prevArticles, savedArticle]);
     } catch (err) {
       console.log(err);
@@ -73,13 +71,14 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
   };
 
   const toggleSave = (isSavedArticle) => {
-    console.log('haloo');
     if (allSavedArticles !== undefined) {
       if (!isLoggedIn) {
         popup.openPopup('signin');
         return;
       }
-      const isArticleIsSaved = allSavedArticles.find((savedArticle) => savedArticle.link === isSavedArticle.link);
+      const isArticleIsSaved = allSavedArticles.find(
+        (savedArticle) => savedArticle.link === isSavedArticle.link || savedArticle.link === isSavedArticle.url
+      );
 
       if (isArticleIsSaved !== undefined) {
         UnsaveArticle(isArticleIsSaved);

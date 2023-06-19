@@ -31,7 +31,6 @@ const AuthProvider = ({ children }) => {
               username: res.username,
               id: res._id,
             });
-            console.log(user);
           }
         })
         .catch((err) => {
@@ -40,7 +39,7 @@ const AuthProvider = ({ children }) => {
           setIsLoggedIn(false);
         });
     }
-  }, [history, token]);
+  }, [history, token, isLoggedIn]);
   return (
     <AuthContext.Provider
       value={{

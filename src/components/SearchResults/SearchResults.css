@@ -8,15 +8,7 @@
   display: grid;
   justify-content: center;
 }
-
-.searchresult__cards-listitem {
-  box-sizing: border-box;
-  display: flex;
-}
-.searchresult__notfound {
-  grid-template-columns: 2 / 3;
-}
-.searchresult-title {
+.searchresults__title {
   font-family: 'Roboto-slab', Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -27,6 +19,13 @@
   margin-block-start: 0;
   margin-block-end: 0;
   padding-bottom: 64px;
+}
+.searchresult__cards-listitem {
+  box-sizing: border-box;
+  display: flex;
+}
+.searchresult__notfound {
+  grid-template-columns: 2 / 3;
 }
 
 .searchresult__container {

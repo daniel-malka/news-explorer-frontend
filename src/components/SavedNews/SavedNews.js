@@ -4,60 +4,60 @@ import { useHome } from '../../contexts/HomeContext';
 import NewsCardList from '../NewsCardList/NewsCardList';
 import { useArticles } from '../../contexts/ArticlesContext';
 
-const SavedNews = ({ showMore, onClickShowmore, allSavedArticles, setAllSavedArticles }) => {
-  const { user } = useAuth();
+const SavedNews = () => {
+  const { isLoggedIn, user } = useAuth();
   const { api } = useArticles();
   const { isHome } = useHome();
   const token = localStorage.getItem('token');
+  const [userArticles, setUserArticles] = useState([]);
+  const [keywordList, setKeywordList] = useState([]);
 
   const getSaved = async () => {
-    try {
-      const response = await api.getSavedArticles(token);
-      const savedArticles = await response.json();
-      setAllSavedArticles(savedArticles);
-    } catch {
-      return (err) => console.log(err);
+    if (!isHome && isLoggedIn) {
+      try {
+        const response = await api.getSavedArticles(token);
+        const savedArticles = await response.json();
+        setUserArticles(savedArticles);
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   useEffect(() => {
     getSaved();
   }, [!isHome]);
-  const keywordSelect = useCallback(() => {
-    let uniqKeywords = [];
-    if (allSavedArticles !== undefined) {
-      const keyW = allSavedArticles.map((article) => article.keyword);
-      console.log(keyW);
-      uniqKeywords.push(new Set(keyW));
 
-      if (uniqKeywords > 3) return `${uniqKeywords[0]}, ${uniqKeywords[1]}, and ${uniqKeywords.length - 2} others`;
-      else if (uniqKeywords.length <= 3) return uniqKeywords.map((word) => word).join(', ');
-      else return 'None';
+  useEffect(() => {
+    if (userArticles !== undefined) {
+      const keyW = userArticles.map((article) => article.keyword);
+      const uniqueKeyW = [...new Set(keyW)]; // Convert Set to an array
+      setKeywordList(uniqueKeyW); // Update the keyword list state with unique values
     }
-  }, [setAllSavedArticles]);
+  }, []);
+
+  const keywordSelect = () => {
+    if (keywordList.length >= 3) return `${keywordList[0]}, ${keywordList[1]}, and ${keywordList.length - 2} others`;
+    else if (keywordList.length <= 3) return keywordList.join(', ');
+    else return 'None';
+  };
+
   return (
     <>
       <main className="savednews">
-        <section className="savednews__text">
-          <p className="savednews__paragraph">saved articles</p>
-          <h2 className="savednews__title">
-            {user.username + ` you have` + ` `}
-            {allSavedArticles !== undefined && allSavedArticles.length} saved articles
+        <section className="savedarticles__text">
+          <p className="savedarticles__paragraph">saved articles</p>
+          <h2 className="savedarticles__title">
+            {user.username + `, you have` + ` `}
+            {userArticles !== undefined && userArticles.length} saved articles
           </h2>
-          <p className="savednews__keywords">
-            By keywords: <strong>{() => keywordSelect()}</strong>
+          <p className="savedarticles__keywords">
+            By keywords: <strong>{keywordSelect()}</strong>
           </p>
         </section>
         <section className="savedarticles__div">
           <div className="savedarticles__container">
             <NewsCardList />
-            {showMore ? (
-              <button onClick={onClickShowmore} className="savedcardlist__button">
-                Show more
-              </button>
-            ) : (
-              ''
-            )}
           </div>
         </section>
       </main>

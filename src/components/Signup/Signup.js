@@ -38,9 +38,9 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
       successPopup: true,
     });
     setUserLoginInfo({
-      email: '',
-      password: '',
-      username: '',
+      email: email,
+      password: password,
+      username: username,
     });
     setValidation({
       email: '',
@@ -93,17 +93,9 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
     });
   };
 
-  const signupValidtion =
-    validation &&
-    validation.email === '' &&
-    validation.password === '' &&
-    validation.ame === '';
+  const signupValidtion = validation && validation.email === '' && validation.password === '' && validation.ame === '';
   const validateForm = () => {
-    if (
-      userLoginInfo.email !== '' &&
-      userLoginInfo.password !== '' &&
-      userLoginInfo.username !== ''
-    ) {
+    if (userLoginInfo.email !== '' && userLoginInfo.password !== '' && userLoginInfo.username !== '') {
       setIsFormValid(true);
       if (signupValidtion) {
         setIsFormValid(true);
@@ -144,9 +136,7 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
           onChange={handleEmailInput}
           required
         />
-        {validation.email !== '' && (
-          <span className="popup__error-message email">{validation.email}</span>
-        )}
+        {validation.email !== '' && <span className="popup__error-message email">{validation.email}</span>}
       </div>
       <div className="popup__inputs-div signup">
         {' '}
@@ -163,11 +153,7 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
           onChange={handlePasswordInput}
           required
         />
-        {validation.password !== '' && (
-          <span className="popup__error-message password">
-            {validation.password}
-          </span>
-        )}
+        {validation.password !== '' && <span className="popup__error-message password">{validation.password}</span>}
       </div>
       <div className="popup__inputs-div signup">
         <label className="signin-label" htmlFor="username">
@@ -183,11 +169,7 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
           onChange={handleNameInput}
           required
         />
-        {validation.username !== '' && (
-          <span className="popup__error-message username">
-            {validation.username}
-          </span>
-        )}
+        {validation.username !== '' && <span className="popup__error-message username">{validation.username}</span>}
       </div>
     </PopupWithForm>
   );

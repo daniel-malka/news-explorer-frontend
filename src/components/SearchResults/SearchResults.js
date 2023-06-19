@@ -28,7 +28,6 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
       fetchSavedArticles();
     }
   }, [isHome, token]);
-
   return (
     <>
       {isHome ? (
@@ -37,10 +36,11 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
             ''
           ) : (
             <div className="searchresults__div">
+              <h2 className="searchresults__title">Search results</h2>
               <div className={showMore ? `searchresult__container` : `searchresult__container searchresult__container-all`}>
                 {searchResults.length !== 0 ? (
                   searchResults.map((article) => {
-                    let uniqueArticleId = (article.source.id ?? 'default')
+                    let uniqueArticleId = (article.source.id ?? 'dfault')
                       .split('')
                       .map((w) => w.toString() + Math.floor(Math.random() * 100).toString())
                       .join('');
@@ -72,7 +72,6 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
         </section>
       ) : (
         <SavedNews
-          showMore={showMore}
           onClickShowmore={onClickShowmore}
           allSavedArticles={allSavedArticles}
           setAllSavedArticles={setAllSavedArticles}
