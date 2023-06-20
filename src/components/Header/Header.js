@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { Navigate, NavLink, useLocation } from 'react-router-dom';
+import { useNavigate, NavLink, useLocation } from 'react-router-dom';
+import './Header.css';
 // images
 import menuWhite from '../../images/icons/menuW.svg';
 import menuBlack from '../../images/icons/menuB.svg';
@@ -19,7 +20,7 @@ function Header() {
   const liClass = document.querySelectorAll('.header__button');
   const { isLoggedIn, user, handleLogout } = useAuth();
   const location = useLocation();
-
+  const navigate = useNavigate();
   let [isSavedNews, setIsSavedNews] = useState(false);
   let [isNavActive, setIsNavActive] = useState(false);
 
@@ -98,9 +99,11 @@ function Header() {
           ) : (
             <>
               <li
-                onClick={() => openPopup('signin')}
+                onClick={() => {
+                  openPopup('signin');
+                  navigate('signin');
+                }}
                 className="header__link header__button"
-                elemnt={<Navigate replace to="/signin" />}
               >
                 Sign in
               </li>

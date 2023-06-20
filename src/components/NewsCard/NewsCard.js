@@ -18,7 +18,6 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     'https://thumbs.dreamstime.com/b/no-image-available-icon-flat-vector-no-image-available-icon-flat-vector-illustration-132482953.jpg';
   const thisArticle = article;
   const popup = usePopup();
-  const date = new Date();
 
   const toolTipText = isLoggedIn && !isHome ? `Remove from saved` : `Sign in to save articles`;
   function setDateString() {
@@ -35,17 +34,16 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     date: setDateString(),
     source: thisArticle.source?.name || thisArticle.source,
     image: thisArticle.urlToImage || thisArticle.image || undifindImg,
-    link: thisArticle.url || thisArticle.link,
+    link: thisArticle.link || thisArticle.url,
     _id: thisArticle._id,
   });
-
   if (allSavedArticles !== undefined) {
     isSaved = allSavedArticles.some((savedArticle) => savedArticle.link === thisArticle.url);
   }
 
   const SaveArticle = async (foundArticle) => {
     if (!isLoggedIn) {
-      popup.openPopup('signin');
+      popup.openPopup('signup');
       return;
     }
     try {
@@ -70,7 +68,7 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
   const toggleSave = (isSavedArticle) => {
     if (allSavedArticles !== undefined) {
       if (!isLoggedIn) {
-        popup.openPopup('signin');
+        popup.openPopup('signup');
         return;
       }
       const isArticleIsSaved = allSavedArticles.find(
@@ -90,15 +88,15 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     }
   };
 
-  const onHoverMessage = (e) => {
+  function onHoverMessage(e) {
     e.preventDefault();
     setShowToolTip(true);
-  };
+  }
 
-  const handleMouseLeave = (e) => {
+  function handleMouseLeave(e) {
     e.preventDefault();
     setShowToolTip(false);
-  };
+  }
   return (
     <>
       <article className="newscard" onClick={handleArticleClick}>

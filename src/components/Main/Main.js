@@ -1,22 +1,12 @@
-import { Routes, Route } from 'react-router-dom';
 import SearchForm from '../SearchForm/SearchForm';
 import About from '../About/About';
-
+import Footer from '../Footer/Footer';
 const Main = () => {
   return (
     <main className="main">
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <>
-              <SearchForm />
-              <About />
-            </>
-          }
-        />
-      </Routes>
+      <SearchForm />
+      <About />
+      <Footer />
     </main>
   );
 };

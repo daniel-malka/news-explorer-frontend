@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useHome } from '../../contexts/HomeContext';
 import NewsCardList from '../NewsCardList/NewsCardList';
@@ -12,7 +12,7 @@ const SavedNews = () => {
   const [userArticles, setUserArticles] = useState([]);
   const [keywordList, setKeywordList] = useState([]);
 
-  const getSaved = async () => {
+  async function getSaved() {
     if (!isHome && isLoggedIn) {
       try {
         const response = await api.getSavedArticles(token);
@@ -22,7 +22,7 @@ const SavedNews = () => {
         console.log(err);
       }
     }
-  };
+  }
 
   useEffect(() => {
     getSaved();
@@ -37,7 +37,7 @@ const SavedNews = () => {
   }, []);
 
   const keywordSelect = () => {
-    if (keywordList.length >= 3) return `${keywordList[0]}, ${keywordList[1]}, and ${keywordList.length - 2} others`;
+    if (keywordList.length > 3) return `${keywordList[0]}, ${keywordList[1]}, and ${keywordList.length - 2} others`;
     else if (keywordList.length <= 3) return keywordList.join(', ');
     else return 'None';
   };

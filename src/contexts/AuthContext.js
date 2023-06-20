@@ -5,41 +5,37 @@ import { checkToken } from '../utilities/MainApi';
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState();
-  const [user, setUser] = useState({
-    email: '',
-    username: '',
-  });
+  const [token, setToken] = useState('');
+  const [user, setUser] = useState({ email: '', username: '' });
 
-  const handleLogout = () => {
+  function handleLogout() {
     setIsLoggedIn(false);
     localStorage.clear();
     setToken(localStorage.getItem('token'));
-    history('/');
-  };
+    navigate('/');
+  }
 
   useEffect(() => {
-    if (isLoggedIn && localStorage.getItem('token')) {
+    if (token) {
       checkToken(token)
         .then((res) => {
           if (res._id) {
+            console.log(res);
             setIsLoggedIn(true);
-            setUser({
-              email: res.email,
-              username: res.username,
-              id: res._id,
-            });
+            console.log(res.user);
+            setUser(res.user);
           }
         })
         .catch((err) => {
           console.log(err);
-          history('/');
+          navigate('/');
           setIsLoggedIn(false);
         });
     }
-  }, [history, token, isLoggedIn]);
+  }, [token]);
+
   return (
     <AuthContext.Provider
       value={{

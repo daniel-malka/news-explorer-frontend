@@ -29,6 +29,7 @@ const NewsCardList = () => {
   return (
     <>
       {allSavedArticles !== undefined &&
+        allSavedArticles.length > 0 &&
         allSavedArticles.map((article) => {
           let uniqueArticleId = article.source
             .split('')

@@ -28,6 +28,7 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
       username: '',
     });
   };
+
   function handleSubmit(e) {
     e.preventDefault();
     const { email, username, password } = userLoginInfo;
@@ -37,6 +38,7 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
       signup: false,
       successPopup: true,
     });
+
     setUserLoginInfo({
       email: email,
       password: password,

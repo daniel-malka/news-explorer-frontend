@@ -24,7 +24,7 @@ const SignIn = ({
     const { email, password } = userLoginInfo;
     handleLogin(email, password);
   }
-  // reset the user login info
+ 
 
   const closePopup = () => {
     setPopupState({
