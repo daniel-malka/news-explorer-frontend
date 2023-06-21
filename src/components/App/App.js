@@ -19,6 +19,20 @@ function App() {
   const { setUser, setIsLoggedIn, setToken } = useAuth();
 
   useEffect(() => {
+    if (popupState.successPopup) {
+      const timer = setTimeout(() => {
+        setPopupState({
+          ...popupState,
+          successPopup: false,
+          signin: true,
+        });
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [popupState, setPopupState]);
+
+  useEffect(() => {
     const token = localStorage.getItem('token');
     const email = localStorage.getItem('email');
     if (token && email) {
@@ -55,7 +69,7 @@ function App() {
     signup(email, username, password)
       .then((res) => {
         res.json().then((res) => {
-          if (res.ok && res.user._id) {
+          if (res.ok) {
             setPopupState({
               ...popupState,
               signup: false,

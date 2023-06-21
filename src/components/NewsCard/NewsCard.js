@@ -26,7 +26,7 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
     return date.toLocaleDateString('en-US', options);
   }
-
+  console.log(thisArticle);
   const [Article] = useState({
     title: thisArticle.title,
     keyword: searchTerm,
@@ -48,8 +48,8 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     }
     try {
       const saved = await api.saveArticle(foundArticle, token);
-      console.log(saved);
       setAllSavedArticles((prevArticles) => [...prevArticles, saved]);
+      console.log(allSavedArticles);
     } catch (err) {
       console.log(err);
     }
@@ -57,8 +57,8 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
 
   const UnsaveArticle = async (article) => {
     try {
-      const response = await api.unsaveArticle(article._id, token);
-      const deletedArticle = await response.json();
+      await api.unsaveArticle(article._id, token);
+
       setAllSavedArticles((prevSavedArticles) => prevSavedArticles.filter((item) => item._id !== article._id));
     } catch (err) {
       console.log(err);

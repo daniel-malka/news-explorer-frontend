@@ -25,7 +25,7 @@ const SavedNews = () => {
 
   useEffect(() => {
     getSaved();
-  }, [!isHome]);
+  }, [!isHome, userArticles]);
 
   useEffect(() => {
     if (userArticles !== undefined) {
@@ -48,7 +48,7 @@ const SavedNews = () => {
           <p className="savedarticles__paragraph">saved articles</p>
           <h2 className="savedarticles__title">
             {user.username + `, you have` + ` `}
-            {userArticles !== undefined && userArticles.length} saved articles
+            {userArticles.length} saved articles
           </h2>
           <p className="savedarticles__keywords">
             By keywords: <strong>{keywordSelect()}</strong>

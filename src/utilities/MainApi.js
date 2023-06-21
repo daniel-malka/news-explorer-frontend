@@ -1,7 +1,7 @@
 import { NEWS_API, BASE_API, DEV_API } from './constants';
 
-function checkResponse(res) {
-  return res.ok ? res : Promise.reject(`Error: ${res.status}`);
+function _checkResponse(res) {
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
 }
 
 export const getSavedArticles = (token) => {
@@ -25,7 +25,7 @@ export const saveArticle = (Article, token) => {
     body: JSON.stringify({
       Article,
     }),
-  });
+  }).then((res) => _checkResponse(res));
 };
 
 export const unsaveArticle = (articleId, token) => {
@@ -48,7 +48,7 @@ export const signup = (email, username, password) => {
       Accept: 'application/json',
     },
     body: JSON.stringify({ email, username, password }),
-  }).then((res) => checkResponse(res));
+  });
 };
 
 export const signin = (email, password) => {
@@ -59,7 +59,7 @@ export const signin = (email, password) => {
       Accept: 'application/json',
     },
     body: JSON.stringify({ email, password }),
-  }).then((res) => checkResponse(res));
+  });
 };
 
 export const checkToken = (token) => {
@@ -70,5 +70,5 @@ export const checkToken = (token) => {
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => res.json());
+  }).then((res) => _checkResponse(res));
 };

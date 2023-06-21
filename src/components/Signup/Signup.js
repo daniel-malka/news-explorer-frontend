@@ -1,10 +1,25 @@
+import React, { useEffect } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
 import { useFormAndValidation } from '../../utilities/useFormAndValidation';
-
 import { usePopup } from '../../contexts/PopupContext';
+
 const Signup = ({ isLoading, handleRegister }) => {
   const { popupState, setPopupState } = usePopup(false);
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+
+  useEffect(() => {
+    if (popupState.successPopup) {
+      const timer = setTimeout(() => {
+        setPopupState({
+          ...popupState,
+          successPopup: false,
+          signin: true,
+        });
+      }, 4000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [popupState, setPopupState]);
 
   const onClose = () => {
     setPopupState({
@@ -14,14 +29,13 @@ const Signup = ({ isLoading, handleRegister }) => {
     resetForm();
   };
 
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     const { email, username, password } = values;
-    await handleRegister(email, username, password);
-    onClose();
-    resetForm();
+    handleRegister(email, username, password);
     setPopupState({
       ...popupState,
+      signup: false,
       successPopup: true,
     });
   }
@@ -88,4 +102,5 @@ const Signup = ({ isLoading, handleRegister }) => {
     </PopupWithForm>
   );
 };
+
 export default Signup;

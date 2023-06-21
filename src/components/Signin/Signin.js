@@ -4,13 +4,6 @@ import PopupWithForm from '../PopupWithForm/PopupWithForm';
 const SignIn = ({ isLoading, handleLogin, popupState, setPopupState }) => {
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    const { email, password } = values;
-    await handleLogin(email, password);
-    resetForm();
-  }
-
   const onClose = () => {
     setPopupState({
       ...popupState,
@@ -18,6 +11,13 @@ const SignIn = ({ isLoading, handleLogin, popupState, setPopupState }) => {
     });
     resetForm();
   };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const { email, password } = values;
+    handleLogin(email, password);
+    onClose();
+  }
 
   return (
     <PopupWithForm
