@@ -1,124 +1,37 @@
-import { useState, useEffect } from 'react';
 import PopupWithForm from '../PopupWithForm/PopupWithForm';
+import { useFormAndValidation } from '../../utilities/useFormAndValidation';
+
 import { usePopup } from '../../contexts/PopupContext';
-const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
+const Signup = ({ isLoading, handleRegister }) => {
   const { popupState, setPopupState } = usePopup(false);
-  const [isFormValid, setIsFormValid] = useState(false);
-
-  const [userLoginInfo, setUserLoginInfo] = useState({
-    email: '',
-    password: '',
-    username: '',
-  });
-
-  const [validation, setValidation] = useState({
-    email: '',
-    password: '',
-    username: '',
-  });
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
   const onClose = () => {
     setPopupState({
       ...popupState,
       signup: false,
     });
-    setValidation({
-      email: '',
-      password: '',
-      username: '',
-    });
+    resetForm();
   };
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const { email, username, password } = userLoginInfo;
-    handleRegister(email, username, password);
+    const { email, username, password } = values;
+    await handleRegister(email, username, password);
+    onClose();
+    resetForm();
     setPopupState({
       ...popupState,
-      signup: false,
       successPopup: true,
-    });
-
-    setUserLoginInfo({
-      email: email,
-      password: password,
-      username: username,
-    });
-    setValidation({
-      email: '',
-      password: '',
-      username: '',
     });
   }
 
-  const handleEmailInput = (e) => {
-    const { name, value } = e.target;
-    const emailPattern = /^[^\s@]{4,}@[^\s@]+\.[^\s@]+$/;
-
-    const isEmailValid = value.trim() !== '' && emailPattern.test(value);
-    setValidation((prevValidation) => ({
-      ...prevValidation,
-      email: isEmailValid ? '' : 'Please enter a valid Email',
-    }));
-
-    setUserLoginInfo({
-      ...userLoginInfo,
-      [name]: value,
-    });
-  };
-
-  const handleNameInput = (e) => {
-    const { name, value } = e.target;
-    const isNameValid = value.trim() !== '';
-    setValidation((prevValidation) => ({
-      ...prevValidation,
-      username: isNameValid ? '' : "User name can't be empty",
-    }));
-
-    setUserLoginInfo({
-      ...userLoginInfo,
-      [name]: value,
-    });
-  };
-
-  const handlePasswordInput = (e) => {
-    const { name, value } = e.target;
-    const isPasswordValid = value.trim() !== '';
-    setValidation((prevValidation) => ({
-      ...prevValidation,
-      password: isPasswordValid ? '' : "Password can't be empty",
-    }));
-
-    setUserLoginInfo({
-      ...userLoginInfo,
-      [name]: value,
-    });
-  };
-
-  const signupValidtion = validation && validation.email === '' && validation.password === '' && validation.ame === '';
-  const validateForm = () => {
-    if (userLoginInfo.email !== '' && userLoginInfo.password !== '' && userLoginInfo.username !== '') {
-      setIsFormValid(true);
-      if (signupValidtion) {
-        setIsFormValid(true);
-      }
-    } else {
-      setIsFormValid(false);
-    }
-  };
-
-  useEffect(() => {
-    validateForm();
-  });
   return (
     <PopupWithForm
-      onSubmit={handleSubmit}
-      setErrMessage={setErrMessage}
-      errMessage={errMessage}
-      validation={validation}
-      isFormValid={isFormValid}
+      handleSubmit={handleSubmit}
+      errors={errors}
+      isValid={isValid}
       isOpen={popupState.signup}
-      setIsFormValid={setIsFormValid}
       onClose={onClose}
       title="sign up"
       name="signup"
@@ -134,14 +47,13 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
           id="email"
           className="popup__input login-form__input"
           placeholder="Email"
-          defaultValue={userLoginInfo.email}
-          onChange={handleEmailInput}
+          defaultValue={values.email}
+          onChange={handleChange}
           required
         />
-        {validation.email !== '' && <span className="popup__error-message email">{validation.email}</span>}
+        {errors.email !== '' && <span className="popup__error-message email">{errors.email}</span>}
       </div>
       <div className="popup__inputs-div signup">
-        {' '}
         <label className="signin-label" htmlFor="password">
           Password
         </label>
@@ -151,11 +63,11 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
           id="password"
           className="popup__input login-form__input"
           placeholder="Password"
-          defaultValue={userLoginInfo.password}
-          onChange={handlePasswordInput}
+          defaultValue={values.password}
+          onChange={handleChange}
           required
         />
-        {validation.password !== '' && <span className="popup__error-message password">{validation.password}</span>}
+        {errors.password !== '' && <span className="popup__error-message password">{errors.password}</span>}
       </div>
       <div className="popup__inputs-div signup">
         <label className="signin-label" htmlFor="username">
@@ -167,11 +79,11 @@ const Signup = ({ isLoading, handleRegister, setErrMessage, errMessage }) => {
           id="username"
           className="popup__input login-form__input"
           placeholder="user name"
-          defaultValue={userLoginInfo.username}
-          onChange={handleNameInput}
+          defaultValue={values.username}
+          onChange={handleChange}
           required
         />
-        {validation.username !== '' && <span className="popup__error-message username">{validation.username}</span>}
+        {errors.username !== '' && <span className="popup__error-message username">{errors.username}</span>}
       </div>
     </PopupWithForm>
   );

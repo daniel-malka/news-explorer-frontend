@@ -1,49 +1,33 @@
 import Popup from '../Popup/Popup';
 import { usePopup } from '../../contexts/PopupContext';
 
-const PopupWithForm = (props) => {
-  const { popupState, setPopupState } = usePopup();
-  const popupToOpen = props.name === 'signin' ? 'signup' : 'signin';
+const PopupWithForm = ({ buttonText, name, title, handleSubmit, errors, onClose, isOpen, children }) => {
+  const { setPopupState } = usePopup();
+  const popupToOpen = name === 'signin' ? 'signup' : 'signin';
 
   const handleRedirect = () => {
-    props.setIsFormValid(true);
     setPopupState((prevState) => ({
       ...prevState,
-      [props.name]: false,
+      [name]: false,
       [popupToOpen]: true,
     }));
   };
 
   return (
-    <Popup
-      title={props.title}
-      isOpen={props.isOpen}
-      name={props.name}
-      onClose={props.onClose}
-    >
-      <form
-        className={`popup__inputs-container popup__inputs-${props.name}`}
-        name={props.name}
-        onSubmit={props.onSubmit}
-      >
-        {props.children}
+    <Popup title={title} isOpen={isOpen} name={name} onClose={onClose}>
+      <form className={`popup__inputs-container popup__inputs-${name}`} name={name} onSubmit={handleSubmit}>
+        {children}
         <button
-          className={`popup__submit-button popup__submit-button-${props.name} ${
-            props.validation.email === '' && props.validation.password === ''
-              ? 'popup__submit-button-filled'
-              : ''
+          className={`popup__submit-button popup__submit-button-${name} ${
+            errors.email === '' && errors.password === '' ? 'popup__submit-button-filled' : ''
           }`}
           type="submit"
         >
-          {props.buttonText}
+          {buttonText}
         </button>
         <p>
-          or{' '}
-          <button
-            type="button"
-            className="signin__redirect-button"
-            onClick={handleRedirect}
-          >
+          or
+          <button type="button" className="signin__redirect-button" onClick={handleRedirect}>
             {popupToOpen}
           </button>
         </p>

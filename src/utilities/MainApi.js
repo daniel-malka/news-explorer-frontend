@@ -1,5 +1,9 @@
 import { NEWS_API, BASE_API, DEV_API } from './constants';
 
+function checkResponse(res) {
+  return res.ok ? res : Promise.reject(`Error: ${res.status}`);
+}
+
 export const getSavedArticles = (token) => {
   return fetch(`${BASE_API}/articles`, {
     method: 'GET',
@@ -44,7 +48,7 @@ export const signup = (email, username, password) => {
       Accept: 'application/json',
     },
     body: JSON.stringify({ email, username, password }),
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export const signin = (email, password) => {
@@ -55,7 +59,7 @@ export const signin = (email, password) => {
       Accept: 'application/json',
     },
     body: JSON.stringify({ email, password }),
-  });
+  }).then((res) => checkResponse(res));
 };
 
 export const checkToken = (token) => {
@@ -66,5 +70,5 @@ export const checkToken = (token) => {
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
-  });
+  }).then((res) => res.json());
 };

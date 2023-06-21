@@ -5,20 +5,24 @@ class Api {
     this._baseUrl = baseUrl;
     this._apiKey = apiKey;
   }
-  _customFetch(url, headers) {
-    return fetch(url, headers).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
+
+  _customFetch(url, options) {
+    return fetch(url, options).then((res) => (res.ok ? res.json() : Promise.reject(res.statusText)));
   }
 
   getArticles(input) {
-    return fetch(`${this._baseUrl}${input}&apiKey=${this._apiKey}`, {
+    const url = `${this._baseUrl}${input}&apiKey=${this._apiKey}`;
+    const options = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(),
-    });
+    };
+
+    return this._customFetch(url, options);
   }
 }
+
 export const newsApi = new Api({
   baseUrl: NEWS_API,
   apiKey: API_KEY,

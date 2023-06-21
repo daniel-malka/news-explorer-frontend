@@ -22,10 +22,8 @@ const AuthProvider = ({ children }) => {
       checkToken(token)
         .then((res) => {
           if (res._id) {
-            console.log(res);
             setIsLoggedIn(true);
-            console.log(res.user);
-            setUser(res.user);
+            setUser(res);
           }
         })
         .catch((err) => {

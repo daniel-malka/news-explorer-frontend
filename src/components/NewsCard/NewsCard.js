@@ -30,7 +30,7 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
   const [Article] = useState({
     title: thisArticle.title,
     keyword: searchTerm,
-    text: thisArticle.description,
+    text: thisArticle.description || thisArticle.text,
     date: setDateString(),
     source: thisArticle.source?.name || thisArticle.source,
     image: thisArticle.urlToImage || thisArticle.image || undifindImg,
@@ -47,9 +47,9 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
       return;
     }
     try {
-      const response = await api.saveArticle(foundArticle, token);
-      const savedArticle = await response.json();
-      setAllSavedArticles((prevArticles) => [...prevArticles, savedArticle]);
+      const saved = await api.saveArticle(foundArticle, token);
+      console.log(saved);
+      setAllSavedArticles((prevArticles) => [...prevArticles, saved]);
     } catch (err) {
       console.log(err);
     }

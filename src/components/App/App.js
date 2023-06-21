@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Main from '../Main/Main';
 import Popups from '../Popups/Popups';
@@ -16,62 +16,48 @@ import '../../index.css';
 function App() {
   const { popupState, setPopupState } = usePopup();
   const { isLoggedIn } = useAuth();
-  const { setUser, user, setIsLoggedIn, setToken, checkToken } = useAuth();
-  const [errMessage, setErrMessage] = useState('');
-  const token = localStorage.getItem('token');
-  const email = localStorage.getItem('email');
-  if (!isLoggedIn && token && email) {
-    setPopupState({
-      ...popupState,
-      signin: true,
-    });
-  }
+  const { setUser, setIsLoggedIn, setToken } = useAuth();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const email = localStorage.getItem('email');
+    if (token && email) {
+      setIsLoggedIn(true);
+      setToken(token);
+      checkToken(token);
+    }
+  }, [setUser, setIsLoggedIn, setToken]);
+
   function handleLogin(email, password) {
     signin(email, password)
       .then((res) => {
-        if (res.status === 401) {
-          setErrMessage('incorrct Email or password');
-        }
         res.json().then((res) => {
-          console.log(res.user.username);
-          setUser({ username: res.user.username });
           if (res.token) {
             setIsLoggedIn(true);
+            setUser(res.user);
             localStorage.setItem('token', res.token);
+            localStorage.setItem('email', res.user.email);
             setToken(res.token);
             checkToken(res.token);
-            localStorage.setItem('email', user.email);
             setPopupState({
               ...popupState,
               signin: false,
             });
-            setErrMessage('');
           }
         });
       })
       .catch((err) => {
         console.log(err);
-        setErrMessage('User Does not exists');
       });
   }
 
   function handleRegister(email, username, password) {
-    setErrMessage('');
-    if (password.length <= 4) {
-      setErrMessage('Password must be longer then 4 digits');
-      return;
-    } else if (username.length < 3) {
-      setErrMessage('Name must be longer');
-      return;
-    }
-
     signup(email, username, password)
       .then((res) => {
         res.json().then((res) => {
-          setUser(res.user);
           if (res.ok && res.user._id) {
             setPopupState({
-              popupState,
+              ...popupState,
               signup: false,
               successPopup: true,
             });
@@ -80,6 +66,7 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
+
   return (
     <div className="app">
       <Routes>
@@ -100,4 +87,5 @@ function App() {
     </div>
   );
 }
+
 export default App;

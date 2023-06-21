@@ -20,7 +20,7 @@ const SearchResults = ({ showMore, onClickShowmore, searchResults, searchTerm })
         try {
           const response = await api.getSavedArticles(token);
           const savedarticles = await response.json();
-          setAllSavedArticles(savedarticles);
+          savedarticles && setAllSavedArticles(savedarticles);
         } catch (error) {
           console.log(error);
         }

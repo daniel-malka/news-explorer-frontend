@@ -11,7 +11,6 @@ const SavedNews = () => {
   const token = localStorage.getItem('token');
   const [userArticles, setUserArticles] = useState([]);
   const [keywordList, setKeywordList] = useState([]);
-
   async function getSaved() {
     if (!isHome && isLoggedIn) {
       try {

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useNavigate, NavLink, useLocation } from 'react-router-dom';
 import './Header.css';
 // images
@@ -23,9 +23,7 @@ function Header() {
   const navigate = useNavigate();
   let [isSavedNews, setIsSavedNews] = useState(false);
   let [isNavActive, setIsNavActive] = useState(false);
-
   isSavedNews = location.pathname === '/saved-news';
-
   const navBurgerChange = () => {
     setIsNavActive(!isNavActive);
     if (!elemntClass[0].classList.contains('open')) {
@@ -101,7 +99,7 @@ function Header() {
               <li
                 onClick={() => {
                   openPopup('signin');
-                  navigate('signin');
+                  navigate('/signin');
                 }}
                 className="header__link header__button"
               >
