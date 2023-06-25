@@ -1,6 +1,6 @@
 # React News-explorer
 
-Welcome to the React Nwes explorer API frontend repository! This project is the frontend part of a full-stack web application built with React, Node.js, and MongoDB, which allows users to seacrh articles by keywords using "news-explorer api worldwide", save the articles and view images source of it with title and their descripoin and of course to surf to the article source page.
+Welcome to the React News Explorer API frontend repository! This project serves as the frontend component of a full-stack web application developed with React, Node.js, and MongoDB. It enables users to search for articles worldwide using the "news-explorer" API, save interesting articles, and view their images, titles, descriptions, and source links. Feel free to explore and navigate to the source pages of the articles you find intriguing.
 
 ## Installation
 
@@ -20,8 +20,8 @@ To run this project locally, you need to have Node.js and MongoDB and Git instal
 
 The API exposes the following endpoints:
 
-- `POST /signup` - returns Barer token when seccessful registration 
-- `POST /signin` - login registered user 
+- `POST /signup` - returns Barer token when seccessful registration
+- `POST /signin` - login registered user
 - `GET /articles` - returns a list of all articles of logged in user.
 - `GET /users/me` - returns the user with the specified `userId`.
 - `POST /articles` - saves the desired article.

@@ -48,7 +48,7 @@ export const signup = (email, username, password) => {
       Accept: 'application/json',
     },
     body: JSON.stringify({ email, username, password }),
-  });
+  }).then((res) => _checkResponse(res));
 };
 
 export const signin = (email, password) => {
@@ -59,7 +59,7 @@ export const signin = (email, password) => {
       Accept: 'application/json',
     },
     body: JSON.stringify({ email, password }),
-  });
+  }).then((res) => _checkResponse(res));
 };
 
 export const checkToken = (token) => {

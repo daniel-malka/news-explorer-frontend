@@ -26,7 +26,6 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
     return date.toLocaleDateString('en-US', options);
   }
-  console.log(thisArticle);
   const [Article] = useState({
     title: thisArticle.title,
     keyword: searchTerm,
@@ -49,7 +48,6 @@ const NewsCard = ({ searchTerm, article, allSavedArticles, setAllSavedArticles }
     try {
       const saved = await api.saveArticle(foundArticle, token);
       setAllSavedArticles((prevArticles) => [...prevArticles, saved]);
-      console.log(allSavedArticles);
     } catch (err) {
       console.log(err);
     }

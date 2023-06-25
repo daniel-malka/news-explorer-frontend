@@ -45,20 +45,19 @@ function App() {
   function handleLogin(email, password) {
     signin(email, password)
       .then((res) => {
-        res.json().then((res) => {
-          if (res.token) {
-            setIsLoggedIn(true);
-            setUser(res.user);
-            localStorage.setItem('token', res.token);
-            localStorage.setItem('email', res.user.email);
-            setToken(res.token);
-            checkToken(res.token);
-            setPopupState({
-              ...popupState,
-              signin: false,
-            });
-          }
-        });
+        console.log(res);
+        if (res.token) {
+          setIsLoggedIn(true);
+          setUser(res.user);
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('email', res.user.email);
+          setToken(res.token);
+          checkToken(res.token);
+          setPopupState({
+            ...popupState,
+            signin: false,
+          });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -68,15 +67,13 @@ function App() {
   function handleRegister(email, username, password) {
     signup(email, username, password)
       .then((res) => {
-        res.json().then((res) => {
-          if (res.ok) {
-            setPopupState({
-              ...popupState,
-              signup: false,
-              successPopup: true,
-            });
-          }
-        });
+        if (res.ok) {
+          setPopupState({
+            ...popupState,
+            signup: false,
+            successPopup: true,
+          });
+        }
       })
       .catch((err) => console.log(err));
   }
