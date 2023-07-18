@@ -15,13 +15,5 @@ Clone this repository to your local machine,
 Navigate to the project directory: cd news-explorer-frontend
 Install the dependencies using npm: npm install
 Start the frontend by running the command: npm run start. This will start the frontend application and can be accessed at http://localhost:3000.
-File Structure
-The project's file structure is organized as follows:
-
-
-news-explorer-frontend/
-├── public/       # Contains public assets
-├── src/          # Contains source code files
-├── ...
 
 If you have any questions or need further assistance, please don't hesitate to reach out. Enjoy exploring the news articles!
