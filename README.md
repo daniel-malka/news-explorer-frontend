@@ -1,5 +1,8 @@
 ##News Explorer Frontend
-Welcome to the News Explorer Frontend repository! This repository contains the client-side code for the News Explorer application, which allows users to explore and save news articles from various sources.
+
+
+Welcome to the News Explorer Frontend repository! 
+This repository contains the client-side code for the News Explorer application, which allows users to explore and save news articles from various sources.
 
 
 
