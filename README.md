@@ -1,8 +1,9 @@
-News Explorer Frontend
-Welcome to the News Explorer Frontend repository! This repository contains the client-side code for the News Explorer application, which allows users to explore and save news articles from various sources.
+#News Explorer Frontend
+Welcome to the News Explorer Frontend repository! 
+This repository contains the client-side code for the News Explorer application, which allows users to explore and save news articles from various sources.
 
 App Availability
-The News Explorer Frontend application is available at the following URL: news-expo.mooo.com
+The News Explorer Frontend application is available at the following URL: https://news-expo.mooo.com/
 
 You can access the frontend application at the above URL to explore and interact with the news articles. 
 Please note that the frontend and backend are separate repositories but work together to provide a complete user experience.
