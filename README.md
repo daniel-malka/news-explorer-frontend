@@ -18,8 +18,7 @@ Start the frontend by running the command: npm run start. This will start the fr
 File Structure
 The project's file structure is organized as follows:
 
-php
-Copy code
+
 news-explorer-frontend/
 ├── public/       # Contains public assets
 ├── src/          # Contains source code files
